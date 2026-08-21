@@ -124,8 +124,11 @@ export default function ThreeInteractiveGlobe({
     const width = container.clientWidth;
     const height = container.clientHeight;
 
+    const isMobile = width < 640;
+    const initialCameraZ = isMobile ? (width < 440 ? 7.6 : 6.8) : 5.2;
+
     const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 1000);
-    camera.position.set(0, 0, 5.2);
+    camera.position.set(0, 0, initialCameraZ);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -627,6 +630,8 @@ export default function ThreeInteractiveGlobe({
       const w = container.clientWidth;
       const h = container.clientHeight;
       camera.aspect = w / h;
+      const mobile = w < 640;
+      camera.position.z = mobile ? (w < 440 ? 7.6 : 6.8) : 5.2;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     };
