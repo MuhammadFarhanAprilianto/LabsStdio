@@ -1,1 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+@import url('https://fonts.cdnfonts.com/css/agrandir');
 @import "tailwindcss";
+
+@theme {
+  --font-sans: 'Questrial', sans-serif;
+  --font-heading: 'Agrandir', 'Agrandir Grand Heavy', sans-serif;
+}
+
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-left 28s linear infinite;
+}
+
+.animate-marquee-left {
+  animation: marquee-left 52s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 52s linear infinite;
+}
