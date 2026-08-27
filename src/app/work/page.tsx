@@ -42,6 +42,14 @@ const testimonials = [
   },
 ];
 
+const serviceOptions = [
+  "UI/UX Design",
+  "Web Development",
+  "Full-Stack SaaS Platform",
+  "Brand & Visual Identity",
+  "Mobile App (iOS / Android)",
+];
+
 export default function WorkPage() {
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -50,10 +58,27 @@ export default function WorkPage() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [fullName, setFullName] = useState("");
   const [selectedService, setSelectedService] = useState("UI/UX Design");
+  const [isServiceDropdownOpen, setIsServiceDropdownOpen] = useState(false);
+  const serviceDropdownRef = useRef<HTMLDivElement>(null);
+
   const [email, setEmail] = useState("");
   const [selectedBudget, setSelectedBudget] = useState("$10k to 20k");
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        serviceDropdownRef.current &&
+        !serviceDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsServiceDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // Auto cycle testimonials every 3.5 seconds with reset on user click
   useEffect(() => {
@@ -428,25 +453,79 @@ export default function WorkPage() {
                   />
                 </div>
 
-                <div className="space-y-1.5">
+                <div className="space-y-1.5 relative" ref={serviceDropdownRef}>
                   <label className="text-xs font-semibold text-neutral-700 font-['Questrial',sans-serif]">
                     I need help with
                   </label>
                   <div className="relative">
-                    <select
-                      value={selectedService}
-                      onChange={(e) => setSelectedService(e.target.value)}
-                      className="w-full px-4 py-3 rounded-2xl bg-neutral-100/90 border border-neutral-200/80 text-sm text-black focus:outline-none focus:border-black focus:bg-white transition-colors appearance-none font-['Questrial',sans-serif] cursor-pointer"
+                    {/* Custom Trigger Button */}
+                    <button
+                      type="button"
+                      onClick={() => setIsServiceDropdownOpen(!isServiceDropdownOpen)}
+                      className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl bg-neutral-100/90 border text-sm text-black transition-all duration-300 font-['Questrial',sans-serif] cursor-pointer ${
+                        isServiceDropdownOpen
+                          ? "border-black bg-white shadow-md ring-2 ring-[#d4f938]/60"
+                          : "border-neutral-200/80 hover:border-neutral-400 hover:bg-white"
+                      }`}
                     >
-                      <option value="UI/UX Design">UI/UX Design</option>
-                      <option value="Web Development">Web Development</option>
-                      <option value="Full-Stack SaaS">Full-Stack SaaS Platform</option>
-                      <option value="Brand Identity">Brand & Visual Identity</option>
-                      <option value="Mobile App Design">Mobile App (iOS / Android)</option>
-                    </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-neutral-400 text-xs">
-                      ▼
-                    </div>
+                      <span className="font-medium text-neutral-900">{selectedService}</span>
+                      <svg
+                        className={`w-4 h-4 transition-transform duration-300 ${
+                          isServiceDropdownOpen ? "rotate-180 text-black" : "text-neutral-500"
+                        }`}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </button>
+
+                    {/* Animated Dropdown Menu dengan Hover Kuning Stabilo (#d4f938) */}
+                    <AnimatePresence>
+                      {isServiceDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                          transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                          className="absolute left-0 right-0 top-[calc(100%+6px)] z-50 rounded-2xl bg-white border border-neutral-200 shadow-[0_20px_45px_rgba(0,0,0,0.14)] p-1.5 space-y-1 overflow-hidden"
+                        >
+                          {serviceOptions.map((option) => {
+                            const isSelected = selectedService === option;
+                            return (
+                              <button
+                                key={option}
+                                type="button"
+                                onClick={() => {
+                                  setSelectedService(option);
+                                  setIsServiceDropdownOpen(false);
+                                }}
+                                className={`group w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-left text-xs sm:text-sm font-medium font-['Questrial',sans-serif] transition-all duration-200 cursor-pointer ${
+                                  isSelected
+                                    ? "bg-black text-[#d4f938] font-bold shadow-sm"
+                                    : "text-neutral-800 hover:bg-[#d4f938] hover:text-black hover:font-bold hover:shadow-sm"
+                                }`}
+                              >
+                                <span className="transition-transform duration-200 group-hover:translate-x-0.5">
+                                  {option}
+                                </span>
+                                {isSelected ? (
+                                  <span className="text-[#d4f938] font-black text-xs">✓</span>
+                                ) : (
+                                  <span className="opacity-0 group-hover:opacity-100 text-black transition-all duration-200 text-xs font-bold -translate-x-1 group-hover:translate-x-0">
+                                    →
+                                  </span>
+                                )}
+                              </button>
+                            );
+                          })}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </div>
               </div>
