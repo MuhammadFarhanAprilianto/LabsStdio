@@ -333,10 +333,19 @@ export default function ServicesPage() {
 
                         <Link
                           href="/contact"
-                          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#d4f938] text-black text-xs font-bold hover:bg-white transition-colors shadow-md"
+                          className="group/btn relative inline-flex items-center justify-center overflow-hidden rounded-full bg-[#d4f938] px-6 py-2.5 text-xs font-bold tracking-wide border border-[#c4eb28] shadow-[0_3px_15px_rgba(212,249,56,0.3)] transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] hover:bg-[#111111] hover:border-black hover:shadow-lg active:scale-95 cursor-pointer"
                         >
-                          <span>Request Scope</span>
-                          <span>→</span>
+                          {/* Layer 1: Teks Hitam Awal */}
+                          <div className="flex items-center gap-1.5 text-black transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/btn:-translate-y-[160%]">
+                            <span>Request Scope</span>
+                            <span>→</span>
+                          </div>
+
+                          {/* Layer 2: Teks Hijau Neon */}
+                          <div className="absolute inset-0 flex items-center justify-center gap-1.5 text-[#d4f938] translate-y-[160%] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/btn:translate-y-0">
+                            <span>Request Scope</span>
+                            <span>→</span>
+                          </div>
                         </Link>
                       </div>
                     </div>
@@ -419,10 +428,19 @@ export default function ServicesPage() {
 
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d4f938] hover:underline"
+                    className="group/btn relative inline-flex items-center justify-center overflow-hidden rounded-full bg-[#d4f938] px-4.5 py-2 text-xs font-bold tracking-wide border border-[#c4eb28] shadow-[0_3px_12px_rgba(212,249,56,0.25)] transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] hover:bg-[#111111] hover:border-black active:scale-95 cursor-pointer"
                   >
-                    <span>Request Scope</span>
-                    <span>→</span>
+                    {/* Layer 1: Teks Hitam Awal */}
+                    <div className="flex items-center gap-1.5 text-black transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/btn:-translate-y-[160%]">
+                      <span>Request Scope</span>
+                      <span>→</span>
+                    </div>
+
+                    {/* Layer 2: Teks Hijau Neon */}
+                    <div className="absolute inset-0 flex items-center justify-center gap-1.5 text-[#d4f938] translate-y-[160%] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/btn:translate-y-0">
+                      <span>Request Scope</span>
+                      <span>→</span>
+                    </div>
                   </Link>
                 </div>
               </motion.div>

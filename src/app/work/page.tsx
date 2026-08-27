@@ -250,9 +250,6 @@ export default function WorkPage() {
       {/* Featured Deep-Dive Case Study Section */}
       <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-20">
         <div className="space-y-4 pb-8">
-          <div className="text-xs font-bold uppercase tracking-widest text-[#16a34a] font-['Agrandir',sans-serif]">
-            Featured Architecture Case Study
-          </div>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <h2 className="text-3xl sm:text-4xl font-bold text-black font-['Agrandir',sans-serif] tracking-tight">
               Blanqs AI Platform Redesign
