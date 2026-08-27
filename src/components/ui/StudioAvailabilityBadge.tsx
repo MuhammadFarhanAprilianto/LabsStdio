@@ -83,15 +83,15 @@ export default function StudioAvailabilityBadge({
         <div className="pt-2 grid grid-cols-3 gap-2 border-t border-neutral-800 text-center">
           <div className="p-2 rounded-xl bg-neutral-950/60 border border-neutral-800/80">
             <div className="text-[10px] text-neutral-500 uppercase font-semibold">Jakarta (WIB)</div>
-            <div className="text-xs font-bold text-white font-mono">{times.jakarta || "--:--"}</div>
+            <div suppressHydrationWarning className="text-xs font-bold text-white font-mono">{times.jakarta || "--:--"}</div>
           </div>
           <div className="p-2 rounded-xl bg-neutral-950/60 border border-neutral-800/80">
             <div className="text-[10px] text-neutral-500 uppercase font-semibold">London (GMT)</div>
-            <div className="text-xs font-bold text-white font-mono">{times.london || "--:--"}</div>
+            <div suppressHydrationWarning className="text-xs font-bold text-white font-mono">{times.london || "--:--"}</div>
           </div>
           <div className="p-2 rounded-xl bg-neutral-950/60 border border-neutral-800/80">
             <div className="text-[10px] text-neutral-500 uppercase font-semibold">San Francisco (PST)</div>
-            <div className="text-xs font-bold text-white font-mono">{times.sanFrancisco || "--:--"}</div>
+            <div suppressHydrationWarning className="text-xs font-bold text-white font-mono">{times.sanFrancisco || "--:--"}</div>
           </div>
         </div>
       </div>
@@ -105,11 +105,11 @@ export default function StudioAvailabilityBadge({
         Studio Active
       </span>
       <span>•</span>
-      <span>Jakarta: {times.jakarta || "--:--"}</span>
+      <span suppressHydrationWarning>Jakarta: {times.jakarta || "--:--"}</span>
       <span>•</span>
-      <span>London: {times.london || "--:--"}</span>
+      <span suppressHydrationWarning>London: {times.london || "--:--"}</span>
       <span>•</span>
-      <span>SF: {times.sanFrancisco || "--:--"}</span>
+      <span suppressHydrationWarning>SF: {times.sanFrancisco || "--:--"}</span>
     </div>
   );
 }

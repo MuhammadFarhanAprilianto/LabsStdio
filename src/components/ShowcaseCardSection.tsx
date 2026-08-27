@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import SoundWaveVisualizer from "@/components/ui/SoundWaveVisualizer";
 
 export default function ShowcaseCardSection() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
@@ -130,45 +131,24 @@ export default function ShowcaseCardSection() {
           className="absolute inset-0 bg-gradient-to-b from-[#090a0f] via-[#090b10] to-[#040507] z-20 pointer-events-none transition-opacity duration-500 group-hover:opacity-0"
         />
 
-        {/* Neon Lime Audio/Mute Toggle Button di Pojok Kanan Bawah */}
+        {/* Neon Lime Audio/Mute Toggle Button dengan Rolling Flip Transition Sesuai Desain Tombol Website */}
         <button
           onClick={toggleAudio}
           aria-label={isPlayingAudio ? "Mute audio" : "Play audio & music"}
-          className={`absolute bottom-6 right-6 sm:bottom-8 sm:right-8 z-30 flex h-13 w-13 sm:h-15 sm:w-15 items-center justify-center rounded-full bg-[#d4f938] text-black shadow-xl shadow-black/40 transition-all duration-300 hover:scale-110 active:scale-90 hover:shadow-[#d4f938]/40 hover:shadow-2xl cursor-pointer ${
-            isPlayingAudio ? "ring-4 ring-[#d4f938]/40 scale-105" : ""
+          title={isPlayingAudio ? "Mute audio" : "Play audio & music"}
+          className={`group/btn absolute bottom-6 right-6 sm:bottom-8 sm:right-8 z-30 inline-flex h-13 w-13 sm:h-15 sm:w-15 items-center justify-center overflow-hidden rounded-full bg-[#d4f938] border border-[#c4eb28] shadow-xl shadow-black/40 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] hover:bg-[#111111] hover:border-black hover:shadow-2xl active:scale-90 cursor-pointer ${
+            isPlayingAudio ? "ring-4 ring-[#d4f938]/40 scale-105 shadow-[#d4f938]/30" : ""
           }`}
         >
-          {isPlayingAudio ? (
-            /* Icon Unmuted / Playing Music (Speaker with active sound waves) */
-            <svg
-              className="w-6 h-6 sm:w-7 sm:h-7 animate-pulse"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-              <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-              <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-            </svg>
-          ) : (
-            /* Icon Muted (Speaker with slash) */
-            <svg
-              className="w-6 h-6 sm:w-7 sm:h-7"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-              <line x1="23" y1="9" x2="17" y2="15" />
-              <line x1="17" y1="9" x2="23" y2="15" />
-            </svg>
-          )}
+          {/* Layer 1: Icon Hitam Awal (Meluncur keluar ke atas saat hover) */}
+          <div className="flex items-center justify-center text-black transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/btn:-translate-y-[160%]">
+            <SoundWaveVisualizer isPlaying={isPlayingAudio} />
+          </div>
+
+          {/* Layer 2: Icon Hijau Neon (Meluncur masuk dari bawah ke tengah saat hover) */}
+          <div className="absolute inset-0 flex items-center justify-center text-[#d4f938] translate-y-[160%] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/btn:translate-y-0">
+            <SoundWaveVisualizer isPlaying={isPlayingAudio} />
+          </div>
         </button>
       </motion.div>
     </section>

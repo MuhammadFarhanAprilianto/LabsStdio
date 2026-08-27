@@ -59,6 +59,10 @@ const featureOptions: FeatureOption[] = [
   { id: "seo-i18n", name: "Global Multi-Language & SEO", price: 1800, extraWeeks: 0.5 },
 ];
 
+const formatPrice = (num: number) => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
 export default function ContactPage() {
   const [selectedProduct, setSelectedProduct] = useState<string>("web-app");
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>(["3d-webgl", "micro-anim"]);
@@ -117,27 +121,76 @@ export default function ContactPage() {
     }, 1200);
   };
 
+  const headlineLine1 = ["Estimate", "Your", "Scope."];
+  const headlineLine2 = ["Launch", "Faster."];
+
   return (
     <main className="min-h-screen bg-white text-gray-900 font-['Questrial',sans-serif] pt-28 sm:pt-36">
       {/* Header Section */}
       <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-12 sm:pb-16 text-center sm:text-left">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 border-b border-neutral-200/80 pb-10">
           <div className="space-y-4 max-w-3xl">
-            <StudioAvailabilityBadge variant="pill" />
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-black leading-[1.08] font-['Agrandir',sans-serif]">
-              Estimate Your Scope.
-              <br />
-              <span className="text-neutral-400">Launch Faster.</span>
+            {/* Main Headline: Blur-to-Clear Upward Animation */}
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-black leading-[1.08] w-full">
+              {/* Baris 1: Estimate Your Scope. (Tebal) */}
+              <span className="block overflow-hidden pb-1 font-bold text-black font-['Agrandir',sans-serif]">
+                {headlineLine1.map((word, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ opacity: 0, y: 45, filter: "blur(14px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    transition={{
+                      duration: 0.75,
+                      delay: 0.12 + index * 0.12,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="inline-block mr-2 sm:mr-3.5"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </span>
+
+              {/* Baris 2: Launch Faster. (Abu-abu / Muted Elegan) */}
+              <span className="block overflow-hidden font-bold text-neutral-400 font-['Agrandir',sans-serif]">
+                {headlineLine2.map((word, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ opacity: 0, y: 45, filter: "blur(14px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    transition={{
+                      duration: 0.75,
+                      delay: 0.48 + index * 0.12,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="inline-block mr-2 sm:mr-3.5"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </span>
             </h1>
-            <p className="text-neutral-600 text-base sm:text-lg max-w-xl leading-relaxed">
+
+            {/* Subtitle Description with Blur-to-Clear */}
+            <motion.p
+              initial={{ opacity: 0, y: 25, filter: "blur(10px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
+              className="text-neutral-600 text-base sm:text-lg max-w-xl leading-relaxed"
+            >
               Use our live project scope &amp; cost calculator below to estimate sprint timelines, deliverables, and investment before submitting your brief.
-            </p>
+            </motion.p>
           </div>
 
           {/* Quick Response Card */}
-          <div className="lg:w-80">
+          <motion.div
+            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:w-80"
+          >
             <StudioAvailabilityBadge variant="detailed" />
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -147,7 +200,13 @@ export default function ContactPage() {
           {/* Left Column: Interactive Scope Calculator (7 Cols) */}
           <div className="lg:col-span-7 space-y-10">
             {/* Step 1: Product Architecture */}
-            <div className="space-y-4">
+            <motion.div
+              initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-4"
+            >
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-widest text-neutral-400 font-['Agrandir',sans-serif]">
                   Step 01 / 03
@@ -185,10 +244,16 @@ export default function ContactPage() {
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
 
             {/* Step 2: Special Features */}
-            <div className="space-y-4">
+            <motion.div
+              initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-4"
+            >
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-widest text-neutral-400 font-['Agrandir',sans-serif]">
                   Step 02 / 03
@@ -223,10 +288,16 @@ export default function ContactPage() {
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
 
             {/* Step 3: Sprint Velocity */}
-            <div className="space-y-4">
+            <motion.div
+              initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-4"
+            >
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-widest text-neutral-400 font-['Agrandir',sans-serif]">
                   Step 03 / 03
@@ -264,11 +335,17 @@ export default function ContactPage() {
                   <div className="text-xs text-neutral-400 mt-1">Dedicated senior pair-engineers for rush launch deadlines.</div>
                 </button>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Right Column: Live Estimate Card & Submission Form (5 Cols) */}
-          <div className="lg:col-span-5 space-y-8 sticky top-28">
+          <motion.div
+            initial={{ opacity: 0, y: 45, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 space-y-8 sticky top-28"
+          >
             {/* Live Calculation Summary Box */}
             <div className="rounded-[36px] bg-[#0c0d12] text-white p-7 sm:p-9 border border-neutral-800 shadow-2xl relative overflow-hidden space-y-6">
               <div className="absolute top-0 right-0 w-56 h-56 bg-[radial-gradient(circle,rgba(212,249,56,0.14)_0%,transparent_70%)] pointer-events-none" />
@@ -287,7 +364,7 @@ export default function ContactPage() {
                 <div>
                   <div className="text-[11px] text-neutral-400 uppercase font-semibold">Ballpark Investment</div>
                   <div className="text-2xl sm:text-3xl font-black text-[#d4f938] font-['Agrandir',sans-serif] mt-1">
-                    ${calculation.estimatedPriceMin.toLocaleString()} - ${calculation.estimatedPriceMax.toLocaleString()}
+                    ${formatPrice(calculation.estimatedPriceMin)} - ${formatPrice(calculation.estimatedPriceMax)}
                   </div>
                 </div>
                 <div>
@@ -392,7 +469,7 @@ export default function ContactPage() {
                 </form>
               )}
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 

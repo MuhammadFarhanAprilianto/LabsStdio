@@ -102,7 +102,10 @@ const row2Logos = [
     name: "reviewinc",
     element: (
       <div className="flex items-center gap-2 text-white font-bold text-2xl sm:text-3xl tracking-tight">
-        <span className="text-white text-2xl">📍</span>
+        <svg className="w-5 h-5 sm:w-6 sm:h-6 fill-none stroke-current stroke-2 text-white" viewBox="0 0 24 24">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+          <circle cx="12" cy="9" r="2.5" />
+        </svg>
         <span className="font-sans lowercase text-slate-100">reviewinc</span>
       </div>
     ),
@@ -111,7 +114,9 @@ const row2Logos = [
     name: "POWER SYNCH",
     element: (
       <div className="flex items-center gap-2.5 text-[#22c55e] font-black text-xl sm:text-2xl tracking-wider">
-        <span className="text-2xl">⚡</span>
+        <svg className="w-5 h-5 sm:w-6 sm:h-6 fill-current text-[#22c55e]" viewBox="0 0 24 24">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+        </svg>
         <div className="leading-none text-left">
           <div className="text-xs text-white tracking-widest font-normal">POWER</div>
           <div className="text-base sm:text-lg text-[#22c55e]">SYNCH</div>
@@ -150,8 +155,12 @@ const row3Logos = [
     name: "Cenario.ai",
     element: (
       <div className="flex items-center gap-2.5 text-white font-medium text-2xl sm:text-3xl tracking-tight">
-        <div className="w-8 h-8 rounded-full border-2 border-white/50 flex items-center justify-center text-sm">
-          🌐
+        <div className="w-8 h-8 rounded-full border-2 border-white/50 flex items-center justify-center">
+          <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+          </svg>
         </div>
         <span>Cenario.ai</span>
       </div>
@@ -177,7 +186,9 @@ const row3Logos = [
     name: "QORE LOGIQ",
     element: (
       <div className="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl tracking-wider">
-        <span className="text-cyan-400 text-2xl">💠</span>
+        <svg className="w-5 h-5 sm:w-6 sm:h-6 fill-current text-cyan-400" viewBox="0 0 24 24">
+          <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
+        </svg>
         <span className="text-slate-100">QORE LOGIQ</span>
       </div>
     ),
@@ -194,7 +205,9 @@ const row3Logos = [
     name: "Supabase",
     element: (
       <div className="flex items-center gap-2.5 text-white font-bold text-2xl sm:text-3xl tracking-tight">
-        <span className="text-[#3ecf8e] text-3xl">⚡</span>
+        <svg className="w-5 h-5 sm:w-6 sm:h-6 fill-current text-[#3ecf8e]" viewBox="0 0 24 24">
+          <path d="M21.362 9.354H12V.396a.396.396 0 0 0-.716-.233L.116 14.162a.396.396 0 0 0 .316.634H12v8.958a.396.396 0 0 0 .716.233l11.168-13.999a.396.396 0 0 0-.522-.634z" />
+        </svg>
         <span className="text-[#3ecf8e]">supabase</span>
       </div>
     ),
@@ -203,7 +216,7 @@ const row3Logos = [
     name: "Raycast",
     element: (
       <div className="flex items-center gap-2.5 text-white font-bold text-2xl sm:text-3xl tracking-tight">
-        <span className="text-[#ff6363] text-2xl">🔴</span>
+        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#ff6363] shadow-[0_0_8px_#ff6363]" />
         <span>Raycast</span>
       </div>
     ),

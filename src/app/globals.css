@@ -25,6 +25,21 @@
   }
 }
 
+@keyframes sound-wave {
+  0%, 100% {
+    transform: scaleY(0.28);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.animate-sound-wave {
+  animation: sound-wave 0.75s ease-in-out infinite alternate;
+}
+
 .animate-marquee {
   animation: marquee-left 28s linear infinite;
 }

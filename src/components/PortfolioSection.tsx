@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ProjectItem {
@@ -31,6 +32,7 @@ const sampleProjects: ProjectItem[] = [
     description:
       "Where users can use their Virtual & Disposable Cards with scalable digital payments.",
     badge: "Figma",
+    image: "/images/DigitalPay.webp",
     bgGradient: "from-emerald-950 via-slate-900 to-black",
   },
   {
@@ -40,6 +42,7 @@ const sampleProjects: ProjectItem[] = [
     description:
       "We redesigned an agency site with high-velocity UI/UX, helping marketers automate and convert.",
     badge: "Figma",
+    image: "/images/UserPath.webp",
     bgGradient: "from-rose-950 via-slate-900 to-black",
   },
   {
@@ -49,6 +52,7 @@ const sampleProjects: ProjectItem[] = [
     description:
       "Full-stack analytics workspace enabling teams to track real-time revenue and growth funnels.",
     badge: "Next.js",
+    image: "/images/Revenue.webp",
     bgGradient: "from-blue-950 via-slate-900 to-black",
   },
   {
@@ -58,6 +62,7 @@ const sampleProjects: ProjectItem[] = [
     description:
       "Empowering therapy & counseling with interactive booking and personalized patient care journeys.",
     badge: "Mobile",
+    image: "/images/Mobile Health.webp",
     bgGradient: "from-amber-950 via-slate-900 to-black",
   },
 ];
@@ -84,18 +89,27 @@ function ProjectCard({ project }: { project: ProjectItem }) {
       onMouseLeave={() => setIsHovered(false)}
       onMouseMove={handleMouseMove}
       /* cursor-none menyembunyikan kursor tangan/panah bawaan OS sehingga hanya bulatan yang terlihat */
-      className="group relative w-full aspect-[16/11] sm:aspect-[16/10] rounded-[28px] sm:rounded-[32px] overflow-hidden bg-neutral-900 border border-neutral-200/60 shadow-lg hover:shadow-2xl transition-all duration-500 cursor-none flex flex-col justify-end p-6 sm:p-8"
+      className="group relative w-full aspect-[16/11] sm:aspect-[16/10] rounded-[28px] sm:rounded-[32px] overflow-hidden bg-neutral-950 border border-neutral-800/80 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-none flex flex-col justify-end p-6 sm:p-8"
     >
-      {/* Background Gradient / Placeholder */}
-      <div
-        className={`absolute inset-0 bg-gradient-to-br ${project.bgGradient} opacity-90 transition-transform duration-700 ease-out group-hover:scale-105`}
-      />
+      {/* Background Image / Gradient */}
+      {project.image ? (
+        <div className="absolute inset-0 overflow-hidden">
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover object-top opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
+      ) : (
+        <div
+          className={`absolute inset-0 bg-gradient-to-br ${project.bgGradient} opacity-90 transition-transform duration-700 ease-out group-hover:scale-105`}
+        />
+      )}
 
-      {/* Grid Overlay / Subtle Texture */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.08),transparent_70%)] pointer-events-none" />
-
-      {/* Dark Vignette Bottom Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
+      {/* Dark Vignette Overlay for Readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/15 pointer-events-none" />
 
       {/* Floating Neon Lime Cursor "See Full Project ↗" Menggantikan Kursor Bawaan */}
       <AnimatePresence>

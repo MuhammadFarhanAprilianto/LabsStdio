@@ -6,7 +6,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
-import StudioAvailabilityBadge from "@/components/ui/StudioAvailabilityBadge";
 
 interface CaseStudyData {
   slug: string;
@@ -64,7 +63,6 @@ export default function CaseStudyPage({ params }: { params: Promise<{ slug: stri
             >
               <span>← Back to Work</span>
             </Link>
-            <StudioAvailabilityBadge variant="pill" />
           </div>
 
           <div className="space-y-3 max-w-4xl">

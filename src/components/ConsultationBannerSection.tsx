@@ -2,23 +2,30 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import ThreeKey3DIcon from "@/components/ui/ThreeKey3DIcon";
 
 export default function ConsultationBannerSection() {
   const [activeKey, setActiveKey] = useState<string | null>(null);
 
   const teamAvatars = [
-    { name: "Sarah Chen", role: "Design Lead", bg: "bg-emerald-600", text: "SC" },
-    { name: "David Kim", role: "Product Strategist", bg: "bg-blue-600", text: "DK" },
-    { name: "Alex Thorne", role: "Tech Architect", bg: "bg-neutral-800", text: "AT" },
-    { name: "Elena Rostova", role: "UX Director", bg: "bg-purple-600", text: "ER" },
+    { name: "Sarah Chen", role: "Design Lead", image: "/images/Orang 01.webp" },
+    { name: "David Kim", role: "Product Strategist", image: "/images/Orang 02.webp" },
+    { name: "Alex Thorne", role: "Tech Architect", image: "/images/Orang 03.webp" },
+    { name: "Elena Rostova", role: "UX Director", image: "/images/Orang 04.webp" },
   ];
 
-  const featureKeys = [
-    { id: "audit", icon: "📞", title: "Quick product audit", row: "top", col: "col-span-1" },
-    { id: "growth", icon: "🎯", title: "Growth direction", row: "top", col: "col-span-1" },
-    { id: "expert", icon: "👤", title: "Expert perspective", row: "top", col: "col-span-1" },
-    { id: "revenue", icon: "🚀", title: "$2B+ Revenue influenced", row: "bottom", col: "col-span-1" },
-    { id: "onboarding", icon: "⏱️", title: "48h avg kickoff", row: "bottom", col: "col-span-1" },
+  const featureKeys: {
+    id: "audit" | "growth" | "expert" | "revenue" | "onboarding";
+    title: string;
+    row: string;
+    col: string;
+  }[] = [
+    { id: "audit", title: "Quick product audit", row: "top", col: "col-span-1" },
+    { id: "growth", title: "Growth direction", row: "top", col: "col-span-1" },
+    { id: "expert", title: "Expert perspective", row: "top", col: "col-span-1" },
+    { id: "revenue", title: "$2B+ Revenue influenced", row: "bottom", col: "col-span-1" },
+    { id: "onboarding", title: "48h avg kickoff", row: "bottom", col: "col-span-1" },
   ];
 
   return (
@@ -47,9 +54,15 @@ export default function ConsultationBannerSection() {
                   <div
                     key={i}
                     title={`${member.name} • ${member.role}`}
-                    className={`relative w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white ${member.bg} text-white text-[10px] sm:text-xs font-bold flex items-center justify-center shadow-md transform transition-transform hover:scale-115 hover:z-20 cursor-pointer`}
+                    className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white overflow-hidden bg-neutral-200 shadow-md transform transition-transform hover:scale-115 hover:z-20 cursor-pointer"
                   >
-                    {member.text}
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      width={48}
+                      height={48}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 ))}
               </span>{" "}
@@ -120,15 +133,19 @@ export default function ConsultationBannerSection() {
                       key={item.id}
                       onMouseEnter={() => setActiveKey(item.id)}
                       onMouseLeave={() => setActiveKey(null)}
-                      className={`h-24 sm:h-28 rounded-2xl bg-white border border-neutral-200/90 p-3 sm:p-3.5 flex flex-col justify-between shadow-[0_4px_0_#cbd5e1,0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-300 cursor-pointer ${isHover
+                      className={`h-24 sm:h-28 rounded-2xl bg-white border border-neutral-200/90 p-3 sm:p-3.5 flex flex-col justify-between shadow-[0_4px_0_#cbd5e1,0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-300 cursor-pointer ${
+                        isHover
                           ? "translate-y-1 shadow-[0_1px_0_#cbd5e1] border-[#a6f30d] bg-neutral-900 text-white"
                           : "hover:-translate-y-0.5 text-neutral-900"
-                        }`}
+                      }`}
                     >
-                      <div className="text-base sm:text-lg">{item.icon}</div>
+                      <div className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
+                        <ThreeKey3DIcon type={item.id} isHovered={isHover} className="w-8 h-8 sm:w-9 sm:h-9" />
+                      </div>
                       <p
-                        className={`text-[11px] sm:text-xs font-bold leading-tight font-['Agrandir',sans-serif] ${isHover ? "text-[#d4f938]" : "text-neutral-900"
-                          }`}
+                        className={`text-[11px] sm:text-xs font-bold leading-tight font-['Agrandir',sans-serif] ${
+                          isHover ? "text-[#d4f938]" : "text-neutral-900"
+                        }`}
                       >
                         {item.title}
                       </p>
@@ -147,15 +164,19 @@ export default function ConsultationBannerSection() {
                       key={item.id}
                       onMouseEnter={() => setActiveKey(item.id)}
                       onMouseLeave={() => setActiveKey(null)}
-                      className={`col-span-1.5 sm:col-span-1 h-22 sm:h-26 rounded-2xl bg-white border border-neutral-200/90 p-3 flex flex-col justify-between shadow-[0_4px_0_#cbd5e1,0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-300 cursor-pointer ${isHover
+                      className={`col-span-1.5 sm:col-span-1 h-22 sm:h-26 rounded-2xl bg-white border border-neutral-200/90 p-3 flex flex-col justify-between shadow-[0_4px_0_#cbd5e1,0_8px_20px_rgba(0,0,0,0.04)] transition-all duration-300 cursor-pointer ${
+                        isHover
                           ? "translate-y-1 shadow-[0_1px_0_#cbd5e1] border-[#a6f30d] bg-neutral-900 text-white"
                           : "hover:-translate-y-0.5 text-neutral-900"
-                        }`}
+                      }`}
                     >
-                      <div className="text-base">{item.icon}</div>
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center">
+                        <ThreeKey3DIcon type={item.id} isHovered={isHover} className="w-7 h-7 sm:w-8 sm:h-8" />
+                      </div>
                       <p
-                        className={`text-[10px] sm:text-[11px] font-bold leading-tight font-['Agrandir',sans-serif] ${isHover ? "text-[#d4f938]" : "text-neutral-900"
-                          }`}
+                        className={`text-[10px] sm:text-[11px] font-bold leading-tight font-['Agrandir',sans-serif] ${
+                          isHover ? "text-[#d4f938]" : "text-neutral-900"
+                        }`}
                       >
                         {item.title}
                       </p>

@@ -104,7 +104,10 @@ const allCompletedLogos = [
     name: "reviewinc",
     element: (
       <div className="flex items-center gap-1.5 text-neutral-900 font-bold text-xl sm:text-2xl tracking-tight">
-        <span className="text-xl">📍</span>
+        <svg className="w-5 h-5 fill-none stroke-current stroke-2 text-neutral-900" viewBox="0 0 24 24">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+          <circle cx="12" cy="9" r="2.5" />
+        </svg>
         <span className="font-sans lowercase text-neutral-800">reviewinc</span>
       </div>
     ),
@@ -113,7 +116,9 @@ const allCompletedLogos = [
     name: "POWER SYNCH",
     element: (
       <div className="flex items-center gap-2 text-[#16a34a] font-black text-lg sm:text-xl tracking-wider">
-        <span className="text-xl">⚡</span>
+        <svg className="w-5 h-5 fill-current text-[#16a34a]" viewBox="0 0 24 24">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+        </svg>
         <div className="leading-none text-left">
           <div className="text-[10px] text-neutral-500 tracking-widest font-normal">POWER</div>
           <div className="text-sm sm:text-base text-[#16a34a]">SYNCH</div>
@@ -149,8 +154,12 @@ const allCompletedLogos = [
     name: "Cenario.ai",
     element: (
       <div className="flex items-center gap-2 text-neutral-900 font-medium text-xl sm:text-2xl tracking-tight">
-        <div className="w-6 h-6 rounded-full border-2 border-neutral-700 flex items-center justify-center text-xs">
-          🌐
+        <div className="w-6 h-6 rounded-full border-2 border-neutral-700 flex items-center justify-center">
+          <svg className="w-3.5 h-3.5 text-neutral-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+          </svg>
         </div>
         <span>Cenario.ai</span>
       </div>
@@ -176,7 +185,9 @@ const allCompletedLogos = [
     name: "QORE LOGIQ",
     element: (
       <div className="flex items-center gap-1.5 text-neutral-900 font-bold text-lg sm:text-xl tracking-wider">
-        <span className="text-cyan-600 text-xl">💠</span>
+        <svg className="w-5 h-5 fill-current text-cyan-600" viewBox="0 0 24 24">
+          <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
+        </svg>
         <span className="text-neutral-800">QORE LOGIQ</span>
       </div>
     ),
@@ -193,7 +204,9 @@ const allCompletedLogos = [
     name: "Supabase",
     element: (
       <div className="flex items-center gap-2 text-neutral-900 font-bold text-xl sm:text-2xl tracking-tight">
-        <span className="text-[#16a34a] text-2xl">⚡</span>
+        <svg className="w-5 h-5 fill-current text-[#16a34a]" viewBox="0 0 24 24">
+          <path d="M21.362 9.354H12V.396a.396.396 0 0 0-.716-.233L.116 14.162a.396.396 0 0 0 .316.634H12v8.958a.396.396 0 0 0 .716.233l11.168-13.999a.396.396 0 0 0-.522-.634z" />
+        </svg>
         <span className="text-[#16a34a]">supabase</span>
       </div>
     ),
@@ -202,7 +215,7 @@ const allCompletedLogos = [
     name: "Raycast",
     element: (
       <div className="flex items-center gap-2 text-neutral-900 font-bold text-xl sm:text-2xl tracking-tight">
-        <span className="text-[#ef4444] text-xl">🔴</span>
+        <div className="w-4 h-4 rounded-full bg-[#ef4444]" />
         <span>Raycast</span>
       </div>
     ),
@@ -1082,7 +1095,7 @@ export default function AboutPage() {
               A powerhouse team of UI UX & brand identity designers, strategists, and web developers working remotely to create digital experiences that make an impact.
             </motion.p>
 
-            {/* Interactive Category Filter Tabs */}
+            {/* Interactive Category Filter Tabs with Signature Rolling Flip Transition */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1090,19 +1103,39 @@ export default function AboutPage() {
               transition={{ duration: 0.7, delay: 0.75 }}
               className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 pt-2"
             >
-              {["All", "Design", "Engineering", "Leadership", "Culture"].map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setActiveFilter(category)}
-                  className={`px-5 py-2 rounded-full text-xs sm:text-sm font-medium font-['Questrial',sans-serif] transition-all duration-300 ${
-                    activeFilter === category
-                      ? "bg-[#d4f938] text-black font-bold shadow-[0_0_15px_rgba(212,249,56,0.35)] scale-105"
-                      : "bg-neutral-900/90 text-neutral-400 border border-neutral-800 hover:text-white hover:border-neutral-700"
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
+              {["All", "Design", "Engineering", "Leadership", "Culture"].map((category) => {
+                const isActive = activeFilter === category;
+                return (
+                  <button
+                    key={category}
+                    type="button"
+                    onClick={() => setActiveFilter(category)}
+                    className={`group/btn relative inline-flex items-center justify-center overflow-hidden rounded-full px-5 py-2 text-xs sm:text-sm font-semibold font-['Questrial',sans-serif] transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] cursor-pointer active:scale-95 ${
+                      isActive
+                        ? "bg-[#d4f938] text-black border border-[#c4eb28] shadow-[0_0_20px_rgba(212,249,56,0.4)] scale-105 hover:bg-[#111111] hover:border-black"
+                        : "bg-neutral-900/90 text-neutral-400 border border-neutral-800 hover:border-[#c4eb28] hover:bg-[#d4f938]"
+                    }`}
+                  >
+                    {/* Layer 1: Teks Utama Awal (Meluncur keluar ke atas saat hover) */}
+                    <span
+                      className={`inline-block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/btn:-translate-y-[160%] ${
+                        isActive ? "text-black" : "text-neutral-400 group-hover/btn:text-black"
+                      }`}
+                    >
+                      {category}
+                    </span>
+
+                    {/* Layer 2: Teks Meluncur Masuk dari Bawah ke Tengah Saat Hover */}
+                    <span
+                      className={`absolute inset-0 flex items-center justify-center translate-y-[160%] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/btn:translate-y-0 ${
+                        isActive ? "text-[#d4f938]" : "text-black"
+                      }`}
+                    >
+                      {category}
+                    </span>
+                  </button>
+                );
+              })}
             </motion.div>
           </div>
 

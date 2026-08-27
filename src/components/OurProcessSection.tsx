@@ -5,7 +5,6 @@ import React, { useState, useEffect } from "react";
 interface ProcessStep {
   id: string;
   tabTitle: string;
-  badgeIcons: string[];
   headline: string;
   subheadline: string;
   cards: {
@@ -20,7 +19,6 @@ const processSteps: ProcessStep[] = [
   {
     id: "discovery",
     tabTitle: "Discovery",
-    badgeIcons: ["🔍", "💡", "🎯"],
     headline: "Uncover. Align. Strategize.",
     subheadline:
       "We dive deep into your brand vision, business model, and target audience to define a clear product roadmap.",
@@ -48,7 +46,6 @@ const processSteps: ProcessStep[] = [
   {
     id: "research",
     tabTitle: "Research",
-    badgeIcons: ["📊", "🧠", "🗺️"],
     headline: "Data-Driven. User-Centric.",
     subheadline:
       "Understanding user behaviors, personas, and conversion touchpoints to eliminate guesswork from design.",
@@ -76,7 +73,6 @@ const processSteps: ProcessStep[] = [
   {
     id: "uiux",
     tabTitle: "UI/UX Design",
-    badgeIcons: ["🎨", "✨", "📐"],
     headline: "Aesthetic Polish. Seamless Utility.",
     subheadline:
       "Crafting high-fidelity wireframes, design systems, and micro-interactions that elevate brand perception.",
@@ -104,7 +100,6 @@ const processSteps: ProcessStep[] = [
   {
     id: "development",
     tabTitle: "Development",
-    badgeIcons: ["⚡", "💻", "🚀"],
     headline: "Precision Code. Scalable Engineering.",
     subheadline:
       "Building lightning-fast, reactive web applications with Next.js, Three.js WebGL, and robust backend architecture.",
@@ -132,7 +127,6 @@ const processSteps: ProcessStep[] = [
   {
     id: "testing",
     tabTitle: "QA Testing",
-    badgeIcons: ["🛡️", "⚙️", "✅"],
     headline: "Tested. Approved. Delivered.",
     subheadline:
       "Every screen, flow, and interaction tested thoroughly before anything goes live.",
@@ -178,7 +172,6 @@ const processSteps: ProcessStep[] = [
   {
     id: "launch",
     tabTitle: "Launch",
-    badgeIcons: ["🌐", "🚀", "📈"],
     headline: "Deploy. Scale. Dominate.",
     subheadline:
       "Seamless production deployment with continuous monitoring, SEO optimization, and handover training.",
@@ -312,18 +305,6 @@ export default function OurProcessSection() {
               {/* Glowing Ambient Background Aura */}
               <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-[radial-gradient(circle,rgba(212,249,56,0.1)_0%,transparent_70%)] pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-[radial-gradient(circle,rgba(34,197,94,0.08)_0%,transparent_70%)] pointer-events-none" />
-
-              {/* Card Header: Tool / Icon Badges */}
-              <div className="relative z-10 flex items-center gap-2.5">
-                {currentStep.badgeIcons.map((icon, idx) => (
-                  <div
-                    key={idx}
-                    className="w-8 h-8 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 flex items-center justify-center text-sm shadow"
-                  >
-                    {icon}
-                  </div>
-                ))}
-              </div>
 
               {/* Card Center: Step Headline & Description */}
               <div className="relative z-10 text-center my-6 space-y-2">
