@@ -10,6 +10,7 @@ import SoundWaveVisualizer from "@/components/ui/SoundWaveVisualizer";
 const testimonials = [
   {
     initial: "C",
+    image: "/images/Orang 01.webp",
     company: "Core & More",
     quote: "15 years in business and I rarely say this, but this team nailed it.",
     feedback: "Issues were fixed fast, and the work was solid. Will definitely reach out for the next project.",
@@ -18,6 +19,7 @@ const testimonials = [
   },
   {
     initial: "B",
+    image: "/images/Orang 02.webp",
     company: "BLANQS Tech",
     quote: "Labs Stdio completely transformed our product UX and engineering velocity.",
     feedback: "Our user retention spiked by +240% within the first 60 days of rolling out the new design system.",
@@ -26,6 +28,7 @@ const testimonials = [
   },
   {
     initial: "H",
+    image: "/images/Orang 03.webp",
     company: "HYRO Athletics",
     quote: "Sub-second speed and a checkout experience that converts like crazy.",
     feedback: "Direct-to-consumer sales grew 3.4x in Q1 following the headless Shopify launch.",
@@ -34,6 +37,7 @@ const testimonials = [
   },
   {
     initial: "F",
+    image: "/images/Orang 04.webp",
     company: "Fortified Capital",
     quote: "Institutional data visualization crafted with meticulous precision.",
     feedback: "Managing over $850M in assets on this platform with zero downtime and exceptional client satisfaction.",
@@ -364,10 +368,15 @@ export default function WorkPage() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Client Company Branding Badge */}
+              {/* Client Company Branding Badge & Avatar Photo */}
               <div className="flex items-center gap-3 pt-2">
-                <div className="w-10 h-10 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center text-sm font-black text-neutral-800 font-['Agrandir',sans-serif]">
-                  {testimonials[activeTestimonial].initial}
+                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-neutral-200 shadow-sm shrink-0 bg-neutral-100">
+                  <Image
+                    src={testimonials[activeTestimonial].image}
+                    alt={testimonials[activeTestimonial].company}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <div>
                   <div className="font-bold text-sm text-black font-['Agrandir',sans-serif]">
@@ -507,10 +516,10 @@ export default function WorkPage() {
                                 className={`group w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-left text-xs sm:text-sm font-medium font-['Questrial',sans-serif] transition-all duration-200 cursor-pointer ${
                                   isSelected
                                     ? "bg-black text-[#d4f938] font-bold shadow-sm"
-                                    : "text-neutral-800 hover:bg-[#d4f938] hover:text-black hover:font-bold hover:shadow-sm"
+                                    : "bg-transparent text-neutral-600 hover:bg-transparent hover:text-black hover:font-bold"
                                 }`}
                               >
-                                <span className="transition-transform duration-200 group-hover:translate-x-0.5">
+                                <span className="transition-all duration-200 group-hover:translate-x-0.5">
                                   {option}
                                 </span>
                                 {isSelected ? (
