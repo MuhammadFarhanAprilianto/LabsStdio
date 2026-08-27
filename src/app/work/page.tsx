@@ -521,16 +521,16 @@ export default function WorkPage() {
                                 className={`group w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-left text-xs sm:text-sm font-medium font-['Questrial',sans-serif] transition-all duration-200 cursor-pointer ${
                                   isSelected
                                     ? "bg-black text-[#d4f938] font-bold shadow-sm"
-                                    : "bg-transparent text-neutral-600 hover:bg-transparent hover:text-black hover:font-bold"
+                                    : "bg-transparent text-neutral-600 hover:bg-transparent hover:text-[#84cc16] hover:font-bold"
                                 }`}
                               >
-                                <span className="transition-all duration-200 group-hover:translate-x-0.5">
+                                <span className="transition-all duration-200 group-hover:text-[#84cc16] group-hover:translate-x-0.5">
                                   {option}
                                 </span>
                                 {isSelected ? (
                                   <span className="text-[#d4f938] font-black text-xs">✓</span>
                                 ) : (
-                                  <span className="opacity-0 group-hover:opacity-100 text-black transition-all duration-200 text-xs font-bold -translate-x-1 group-hover:translate-x-0">
+                                  <span className="opacity-0 group-hover:opacity-100 text-[#84cc16] transition-all duration-200 text-xs font-bold -translate-x-1 group-hover:translate-x-0">
                                     →
                                   </span>
                                 )}
