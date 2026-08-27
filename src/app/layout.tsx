@@ -12,8 +12,16 @@ const questrial = Questrial({
 });
 
 export const metadata: Metadata = {
-  title: "Labs Stdio — Venture-Grade UI/UX Design & Web Development Agency",
+  title: "LabStdio - Agency.",
   description: "We design and build award-winning websites, SaaS platforms, and digital experiences that drive exponential growth.",
+  icons: {
+    icon: [
+      { url: "/images/P-LOGO.webp", type: "image/webp" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    shortcut: "/images/P-LOGO.webp",
+    apple: "/images/P-LOGO.webp",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Logo({
   className = "h-11 w-auto",
   inverted = false,
@@ -6,58 +8,29 @@ export default function Logo({
   inverted?: boolean;
 }) {
   return (
-    <div className={`flex items-center gap-3 select-none ${className}`}>
-      {/* Origami / Low-Poly 'P' Icon */}
-      <svg
-        viewBox="0 0 160 180"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-full w-auto shrink-0 transition-all duration-500"
-      >
-        {inverted ? (
-          <>
-            {/* White / Platinum Silver Facets for Dark Liquid Glass */}
-            <polygon points="15,48 65,12 65,58" fill="#FFFFFF" />
-            <polygon points="65,12 145,58 65,58" fill="#E2E8F0" />
-            <polygon points="145,58 126,108 65,58" fill="#94A3B8" />
-            <polygon points="65,58 126,108 65,108" fill="#CBD5E1" />
-            <polygon points="15,48 65,58 65,108" fill="#F8FAFC" />
-            <polygon points="15,48 65,108 15,142" fill="#E2E8F0" />
-            <polygon points="15,142 65,108 65,142" fill="#94A3B8" />
-            <polygon points="15,142 35,155 15,170" fill="#FFFFFF" />
-            <polygon points="15,170 35,155 52,170" fill="#94A3B8" />
-          </>
-        ) : (
-          <>
-            {/* Dark Facets for Light Mode */}
-            <polygon points="15,48 65,12 65,58" fill="#000000" />
-            <polygon points="65,12 145,58 65,58" fill="#141414" />
-            <polygon points="145,58 126,108 65,58" fill="#2d2d2d" />
-            <polygon points="65,58 126,108 65,108" fill="#181818" />
-            <polygon points="15,48 65,58 65,108" fill="#000000" />
-            <polygon points="15,48 65,108 15,142" fill="#050505" />
-            <polygon points="15,142 65,108 65,142" fill="#2a2a2a" />
-            <polygon points="15,142 35,155 15,170" fill="#000000" />
-            <polygon points="15,170 35,155 52,170" fill="#2c2c2c" />
-          </>
-        )}
-      </svg>
+    <div className={`flex items-center gap-2.5 select-none ${className}`}>
+      {/* P-LOGO WebP Image with Black Background */}
+      <div className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-black border border-neutral-800/90 flex items-center justify-center overflow-hidden shrink-0 shadow-md">
+        <Image
+          src="/images/P-LOGO.webp"
+          alt="LabStdio Logo"
+          fill
+          className="object-contain p-1"
+          priority
+        />
+      </div>
 
-      {/* Brand Typography */}
-      <div className="flex flex-col justify-center leading-none">
+      {/* Brand Typography with Font Questrial & Kuning Stabilo */}
+      <div className="flex items-baseline gap-1.5 font-['Questrial',sans-serif]">
         <span
-          className={`font-light tracking-[0.18em] text-[15px] uppercase transition-colors duration-500 ${
-            inverted ? "text-gray-300" : "text-gray-900"
+          className={`font-bold text-lg sm:text-xl tracking-tight transition-colors duration-500 ${
+            inverted ? "text-white" : "text-black"
           }`}
         >
-          ROMETHEAN
+          LabStdio
         </span>
-        <span
-          className={`font-extrabold tracking-tight text-[26px] -mt-0.5 transition-colors duration-500 ${
-            inverted ? "text-white" : "text-gray-950"
-          }`}
-        >
-          Labs<span className={inverted ? "text-blue-400" : "text-gray-900"}>.</span>
+        <span className="text-[11px] sm:text-xs font-semibold px-2 py-0.5 rounded-full bg-black text-[#d4f938] border border-neutral-800 shadow-sm">
+          Agency.
         </span>
       </div>
     </div>
