@@ -285,7 +285,7 @@ export default function AboutPage() {
     {
       id: "culture-1",
       col: 1,
-      image: "/images/culture_1.jpg",
+      image: "/images/culture_1.webp",
       title: "Venture-Grade Systems",
       role: "Full-Stack & WebGL Engineering",
       location: "San Francisco, USA",
@@ -294,7 +294,7 @@ export default function AboutPage() {
     {
       id: "culture-2",
       col: 2,
-      image: "/images/culture_2.jpg",
+      image: "/images/culture_2.webp",
       title: "Founder-Led Strategy",
       role: "Executive Product Architecture",
       location: "Jakarta, Indonesia",
@@ -303,7 +303,7 @@ export default function AboutPage() {
     {
       id: "culture-3",
       col: 3,
-      image: "/images/culture_5.jpg",
+      image: "/images/culture_5.webp",
       title: "Global Creative Sparks",
       role: "Brand Identity & Strategy",
       location: "London, UK",
@@ -312,7 +312,7 @@ export default function AboutPage() {
     {
       id: "culture-4",
       col: 1,
-      image: "/images/culture_3.jpg",
+      image: "/images/culture_3.webp",
       title: "Team Worldwide Synergy",
       role: "Creative Summit",
       location: "Tokyo, Japan",
@@ -321,7 +321,7 @@ export default function AboutPage() {
     {
       id: "culture-5",
       col: 2,
-      image: "/images/culture_4.jpg",
+      image: "/images/culture_4.webp",
       title: "High-Velocity Remote Sprints",
       role: "Global Sprint Sync",
       location: "Across 6 Timezones",
@@ -330,7 +330,7 @@ export default function AboutPage() {
     {
       id: "culture-6",
       col: 3,
-      image: "/images/culture_6.jpg",
+      image: "/images/culture_6.webp",
       title: "Crafting UI Micro-Moments",
       role: "Lead Product Designer",
       location: "Singapore",

@@ -106,7 +106,7 @@ export default function ThreeFooterGlobe() {
     // Generate textured dots using world map projection logic
     const img = new Image();
     img.crossOrigin = "anonymous";
-    img.src = "/images/world_landmask.jpg";
+    img.src = "/images/world_landmask.webp";
 
     let dotsMesh: THREE.Points | null = null;
     let globeGeo: THREE.BufferGeometry | null = null;

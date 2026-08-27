@@ -210,7 +210,7 @@ export default function ThreeInteractiveGlobe({
 
     // --- 5. Load Accurate World Landmask ---
     const img = new Image();
-    img.src = "/images/world_landmask.jpg";
+    img.src = "/images/world_landmask.webp";
     img.crossOrigin = "anonymous";
 
     let pointsMesh: THREE.Points | null = null;

@@ -42,8 +42,8 @@ const caseStudies: Record<string, CaseStudyData> = {
       "The client required an end-to-end UX overhaul that would simplify high-density real-time telemetry, provide instant clarity on computational costs, and look undeniably venture-grade to attract Fortune 500 enterprise buyers.",
     solution:
       "Labs Stdio completely rebuilt the platform interface from the ground up: introducing dark glassmorphism data surfaces, GPU-accelerated canvas charts, contextual sub-menus, and an atomic Figma design token system integrated straight into Next.js Turbopack.",
-    beforeImg: "/images/before_ui.jpg",
-    afterImg: "/images/after_ui.jpg",
+    beforeImg: "/images/before_ui.webp",
+    afterImg: "/images/after_ui.webp",
   },
 };
 

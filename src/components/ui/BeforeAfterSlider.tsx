@@ -14,8 +14,8 @@ interface BeforeAfterSliderProps {
 }
 
 export default function BeforeAfterSlider({
-  beforeImage = "/images/before_ui.jpg",
-  afterImage = "/images/after_ui.jpg",
+  beforeImage = "/images/before_ui.webp",
+  afterImage = "/images/after_ui.webp",
   beforeLabel = "Legacy Architecture (2018)",
   afterLabel = "Labs Stdio Redesign (2026)",
   beforeTag = "Low Conversion & Friction",

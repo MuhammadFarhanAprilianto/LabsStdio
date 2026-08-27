@@ -341,7 +341,7 @@ export default function Navbar() {
                     {/* Full Mockup Preview Card (Tanpa Terpotong) */}
                     <div className="mt-3.5 rounded-2xl overflow-hidden border border-white/90 shadow-sm bg-white p-1.5">
                       <img
-                        src="/images/product_mockup.jpg"
+                        src="/images/product_mockup.webp"
                         alt="Webpagehealth Dashboard Laptop Mockup"
                         className="w-full h-auto aspect-[16/10] object-cover rounded-xl shadow-inner"
                       />

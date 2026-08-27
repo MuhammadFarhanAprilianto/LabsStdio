@@ -29,7 +29,7 @@ const blogPosts: BlogPost[] = [
     title: "10 Best Design Agencies in Toronto to Hire",
     excerpt:
       "The 10 best design agencies in Toronto in 2026 include six2eight, Brand Vision, Orizon Design, and other firms recognized for their expertise in branding, UX/UI, web design, and digital transformation.",
-    image: "/images/blog_1.jpg",
+    image: "/images/blog_1.webp",
     categories: ["UI/UX Design", "Website Design"],
     readTime: "6 min read",
     date: "June 2026",
@@ -45,7 +45,7 @@ const blogPosts: BlogPost[] = [
     title: "AI Tokens Explained: Cost, Context, and Performance (2026)",
     excerpt:
       "AI tokens are the small building blocks that models like GPT, Claude, and Gemini use to process and generate text. Tokens are subword pieces, not fixed characters or words, and their pricing dictates model economics.",
-    image: "/images/blog_2.jpg",
+    image: "/images/blog_2.webp",
     categories: ["UI/UX Design", "SaaS"],
     readTime: "5 min read",
     date: "May 2026",
@@ -60,7 +60,7 @@ const blogPosts: BlogPost[] = [
     title: "Figma Config 2026: Every Major Announcement You Need to Know",
     excerpt:
       "Figma Config 2026 introduced some of the biggest updates Figma has ever released, and if you use it every day, these changes are going to affect how you design, prototype, and build scalable design systems.",
-    image: "/images/blog_3.jpg",
+    image: "/images/blog_3.webp",
     categories: ["UI/UX Design", "Website Design"],
     readTime: "8 min read",
     date: "May 2026",

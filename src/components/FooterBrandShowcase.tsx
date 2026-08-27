@@ -28,7 +28,7 @@ export default function FooterBrandShowcase() {
       <div className="relative z-20 w-full max-w-4xl mx-auto flex items-end justify-center px-6 pointer-events-none">
         <div className="relative w-full flex items-end justify-center">
           <Image
-            src="/images/promethean_logo_cropped.png"
+            src="/images/promethean_logo_cropped.webp"
             alt="PROMETHEAN Labs."
             width={721}
             height={332}
