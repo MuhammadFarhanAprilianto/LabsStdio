@@ -341,8 +341,13 @@ export default function WorkPage() {
             <div className="space-y-8">
               {/* Client Tag Pill */}
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-white border border-neutral-200 flex items-center justify-center font-bold text-xs text-neutral-800 shadow-sm font-['Agrandir',sans-serif]">
-                  {testimonials[activeTestimonial].initial}
+                <div className="relative w-8 h-8 rounded-full overflow-hidden border border-neutral-200 bg-neutral-100 shadow-sm shrink-0">
+                  <Image
+                    src={testimonials[activeTestimonial].image}
+                    alt={testimonials[activeTestimonial].company}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <span className="text-xs sm:text-sm font-medium text-neutral-500 font-['Questrial',sans-serif]">
                   {testimonials[activeTestimonial].company}
