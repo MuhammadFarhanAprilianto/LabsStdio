@@ -23,7 +23,7 @@ export default function ThreeCardRevenue() {
       powerPreference: "high-performance",
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
     container.appendChild(renderer.domElement);
 
     const group = new THREE.Group();
@@ -73,10 +73,6 @@ export default function ThreeCardRevenue() {
 
       // Glowing Checkmark for highlighted layer
       if (isHighlighted) {
-        const checkShape = new THREE.Shape();
-        checkShape.moveTo(-0.06, 0);
-        checkShape.lineTo(-0.01, -0.05);
-        checkShape.lineTo(0.08, 0.06);
         const checkGeo = new THREE.BufferGeometry().setFromPoints([
           new THREE.Vector3(-0.06, 0, 0.03),
           new THREE.Vector3(-0.01, -0.05, 0.03),
@@ -145,7 +141,7 @@ export default function ThreeCardRevenue() {
     const handleMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+      const y = -(((e.clientY - rect.top) / height) * 2 - 1);
       mouseX = x;
       mouseY = y;
     };
@@ -158,12 +154,25 @@ export default function ThreeCardRevenue() {
     container.addEventListener("mousemove", handleMouseMove);
     container.addEventListener("mouseleave", handleMouseLeave);
 
+    // Viewport Intersection Observer - pause WebGL loop when offscreen
+    let isVisible = false;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
+
     // Animation Loop
     let animationId: number;
     const clock = new THREE.Clock();
 
     const animate = () => {
       animationId = requestAnimationFrame(animate);
+
+      if (!isVisible) return; // Skip rendering when card is not in viewport
+
       const time = clock.getElapsedTime();
 
       targetRotY = mouseX * 0.45;
@@ -197,6 +206,7 @@ export default function ThreeCardRevenue() {
 
     return () => {
       cancelAnimationFrame(animationId);
+      observer.disconnect();
       resizeObserver.disconnect();
       container.removeEventListener("mousemove", handleMouseMove);
       container.removeEventListener("mouseleave", handleMouseLeave);

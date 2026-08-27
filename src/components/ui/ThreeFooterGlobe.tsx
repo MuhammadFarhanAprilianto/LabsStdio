@@ -24,7 +24,7 @@ export default function ThreeFooterGlobe() {
       powerPreference: "high-performance",
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
 
@@ -34,15 +34,15 @@ export default function ThreeFooterGlobe() {
     scene.add(globeGroup);
 
     // Inner Dark Core Sphere
-    const coreGeo = new THREE.SphereGeometry(98, 48, 48);
+    const coreGeo = new THREE.SphereGeometry(98, 36, 36);
     const coreMat = new THREE.MeshBasicMaterial({
       color: 0x050608,
     });
     const coreMesh = new THREE.Mesh(coreGeo, coreMat);
     globeGroup.add(coreMesh);
 
-    // 1. Galaxy Stars (Diamond lens flare starbursts)
-    const starCount = 450;
+    // 1. Galaxy Stars (Diamond lens flare starbursts) - Optimized count
+    const starCount = 220;
     const starGeo = new THREE.BufferGeometry();
     const starPositions = new Float32Array(starCount * 3);
     const starScales = new Float32Array(starCount);
@@ -97,9 +97,9 @@ export default function ThreeFooterGlobe() {
     const starField = new THREE.Points(starGeo, starMat);
     scene.add(starField);
 
-    // 2. Earth Particle Mesh with World Map Density
+    // 2. Earth Particle Mesh with Optimized Dot Density (5,500 particles)
     const globeRadius = 100;
-    const dotDensity = 14000;
+    const dotDensity = 5500;
     const globePositions = new Float32Array(dotDensity * 3);
     const globeColors = new Float32Array(dotDensity * 3);
 
@@ -109,6 +109,9 @@ export default function ThreeFooterGlobe() {
     img.src = "/images/world_landmask.jpg";
 
     let dotsMesh: THREE.Points | null = null;
+    let globeGeo: THREE.BufferGeometry | null = null;
+    let globeMat: THREE.PointsMaterial | null = null;
+    let dotTex: THREE.CanvasTexture | null = null;
 
     const buildGlobePoints = (maskData?: ImageData) => {
       let validIndex = 0;
@@ -150,7 +153,7 @@ export default function ThreeFooterGlobe() {
         validIndex++;
       }
 
-      const globeGeo = new THREE.BufferGeometry();
+      globeGeo = new THREE.BufferGeometry();
       globeGeo.setAttribute(
         "position",
         new THREE.BufferAttribute(globePositions.slice(0, validIndex * 3), 3)
@@ -171,10 +174,10 @@ export default function ThreeFooterGlobe() {
         dotCtx.arc(8, 8, 7, 0, Math.PI * 2);
         dotCtx.fill();
       }
-      const dotTex = new THREE.CanvasTexture(dotCanvas);
+      dotTex = new THREE.CanvasTexture(dotCanvas);
 
-      const globeMat = new THREE.PointsMaterial({
-        size: 1.8,
+      globeMat = new THREE.PointsMaterial({
+        size: 2.2,
         vertexColors: true,
         map: dotTex,
         transparent: true,
@@ -202,13 +205,23 @@ export default function ThreeFooterGlobe() {
       buildGlobePoints();
     };
 
+    // Viewport Intersection Observer - auto-pause when out of view
+    let isVisible = false;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0.02 }
+    );
+    observer.observe(container);
+
     // Animation Loop with Smooth Rotation
     let animationFrameId: number;
-    let clock = new THREE.Clock();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-      const elapsedTime = clock.getElapsedTime();
+
+      if (!isVisible) return; // Skip WebGL render loop when not visible
 
       // Continuous gentle rotation
       globeGroup.rotation.y += 0.0025;
@@ -234,8 +247,19 @@ export default function ThreeFooterGlobe() {
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
       resizeObserver.disconnect();
-      if (container && renderer.domElement) {
+
+      coreGeo.dispose();
+      coreMat.dispose();
+      starGeo.dispose();
+      starMat.dispose();
+      starTexture.dispose();
+      if (globeGeo) globeGeo.dispose();
+      if (globeMat) globeMat.dispose();
+      if (dotTex) dotTex.dispose();
+
+      if (container && renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
       renderer.dispose();

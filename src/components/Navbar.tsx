@@ -1,13 +1,133 @@
 "use client";
-
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Logo from "@/components/Logo";
+
+interface SubServiceItem {
+  title: string;
+  desc: string;
+  href: string;
+  icon: React.ReactNode;
+}
+
+const designServices: SubServiceItem[] = [
+  {
+    title: "UI/UX Design",
+    desc: "Web & Mobile app design",
+    href: "/services/ui-ux",
+    icon: (
+      <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+        <polyline points="2 17 12 22 22 17" />
+        <polyline points="2 12 12 17 22 12" />
+      </svg>
+    ),
+  },
+  {
+    title: "Web Design",
+    desc: "Modern websites that convert.",
+    href: "/services/web-design",
+    icon: (
+      <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <line x1="2" y1="12" x2="22" y2="12" />
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Mobile App Design",
+    desc: "Seamless iOS & Android design.",
+    href: "/services/mobile-apps",
+    icon: (
+      <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+        <line x1="12" y1="18" x2="12.01" y2="18" />
+      </svg>
+    ),
+  },
+  {
+    title: "Branding",
+    desc: "Identity that stands out.",
+    href: "/services/branding",
+    icon: (
+      <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+        <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+        <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+        <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+      </svg>
+    ),
+  },
+];
+
+const developmentServices: SubServiceItem[] = [
+  {
+    title: "Web Development",
+    desc: "Built for speed & growth.",
+    href: "/services/web-development",
+    icon: (
+      <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    ),
+  },
+  {
+    title: "WordPress Development",
+    desc: "Easy to manage & scale.",
+    href: "/services/wordpress",
+    icon: (
+      <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="7" height="7" />
+        <rect x="14" y="3" width="7" height="7" />
+        <rect x="14" y="14" width="7" height="7" />
+        <rect x="3" y="14" width="7" height="7" />
+      </svg>
+    ),
+  },
+  {
+    title: "Shopify Development",
+    desc: "Sell more with Shopify.",
+    href: "/services/shopify",
+    icon: (
+      <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 0 1-8 0" />
+      </svg>
+    ),
+  },
+  {
+    title: "Webflow Development",
+    desc: "Custom sites, no compromises.",
+    href: "/services/webflow",
+    icon: (
+      <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+      </svg>
+    ),
+  },
+];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleServicesEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setIsServicesOpen(true);
+  };
+
+  const handleServicesLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setIsServicesOpen(false);
+    }, 180);
+  };
 
   useEffect(() => {
     let lastScrollY = typeof window !== "undefined" ? window.scrollY : 0;
@@ -15,22 +135,18 @@ export default function Navbar() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Ubah gaya navbar (frosted glass capsule) saat mulai discroll
       if (currentScrollY > 20) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
 
-      // Logika Sembunyi saat Scroll ke Bawah & Muncul saat Scroll ke Atas
       if (currentScrollY < 100) {
-        // Masih di area paling atas (Hero Section) -> selalu terlihat
         setIsVisible(true);
       } else if (currentScrollY > lastScrollY && currentScrollY > 400 && !isMobileMenuOpen) {
-        // Scroll ke bawah melewati hero section -> sembunyikan navbar
         setIsVisible(false);
+        setIsServicesOpen(false);
       } else if (currentScrollY < lastScrollY) {
-        // Scroll ke atas -> langsung munculkan kembali navbar
         setIsVisible(true);
       }
 
@@ -41,7 +157,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobileMenuOpen]);
 
-  // Tutup menu saat resize ke layar besar
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -55,22 +170,20 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 flex flex-col items-center pointer-events-none px-4 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] font-['Questrial',sans-serif] ${
-        isVisible
-          ? "translate-y-0 opacity-100"
-          : "-translate-y-full opacity-0"
+        isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
       }`}
     >
-      {/* Navbar Container: Translucent Frosted Glass (Bentuk 100% Asli Dipertahankan) */}
+      {/* Navbar Container */}
       <nav
-        className={`pointer-events-auto relative flex items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden ${
+        className={`pointer-events-auto relative flex items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-visible ${
           isScrolled
-            ? "mt-4 w-full max-w-5xl rounded-full bg-white/40 text-gray-900 shadow-[0_20px_45px_-12px_rgba(0,0,0,0.08),0_2px_6px_rgba(0,0,0,0.03),inset_0_1.5px_1.5px_rgba(255,255,255,0.85),inset_0_-1px_1.5px_rgba(0,0,0,0.04)] backdrop-blur-md backdrop-saturate-150 px-5 sm:px-7 py-2.5 sm:py-3 border border-white/60 ring-1 ring-black/[0.05]"
+            ? "mt-4 w-full max-w-5xl rounded-full bg-white/60 text-gray-900 shadow-[0_20px_45px_-12px_rgba(0,0,0,0.08),0_2px_6px_rgba(0,0,0,0.03),inset_0_1.5px_1.5px_rgba(255,255,255,0.85),inset_0_-1px_1.5px_rgba(0,0,0,0.04)] backdrop-blur-md backdrop-saturate-150 px-5 sm:px-7 py-2.5 sm:py-3 border border-white/60 ring-1 ring-black/[0.05]"
             : "mt-0 w-full max-w-7xl rounded-none bg-transparent text-gray-900 px-4 sm:px-6 py-4 sm:py-5 border-none shadow-none"
         }`}
       >
         {/* Specular Ambient Light Flare */}
         <div
-          className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ${
+          className={`absolute inset-0 rounded-full pointer-events-none transition-opacity duration-700 overflow-hidden ${
             isScrolled ? "opacity-100" : "opacity-0"
           }`}
           style={{
@@ -79,39 +192,182 @@ export default function Navbar() {
           }}
         />
 
-        {/* Brand / Logo Promethean Labs */}
+        {/* Brand / Logo */}
         <Link
           href="/"
-          onClick={() => setIsMobileMenuOpen(false)}
+          onClick={() => {
+            setIsMobileMenuOpen(false);
+            setIsServicesOpen(false);
+          }}
           className="relative z-10 shrink-0 transition-all duration-700 hover:opacity-90 flex items-center"
         >
           <Logo className="h-9 sm:h-11 w-auto" inverted={false} />
         </Link>
 
-        {/* Menu Navigasi Desktop (Font Questrial + Hover Neon Lime Green) */}
+        {/* Menu Navigasi Desktop */}
         <div className="relative z-10 hidden md:flex items-center gap-6 lg:gap-8 text-base lg:text-[18px] tracking-wide transition-all duration-700 text-gray-800">
-          <Link
-            href="/"
-            className="transition-colors duration-200 hover:text-[#a6f30d]"
+          {/* Services Menu Item dengan Mega Menu Dropdown */}
+          <div
+            className="relative py-2"
+            onMouseEnter={handleServicesEnter}
+            onMouseLeave={handleServicesLeave}
           >
-            Services
-          </Link>
-          <Link
-            href="/about"
-            className="transition-colors duration-200 hover:text-[#a6f30d]"
-          >
+            <button
+              type="button"
+              onClick={() => setIsServicesOpen(!isServicesOpen)}
+              className={`inline-flex items-center gap-1.5 transition-colors duration-200 cursor-pointer font-medium ${
+                isServicesOpen ? "text-[#84c405] font-bold" : "text-gray-800 hover:text-[#84c405]"
+              }`}
+            >
+              <span>Services</span>
+              <svg
+                className={`w-3.5 h-3.5 transition-transform duration-300 ${
+                  isServicesOpen ? "rotate-180 text-[#84c405]" : "text-gray-500"
+                }`}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+
+            {/* Mega Menu Dropdown Container */}
+            <div
+              className={`fixed left-1/2 -translate-x-1/2 w-[92vw] max-w-[940px] pt-4 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] z-50 ${
+                isScrolled ? "top-[76px]" : "top-[78px]"
+              } ${
+                isServicesOpen
+                  ? "opacity-100 translate-y-0 pointer-events-auto visible"
+                  : "opacity-0 -translate-y-3 pointer-events-none invisible"
+              }`}
+              onMouseEnter={handleServicesEnter}
+              onMouseLeave={handleServicesLeave}
+            >
+              {/* Triangular Notch Arrow di atas */}
+              <div className="absolute top-2 left-1/2 -translate-x-32 w-4 h-4 bg-white border-t border-l border-neutral-200/80 rotate-45 z-10" />
+
+              {/* Main White Mega Menu Box */}
+              <div className="relative rounded-[32px] bg-white border border-neutral-200/90 shadow-[0_30px_70px_rgba(0,0,0,0.16)] p-7 sm:p-8 text-neutral-900 grid grid-cols-1 md:grid-cols-12 gap-7">
+                {/* Column 1: Design Services (4 cols) */}
+                <div className="md:col-span-4 space-y-4">
+                  {/* Category Pill Heading */}
+                  <div className="inline-block px-3.5 py-1 rounded-full bg-[#f6f3ff] border border-[#ede9fe] text-xs font-bold text-neutral-800 tracking-wide font-['Agrandir',sans-serif]">
+                    Design Services
+                  </div>
+
+                  {/* List of Design Services */}
+                  <div className="space-y-3.5">
+                    {designServices.map((item, idx) => (
+                      <Link
+                        key={idx}
+                        href={item.href}
+                        onClick={() => setIsServicesOpen(false)}
+                        className="group flex items-start gap-3.5 p-2 rounded-2xl hover:bg-neutral-50 transition-colors"
+                      >
+                        <div className="w-9 h-9 rounded-full bg-neutral-900 flex items-center justify-center shrink-0 shadow-sm group-hover:bg-[#d4f938] group-hover:text-black transition-colors">
+                          <span className="group-hover:text-black">{item.icon}</span>
+                        </div>
+                        <div className="space-y-0.5">
+                          <h4 className="text-sm font-bold text-neutral-900 font-['Agrandir',sans-serif] group-hover:text-black">
+                            {item.title}
+                          </h4>
+                          <p className="text-xs text-neutral-500 font-['Questrial',sans-serif]">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Column 2: Development Services (4 cols) */}
+                <div className="md:col-span-4 space-y-4">
+                  {/* Category Pill Heading */}
+                  <div className="inline-block px-3.5 py-1 rounded-full bg-[#fff4eb] border border-[#fee7d6] text-xs font-bold text-neutral-800 tracking-wide font-['Agrandir',sans-serif]">
+                    Development Services
+                  </div>
+
+                  {/* List of Development Services */}
+                  <div className="space-y-3.5">
+                    {developmentServices.map((item, idx) => (
+                      <Link
+                        key={idx}
+                        href={item.href}
+                        onClick={() => setIsServicesOpen(false)}
+                        className="group flex items-start gap-3.5 p-2 rounded-2xl hover:bg-neutral-50 transition-colors"
+                      >
+                        <div className="w-9 h-9 rounded-full bg-neutral-900 flex items-center justify-center shrink-0 shadow-sm group-hover:bg-[#d4f938] group-hover:text-black transition-colors">
+                          <span className="group-hover:text-black">{item.icon}</span>
+                        </div>
+                        <div className="space-y-0.5">
+                          <h4 className="text-sm font-bold text-neutral-900 font-['Agrandir',sans-serif] group-hover:text-black">
+                            {item.title}
+                          </h4>
+                          <p className="text-xs text-neutral-500 font-['Questrial',sans-serif]">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Column 3: Featured Showcase Card / Our Product (4 cols) */}
+                <div className="md:col-span-4 rounded-[26px] bg-[#eef7fb] border border-[#d8eef7] p-5 flex flex-col justify-between">
+                  <div>
+                    {/* Top Tag: Our Product */}
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-900 text-white text-[11px] font-semibold mb-3">
+                      <span className="w-2 h-2 rounded-full bg-[#d4f938]" />
+                      <span>Our Product</span>
+                    </div>
+
+                    {/* Product Brand & Title */}
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-1.5 text-[#0f766e] font-bold text-sm font-['Agrandir',sans-serif]">
+                        <span className="w-4 h-4 rounded bg-[#10b981] flex items-center justify-center text-white text-[10px] font-black">
+                          M
+                        </span>
+                        <span className="text-neutral-900 font-bold">Webpagehealth</span>
+                      </div>
+                      <p className="text-xs text-neutral-500 font-['Questrial',sans-serif]">
+                        AI-Powered Website Analysis
+                      </p>
+                    </div>
+
+                    {/* Full Mockup Preview Card (Tanpa Terpotong) */}
+                    <div className="mt-3.5 rounded-2xl overflow-hidden border border-white/90 shadow-sm bg-white p-1.5">
+                      <img
+                        src="/images/product_mockup.jpg"
+                        alt="Webpagehealth Dashboard Laptop Mockup"
+                        className="w-full h-auto aspect-[16/10] object-cover rounded-xl shadow-inner"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Explore Button */}
+                  <Link
+                    href="/services"
+                    onClick={() => setIsServicesOpen(false)}
+                    className="mt-4 w-full py-2.5 rounded-full bg-neutral-900 hover:bg-black text-white text-center text-xs font-bold font-['Questrial',sans-serif] tracking-wider uppercase shadow-md transition-all hover:shadow-lg active:scale-98 block"
+                  >
+                    Explore
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <Link href="/about" className="transition-colors duration-200 hover:text-[#84c405]">
             About Us
           </Link>
-          <Link
-            href="/services"
-            className="transition-colors duration-200 hover:text-[#a6f30d]"
-          >
+          <Link href="/work" className="transition-colors duration-200 hover:text-[#84c405]">
             Work
           </Link>
-          <Link
-            href="/contact"
-            className="transition-colors duration-200 hover:text-[#a6f30d]"
-          >
+          <Link href="/blog" className="transition-colors duration-200 hover:text-[#84c405]">
             Blog
           </Link>
         </div>
@@ -122,10 +378,7 @@ export default function Navbar() {
             href="/contact"
             className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-gray-300/80 bg-white/70 px-4 sm:px-5 py-2 sm:py-2.5 text-sm sm:text-[16px] font-medium tracking-wide text-gray-900 shadow-sm transition-all duration-300 hover:border-[#a6f30d] hover:shadow-md"
           >
-            {/* Animasi latar belakang hijau neon menyapu dari kiri ke kanan */}
             <span className="absolute inset-0 z-0 bg-[#a6f30d] -translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:translate-x-0" />
-
-            {/* Icon Chevron '>' */}
             <span className="relative z-10 flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-black/5 transition-all duration-300 group-hover:bg-black/10 group-hover:translate-x-0.5">
               <svg
                 className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-gray-800 transition-colors duration-300 group-hover:text-black"
@@ -139,15 +392,13 @@ export default function Navbar() {
                 <polyline points="9 18 15 12 9 6" />
               </svg>
             </span>
-
-            {/* Teks Tombol */}
             <span className="relative z-10 font-medium text-gray-900 transition-colors duration-300 group-hover:text-black">
               Tell Me More
             </span>
           </Link>
         </div>
 
-        {/* Mobile Hamburger Button (Muncul di layar HP / Layar < md) */}
+        {/* Mobile Hamburger Button */}
         <button
           type="button"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -172,40 +423,56 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Drawer Dropdown Menu (Frosted Glass Mobile Pop-up) */}
+      {/* Mobile Drawer Dropdown Menu */}
       <div
         className={`pointer-events-auto md:hidden w-full max-w-sm transition-all duration-400 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden ${
-          isMobileMenuOpen
-            ? "max-h-[380px] opacity-100 mt-2"
-            : "max-h-0 opacity-0 mt-0 pointer-events-none"
+          isMobileMenuOpen ? "max-h-[500px] opacity-100 mt-2" : "max-h-0 opacity-0 mt-0 pointer-events-none"
         }`}
       >
-        <div className="rounded-[28px] bg-white/85 backdrop-blur-xl border border-white/80 shadow-[0_20px_40px_rgba(0,0,0,0.12)] p-6 flex flex-col gap-4 text-center">
-          <Link
-            href="/"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="text-lg font-medium text-gray-800 hover:text-[#a6f30d] py-1.5 transition-colors"
-          >
-            Services
-          </Link>
+        <div className="rounded-[28px] bg-white/95 backdrop-blur-xl border border-white/80 shadow-[0_20px_40px_rgba(0,0,0,0.12)] p-6 flex flex-col gap-3 text-left">
+          {/* Mobile Services Accordion */}
+          <div className="py-1">
+            <div className="font-bold text-gray-900 text-base mb-2">Services</div>
+            <div className="grid grid-cols-2 gap-2 text-xs text-neutral-600">
+              <Link href="/services/ui-ux" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-black">
+                UI/UX Design
+              </Link>
+              <Link href="/services/web-development" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-black">
+                Web Development
+              </Link>
+              <Link href="/services/web-design" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-black">
+                Web Design
+              </Link>
+              <Link href="/services/shopify" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-black">
+                Shopify Dev
+              </Link>
+              <Link href="/services/branding" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-black">
+                Branding
+              </Link>
+              <Link href="/services/wordpress" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-black">
+                WordPress Dev
+              </Link>
+            </div>
+          </div>
+
           <Link
             href="/about"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-lg font-medium text-gray-800 hover:text-[#a6f30d] py-1.5 transition-colors"
+            className="text-base font-medium text-gray-800 hover:text-[#84c405] py-1 transition-colors"
           >
             About Us
           </Link>
           <Link
-            href="/services"
+            href="/work"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-lg font-medium text-gray-800 hover:text-[#a6f30d] py-1.5 transition-colors"
+            className="text-base font-medium text-gray-800 hover:text-[#84c405] py-1 transition-colors"
           >
             Work
           </Link>
           <Link
-            href="/contact"
+            href="/blog"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-lg font-medium text-gray-800 hover:text-[#a6f30d] py-1.5 transition-colors"
+            className="text-base font-medium text-gray-800 hover:text-[#84c405] py-1 transition-colors"
           >
             Blog
           </Link>

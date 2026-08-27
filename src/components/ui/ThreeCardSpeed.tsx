@@ -23,7 +23,7 @@ export default function ThreeCardSpeed() {
       powerPreference: "high-performance",
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
     container.appendChild(renderer.domElement);
 
     const group = new THREE.Group();
@@ -141,7 +141,7 @@ export default function ThreeCardSpeed() {
     const handleMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+      const y = -(((e.clientY - rect.top) / height) * 2 - 1);
       mouseX = x;
       mouseY = y;
     };
@@ -154,12 +154,25 @@ export default function ThreeCardSpeed() {
     container.addEventListener("mousemove", handleMouseMove);
     container.addEventListener("mouseleave", handleMouseLeave);
 
+    // Viewport Intersection Observer - pause WebGL loop when offscreen
+    let isVisible = false;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
+
     // Animation Loop
     let animationId: number;
     const clock = new THREE.Clock();
 
     const animate = () => {
       animationId = requestAnimationFrame(animate);
+
+      if (!isVisible) return; // Skip rendering when card is not in viewport
+
       const time = clock.getElapsedTime();
 
       targetRotY = mouseX * 0.45;
@@ -192,7 +205,9 @@ export default function ThreeCardSpeed() {
 
     return () => {
       cancelAnimationFrame(animationId);
+      observer.disconnect();
       resizeObserver.disconnect();
+      gradeTexture.dispose();
       container.removeEventListener("mousemove", handleMouseMove);
       container.removeEventListener("mouseleave", handleMouseLeave);
       if (container.contains(renderer.domElement)) {

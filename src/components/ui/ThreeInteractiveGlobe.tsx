@@ -136,7 +136,7 @@ export default function ThreeInteractiveGlobe({
       powerPreference: "high-performance",
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     container.appendChild(renderer.domElement);
 
     // --- 2. Globe Group ---
@@ -555,7 +555,15 @@ export default function ThreeInteractiveGlobe({
     window.addEventListener("mouseup", onMouseUp);
     container.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
-    window.addEventListener("touchend", onTouchEnd);
+    // Viewport Intersection Observer - pause WebGL loop when offscreen
+    let isVisible = false;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
 
     // --- 9. Animation Loop & Twinkling Galaxy Stars ---
     let animationFrameId: number;
@@ -564,6 +572,9 @@ export default function ThreeInteractiveGlobe({
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
+
+      if (!isVisible) return; // Skip rendering and pin state updates when not in view
+
       const elapsedTime = clock.getElapsedTime();
 
       const autoSpeed = isHovered ? 0.00035 : 0.0025;
@@ -644,6 +655,7 @@ export default function ThreeInteractiveGlobe({
     // --- Cleanup ---
     return () => {
       cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
       resizeObserver.disconnect();
 
       container.removeEventListener("mouseenter", onMouseEnter);
