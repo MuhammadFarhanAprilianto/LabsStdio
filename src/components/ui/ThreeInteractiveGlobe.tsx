@@ -118,7 +118,7 @@ export default function ThreeInteractiveGlobe({
   className = "",
 }: ThreeInteractiveGlobeProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [screenPins, setScreenPins] = useState<PinScreenPosition[]>([]);
+  const pinRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const [activePinId, setActivePinId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -127,8 +127,8 @@ export default function ThreeInteractiveGlobe({
 
     // --- 1. Scene, Camera, Renderer ---
     const scene = new THREE.Scene();
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    const width = container.clientWidth || 360;
+    const height = container.clientHeight || 500;
 
     const isMobile = width < 640;
     const initialCameraZ = isMobile ? (width < 440 ? 7.6 : 6.8) : 5.2;
@@ -142,7 +142,7 @@ export default function ThreeInteractiveGlobe({
       powerPreference: "high-performance",
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.2 : 1.5));
     container.appendChild(renderer.domElement);
 
     // --- 2. Globe Group ---
@@ -481,6 +481,7 @@ export default function ThreeInteractiveGlobe({
     // --- 8. Interaction & Damping ---
     let isHovered = false;
     let isDragging = false;
+    let isTouchActiveOnGlobe = false;
     let previousMousePosition = { x: 0, y: 0 };
     let targetRotationX = 0.25;
     let mouseVelocity = { x: 0, y: 0 };
@@ -524,9 +525,10 @@ export default function ThreeInteractiveGlobe({
       isDragging = false;
     };
 
-    // Touch support for mobile
+    // Touch support for mobile (only active when touching the globe container)
     const onTouchStart = (e: TouchEvent) => {
       if (e.touches.length === 1) {
+        isTouchActiveOnGlobe = true;
         isDragging = true;
         previousMousePosition = {
           x: e.touches[0].clientX,
@@ -536,12 +538,13 @@ export default function ThreeInteractiveGlobe({
     };
 
     const onTouchMove = (e: TouchEvent) => {
-      if (isDragging && e.touches.length === 1) {
+      if (!isTouchActiveOnGlobe || !isDragging) return;
+      if (e.touches.length === 1) {
         const deltaX = e.touches[0].clientX - previousMousePosition.x;
         const deltaY = e.touches[0].clientY - previousMousePosition.y;
 
-        globeGroup.rotation.y += deltaX * 0.006;
-        globeGroup.rotation.x += deltaY * 0.006;
+        globeGroup.rotation.y += deltaX * 0.005;
+        globeGroup.rotation.x += deltaY * 0.005;
 
         previousMousePosition = {
           x: e.touches[0].clientX,
@@ -552,6 +555,7 @@ export default function ThreeInteractiveGlobe({
 
     const onTouchEnd = () => {
       isDragging = false;
+      isTouchActiveOnGlobe = false;
     };
 
     container.addEventListener("mouseenter", onMouseEnter);
@@ -561,6 +565,8 @@ export default function ThreeInteractiveGlobe({
     window.addEventListener("mouseup", onMouseUp);
     container.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    window.addEventListener("touchcancel", onTouchEnd, { passive: true });
 
     // Viewport Intersection Observer
     let isVisible = false;
@@ -589,7 +595,7 @@ export default function ThreeInteractiveGlobe({
       const elapsedTime = clock.getElapsedTime();
       const now = Date.now();
 
-      const autoSpeed = isHovered ? 0.00035 : 0.0022;
+      const autoSpeed = isHovered ? 0.0004 : 0.0022;
 
       if (!isDragging) {
         globeGroup.rotation.y += autoSpeed;
@@ -619,12 +625,10 @@ export default function ThreeInteractiveGlobe({
         let bestCenterPinId: string | null = null;
         let minCenterDist = Infinity;
 
-        const updatedPositions: PinScreenPosition[] = pinObjects.map((item) => {
+        pinObjects.forEach((item) => {
           item.mesh.getWorldPosition(tempVec);
 
-          // Evaluasi seberapa dekat titik dengan meridian tengah depan (Center Facing Camera)
-          // tempVec.z bernilai positif saat menghadap kamera
-          const isFacingCamera = tempVec.z > 0.4;
+          const isFacingCamera = tempVec.z > 0.35;
           const absX = Math.abs(tempVec.x);
 
           if (isFacingCamera && absX < 0.45 && absX < minCenterDist) {
@@ -637,31 +641,31 @@ export default function ThreeInteractiveGlobe({
           const screenX = (tempVec.x * 0.5 + 0.5) * cWidth;
           const screenY = (-tempVec.y * 0.5 + 0.5) * cHeight;
 
-          return {
-            id: item.id,
-            pin: item.pin,
-            x: screenX,
-            y: screenY,
-            isVisible:
+          const pinEl = pinRefs.current[item.id];
+          if (pinEl) {
+            if (
               isFacingCamera &&
-              screenX >= 0 &&
-              screenX <= cWidth &&
-              screenY >= 0 &&
-              screenY <= cHeight,
-          };
+              screenX >= -20 &&
+              screenX <= cWidth + 20 &&
+              screenY >= -20 &&
+              screenY <= cHeight + 20
+            ) {
+              pinEl.style.display = "block";
+              pinEl.style.transform = `translate3d(${screenX}px, ${screenY}px, 0) translate(-50%, -50%)`;
+            } else {
+              pinEl.style.display = "none";
+            }
+          }
         });
 
         // Trigger Auto-Focus Card bertahan selama 1.2 detik saat melewati bagian tengah
         if (bestCenterPinId && now > autoFocusActiveUntil && bestCenterPinId !== lastTriggeredPinId) {
           lastTriggeredPinId = bestCenterPinId;
           setActivePinId(bestCenterPinId);
-          autoFocusActiveUntil = now + 1200; // Tahan 1.2 detik
+          autoFocusActiveUntil = now + 1400;
         } else if (now > autoFocusActiveUntil && !isHovered && activePinId) {
-          // Reset card saat durasi tayang selesai
           setActivePinId(null);
         }
-
-        setScreenPins(updatedPositions);
       }
 
       renderer.render(scene, camera);
@@ -669,11 +673,20 @@ export default function ThreeInteractiveGlobe({
 
     animate();
 
-    // --- 11. Resize Observer ---
+    // --- 11. Resize Observer (Debounced against address bar scroll jitter) ---
+    let lastW = width;
+    let lastH = height;
+
     const handleResize = () => {
       if (!container) return;
       const w = container.clientWidth;
       const h = container.clientHeight;
+
+      // Filter out small vertical height jitter from mobile address bar collapse
+      if (Math.abs(w - lastW) < 4 && Math.abs(h - lastH) < 80) return;
+      lastW = w;
+      lastH = h;
+
       camera.aspect = w / h;
       const mobile = w < 640;
       camera.position.z = mobile ? (w < 440 ? 7.6 : 6.8) : 5.2;
@@ -700,6 +713,7 @@ export default function ThreeInteractiveGlobe({
       container.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("touchcancel", onTouchEnd);
 
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
@@ -729,31 +743,32 @@ export default function ThreeInteractiveGlobe({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full h-full cursor-grab active:cursor-grabbing select-none ${className}`}
+      className={`relative w-full h-full cursor-grab active:cursor-grabbing select-none overflow-hidden touch-pan-y ${className}`}
     >
       {/* Interactive 2D Projected Hotspot Elements & Tracking Rating Cards */}
-      {screenPins.map((item) => {
-        if (!item.isVisible) return null;
-
-        const isCardActive = activePinId === item.id;
-        const isNearTop = item.y < 210;
+      {pinsData.map((pin) => {
+        const isCardActive = activePinId === pin.id;
 
         return (
           <div
-            key={item.id}
+            key={pin.id}
+            ref={(el) => {
+              pinRefs.current[pin.id] = el;
+            }}
             style={{
               position: "absolute",
-              left: item.x,
-              top: item.y,
-              transform: "translate(-50%, -50%)",
+              left: 0,
+              top: 0,
+              transform: "translate3d(0, 0, 0) translate(-50%, -50%)",
               zIndex: isCardActive ? 50 : 30,
+              display: "none",
             }}
-            className="pointer-events-auto"
-            onMouseEnter={() => setActivePinId(item.id)}
+            className="pointer-events-auto will-change-transform"
+            onMouseEnter={() => setActivePinId(pin.id)}
             onMouseLeave={() => setActivePinId(null)}
             onClick={(e) => {
               e.stopPropagation();
-              setActivePinId(activePinId === item.id ? null : item.id);
+              setActivePinId(activePinId === pin.id ? null : pin.id);
             }}
           >
             {/* Titik Neon Hijau Berdenyut (Hotspot Pin) */}
@@ -764,12 +779,10 @@ export default function ThreeInteractiveGlobe({
 
             {/* Tracking Rating Testimonial Card (Desain Kompak & Elegan) */}
             <div
-              className={`absolute left-1/2 -translate-x-1/2 w-[225px] sm:w-[255px] rounded-[18px] bg-[#0c0d12]/96 backdrop-blur-2xl border border-white/20 p-3.5 sm:p-4 text-white shadow-[0_20px_50px_-10px_rgba(0,0,0,0.95)] transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-auto will-change-transform ${
-                isNearTop ? "top-full mt-2.5" : "bottom-full mb-2.5"
-              } ${
+              className={`absolute left-1/2 -translate-x-1/2 bottom-full mb-2.5 w-[225px] sm:w-[255px] rounded-[18px] bg-[#0c0d12]/96 backdrop-blur-2xl border border-white/20 p-3.5 sm:p-4 text-white shadow-[0_20px_50px_-10px_rgba(0,0,0,0.95)] transition-all duration-300 ease-out pointer-events-auto ${
                 isCardActive
-                  ? "opacity-100 scale-100 translate-y-0"
-                  : "opacity-0 scale-90 -translate-y-3 pointer-events-none"
+                  ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+                  : "opacity-0 scale-90 translate-y-2 pointer-events-none"
               }`}
             >
               {/* Header: Country Badge & Stars Rating */}
@@ -777,15 +790,15 @@ export default function ThreeInteractiveGlobe({
                 {/* Country Pill Badge: [JP] Tokyo • Japan */}
                 <div className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 text-[10px] text-white font-['Questrial',sans-serif]">
                   <span className="font-bold text-[9px] uppercase px-1 py-0.2 rounded bg-white/20 text-white">
-                    {item.pin.countryCode}
+                    {pin.countryCode}
                   </span>
-                  <span className="font-semibold text-white">{item.pin.city}</span>
-                  <span className="text-neutral-400">• {item.pin.country}</span>
+                  <span className="font-semibold text-white">{pin.city}</span>
+                  <span className="text-neutral-400">• {pin.country}</span>
                 </div>
 
                 {/* 5 Stars Rating */}
                 <div className="flex items-center gap-0.5 text-[#d4f938]">
-                  {[...Array(item.pin.rating)].map((_, i) => (
+                  {[...Array(pin.rating)].map((_, i) => (
                     <svg
                       key={i}
                       className="w-3 h-3 fill-current drop-shadow-[0_0_4px_rgba(212,249,56,0.6)]"
@@ -799,33 +812,29 @@ export default function ThreeInteractiveGlobe({
 
               {/* Testimonial Quote */}
               <p className="text-[11px] sm:text-xs text-neutral-200 font-['Questrial',sans-serif] leading-snug mb-2.5 line-clamp-3">
-                &ldquo;{item.pin.content}&rdquo;
+                &ldquo;{pin.content}&rdquo;
               </p>
 
               {/* Author Footer */}
               <div className="flex items-center gap-2 pt-2 border-t border-white/10">
                 <div className="w-6 h-6 rounded-full bg-[#d4f938] text-black font-black text-[9px] flex items-center justify-center shadow-md shadow-black/40 shrink-0 font-['Agrandir',sans-serif]">
-                  {item.pin.avatar}
+                  {pin.avatar}
                 </div>
                 <div className="min-w-0 flex-1">
                   <h4 className="text-[11px] font-bold text-white font-['Agrandir',sans-serif] truncate leading-tight">
-                    {item.pin.name}
+                    {pin.name}
                   </h4>
                   <p className="text-[9px] text-neutral-400 font-['Questrial',sans-serif] truncate leading-tight">
-                    {item.pin.role},{" "}
+                    {pin.role},{" "}
                     <span className="text-neutral-300 font-medium">
-                      {item.pin.company}
+                      {pin.company}
                     </span>
                   </p>
                 </div>
               </div>
 
               {/* Chat Bubble Arrow Tip */}
-              {isNearTop ? (
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 -mb-0.5 border-solid border-b-[#0c0d12]/96 border-b-6 border-x-transparent border-x-6 border-t-0" />
-              ) : (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-0.5 border-solid border-t-[#0c0d12]/96 border-t-6 border-x-transparent border-x-6 border-b-0" />
-              )}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-0.5 border-solid border-t-[#0c0d12]/96 border-t-6 border-x-transparent border-x-6 border-b-0" />
             </div>
           </div>
         );
