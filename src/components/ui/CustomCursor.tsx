@@ -14,8 +14,12 @@ export default function CustomCursor() {
   const cursorY = useSpring(0, springConfig);
 
   useEffect(() => {
-    // Detect touch-only screens (mobile/tablet) to prevent unwanted overlays
-    if (window.matchMedia("(pointer: coarse)").matches) {
+    // Detect touch-only screens (mobile/tablet/iPad) to prevent unwanted overlays
+    if (
+      window.matchMedia("(pointer: coarse)").matches ||
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0
+    ) {
       setIsTouchDevice(true);
       return;
     }

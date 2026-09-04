@@ -55,11 +55,9 @@ export default function BeforeAfterSlider({
       {/* Top Header Labels */}
       <div className="flex items-center justify-between text-xs font-semibold px-2">
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-neutral-400" />
           <span className="text-neutral-500 font-['Questrial',sans-serif]">BEFORE: {beforeLabel}</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#16a34a]" />
           <span className="text-black font-bold font-['Agrandir',sans-serif]">AFTER: {afterLabel}</span>
         </div>
       </div>
@@ -88,7 +86,6 @@ export default function BeforeAfterSlider({
           />
           {/* After Tag Badge */}
           <div className="absolute bottom-6 right-6 px-4 py-2 rounded-2xl bg-black/80 backdrop-blur-md border border-[#d4f938]/40 text-white flex items-center gap-2 shadow-xl pointer-events-none">
-            <span className="w-2 h-2 rounded-full bg-[#d4f938] animate-pulse" />
             <span className="text-xs font-bold text-[#d4f938] font-['Agrandir',sans-serif]">{afterTag}</span>
           </div>
         </div>

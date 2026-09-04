@@ -45,6 +45,28 @@ const caseStudies: Record<string, CaseStudyData> = {
     beforeImg: "/images/before_ui.webp",
     afterImg: "/images/after_ui.webp",
   },
+  "hyro-commerce": {
+    slug: "hyro-commerce",
+    title: "High-Performance E-Commerce & Interactive Web App",
+    client: "HYRO Athletics",
+    year: "2026",
+    category: "Web Architecture & Next.js",
+    deliverables: ["Headless Shopify Engineering", "Sub-Second Edge Infrastructure", "Interactive 3D WebGL", "Conversion Architecture"],
+    metrics: [
+      { label: "D2C Growth", value: "3.4x", desc: "Q1 revenue expansion post-launch" },
+      { label: "Checkout Conversion", value: "+180%", desc: "Surge in completed purchases" },
+      { label: "Page Load", value: "0.42s", desc: "Global edge CDN response time" },
+      { label: "Mobile Engagement", value: "88%", desc: "Mobile-first seamless checkout" },
+    ],
+    overview:
+      "HYRO Athletics is a premier sports performance brand. To scale their international direct-to-consumer footprint, they needed a blazing-fast, custom headless commerce experience that eliminates legacy checkout lag.",
+    challenge:
+      "The existing monolithic platform struggled with slow product rendering, high cart abandonment on mobile, and an outdated visual brand identity.",
+    solution:
+      "We architected a custom headless Next.js solution connected to Shopify Plus with sub-second page transitions, dynamic 3D product previews, and a streamlined 1-click checkout flow.",
+    beforeImg: "/images/before_ui.webp",
+    afterImg: "/images/after_ui.webp",
+  },
 };
 
 export default function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {

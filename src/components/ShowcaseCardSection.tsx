@@ -10,23 +10,7 @@ export default function ShowcaseCardSection() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
-  // Sinkronisasi posisi audio dengan video secara presisi (durasi & loop otomatis mengikuti video)
-  const handleTimeUpdate = () => {
-    if (videoRef.current && audioRef.current && isPlayingAudio) {
-      // Jika selisih waktu audio dan video > 0.2 detik, selaraskan langsung
-      if (Math.abs(audioRef.current.currentTime - videoRef.current.currentTime) > 0.25) {
-        audioRef.current.currentTime = videoRef.current.currentTime;
-      }
-    }
-  };
-
-  const handleVideoSeeked = () => {
-    if (videoRef.current && audioRef.current) {
-      audioRef.current.currentTime = videoRef.current.currentTime;
-    }
-  };
-
-  // Fungsi Toggle Audio & Musik saat tombol diklik
+  // Toggle Audio & Musik saat tombol diklik (Menjamin audio jernih tanpa patah-patah di mobile)
   const toggleAudio = (e: React.MouseEvent) => {
     e.stopPropagation();
 
@@ -35,24 +19,38 @@ export default function ShowcaseCardSection() {
       if (audioRef.current) {
         audioRef.current.pause();
       }
-      if (videoRef.current) {
-        videoRef.current.muted = true;
-      }
       setIsPlayingAudio(false);
     } else {
-      // Putar Musik & Samakan Posisi Detik dengan Video Saat Ini
-      if (videoRef.current && audioRef.current) {
-        audioRef.current.currentTime = videoRef.current.currentTime;
+      // Putar Musik: Selaraskan posisi detik awal sekali saja saat tombol diklik, lalu biarkan streaming mengalir lancar tanpa interupsi
+      if (audioRef.current && videoRef.current) {
+        const vTime = videoRef.current.currentTime || 0;
+        const aDuration = audioRef.current.duration || 0;
+        if (aDuration > 0) {
+          audioRef.current.currentTime = vTime % aDuration;
+        } else {
+          audioRef.current.currentTime = vTime;
+        }
+
         audioRef.current.play().catch((err) => {
           console.log("Audio playback error:", err);
         });
-        videoRef.current.muted = false;
       }
       setIsPlayingAudio(true);
     }
   };
 
-  // Pastikan video autoplay secara otomatis (selalu muted di awal sebelum tombol diklik)
+  // Sinkronisasi saat video di-seek atau di-loop ulang
+  const handleVideoSeeked = () => {
+    if (videoRef.current && audioRef.current && isPlayingAudio) {
+      const vTime = videoRef.current.currentTime || 0;
+      const aDuration = audioRef.current.duration || 0;
+      if (aDuration > 0) {
+        audioRef.current.currentTime = vTime % aDuration;
+      }
+    }
+  };
+
+  // Pastikan video selalu autoplay & selalu muted agar tidak terjadi dual-audio / bentrok audio focus di Android & iPhone
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.muted = true;
@@ -108,16 +106,15 @@ export default function ShowcaseCardSection() {
         }}
         className="group relative mx-auto max-w-7xl aspect-[16/9] min-h-[420px] sm:min-h-[580px] bg-black shadow-[0_30px_90px_-20px_rgba(15,23,42,0.4)] border border-slate-800/80 overflow-hidden flex flex-col items-center justify-center will-change-transform transform-gpu cursor-pointer"
       >
-        {/* Video Player: Video01.webm dengan listener timeupdate & seeked */}
+        {/* Video Player: Video01.webm (selalu muted agar tidak bentrok dengan soundtrack MP3) */}
         <video
           ref={videoRef}
           autoPlay
           loop
-          muted={!isPlayingAudio}
+          muted
           playsInline
-          onTimeUpdate={handleTimeUpdate}
           onSeeked={handleVideoSeeked}
-          className="absolute inset-0 w-full h-full object-cover z-10"
+          className="absolute inset-0 w-full h-full object-cover z-10 pointer-events-none"
         >
           <source src="/videos/Video01.webm" type="video/webm" />
           <source src="/videos/showcase.mp4" type="video/mp4" />

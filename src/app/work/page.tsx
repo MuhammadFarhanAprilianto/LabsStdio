@@ -248,7 +248,6 @@ export default function WorkPage() {
             {/* Video Header Badge */}
             <div className="absolute top-6 left-6 sm:top-8 sm:left-8 flex items-center gap-3 z-10 pointer-events-auto">
               <div className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold text-white flex items-center gap-2 font-['Agrandir',sans-serif]">
-                <span className="w-2 h-2 rounded-full bg-[#d4f938] animate-pulse" />
                 <span>Showreel & Digital Craft</span>
               </div>
             </div>
@@ -276,55 +275,92 @@ export default function WorkPage() {
         </motion.div>
       </section>
 
-      {/* Featured Deep-Dive Case Study Section */}
+      {/* Featured Deep-Dive Case Studies Grid (1 x 1 Side-by-Side) */}
       <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-20">
         <div className="space-y-4 pb-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <h2 className="text-3xl sm:text-4xl font-bold text-black font-['Agrandir',sans-serif] tracking-tight">
-              Blanqs AI Platform Redesign
+              Featured Case Studies
             </h2>
             <Link
               href="/work/blanqs-ai"
               data-cursor="view"
               className="inline-flex items-center gap-2 text-xs font-bold text-black hover:text-[#16a34a] font-['Questrial',sans-serif] uppercase tracking-wider transition-colors"
             >
-              <span>Explore Interactive Case Study</span>
+              <span>Explore All Case Studies</span>
               <span>→</span>
             </Link>
           </div>
         </div>
 
-        <Link
-          href="/work/blanqs-ai"
-          data-cursor="view"
-          className="group block relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-[32px] sm:rounded-[40px] overflow-hidden bg-neutral-950 border border-neutral-800 shadow-2xl"
-        >
-          <Image
-            src="/images/Photo 1.webp"
-            alt="Blanqs AI Case Study"
-            fill
-            sizes="100vw"
-            quality={95}
-            priority
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-8 sm:p-12 space-y-3">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="px-3 py-1 rounded-full bg-[#d4f938] text-black text-xs font-bold font-['Agrandir',sans-serif]">
-                +240% Retention
-              </span>
-              <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-semibold">
-                SaaS & AI Infrastructure
-              </span>
+        {/* 2-Column Grid (1 x 1 Side by Side) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+          {/* Card 1: Blanqs AI Analytics */}
+          <Link
+            href="/work/blanqs-ai"
+            data-cursor="view"
+            className="group block relative w-full aspect-[4/3] sm:aspect-[16/11] rounded-[28px] sm:rounded-[36px] overflow-hidden bg-neutral-950 border border-neutral-800/90 shadow-2xl transition-all duration-500 hover:border-neutral-600"
+          >
+            <Image
+              src="/images/Work1.webp"
+              alt="Blanqs AI Case Study"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              quality={95}
+              priority
+              className="object-cover object-center grayscale group-hover:grayscale-0 transition-[filter] duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-6 sm:p-8 space-y-2.5">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="px-3 py-1 rounded-full bg-[#d4f938] text-black text-xs font-bold font-['Agrandir',sans-serif]">
+                  +240% Retention
+                </span>
+                <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-semibold">
+                  SaaS & AI Infrastructure
+                </span>
+              </div>
+              <h3 className="text-lg sm:text-2xl font-bold text-white font-['Agrandir',sans-serif] group-hover:text-[#d4f938] transition-colors leading-snug">
+                Reimagining Venture-Grade Analytics for 100K+ Active Users
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-300 font-['Questrial',sans-serif] line-clamp-2 leading-relaxed">
+                Discover how we overhauled user retention with dark glassmorphism surfaces, interactive charts, and sub-second Next.js Turbopack pipelines.
+              </p>
             </div>
-            <h3 className="text-xl sm:text-3xl font-bold text-white font-['Agrandir',sans-serif] group-hover:text-[#d4f938] transition-colors">
-              Reimagining Venture-Grade Analytics for 100K+ Active Users
-            </h3>
-            <p className="text-xs sm:text-sm text-neutral-300 font-['Questrial',sans-serif] max-w-2xl line-clamp-2">
-              Discover how we overhauled user retention with dark glassmorphism surfaces, interactive charts, and sub-second Next.js Turbopack pipelines.
-            </p>
-          </div>
-        </Link>
+          </Link>
+
+          {/* Card 2: HYRO Athletics Commerce */}
+          <Link
+            href="/work/hyro-commerce"
+            data-cursor="view"
+            className="group block relative w-full aspect-[4/3] sm:aspect-[16/11] rounded-[28px] sm:rounded-[36px] overflow-hidden bg-neutral-950 border border-neutral-800/90 shadow-2xl transition-all duration-500 hover:border-neutral-600"
+          >
+            <Image
+              src="/images/Work2.webp"
+              alt="HYRO Athletics E-Commerce Case Study"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              quality={95}
+              priority
+              className="object-cover object-center grayscale group-hover:grayscale-0 transition-[filter] duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-6 sm:p-8 space-y-2.5">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="px-3 py-1 rounded-full bg-[#d4f938] text-black text-xs font-bold font-['Agrandir',sans-serif]">
+                  +180% Growth
+                </span>
+                <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-semibold">
+                  Web Architecture & Next.js
+                </span>
+              </div>
+              <h3 className="text-lg sm:text-2xl font-bold text-white font-['Agrandir',sans-serif] group-hover:text-[#d4f938] transition-colors leading-snug">
+                High-Performance E-Commerce & Interactive Web App
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-300 font-['Questrial',sans-serif] line-clamp-2 leading-relaxed">
+                Engineered lightning-fast digital storefront with bespoke headless checkout, 3D WebGL interactions, and global edge routing.
+              </p>
+            </div>
+          </Link>
+        </div>
       </section>
 
       {/* Interactive Project Inquiry & Testimonial Dual Bento Card (Persis Sesuai Gambar 2) */}
@@ -438,7 +474,6 @@ export default function WorkPage() {
             {/* Header Badge & Title */}
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 text-white text-xs font-semibold font-['Questrial',sans-serif]">
-                <span className="w-2 h-2 rounded-full bg-[#d4f938] animate-pulse" />
                 <span>Get in Touch</span>
               </div>
               <h3 className="text-3xl sm:text-4xl font-black text-black font-['Agrandir',sans-serif] tracking-tight">

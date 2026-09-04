@@ -29,7 +29,7 @@ const blogPosts: BlogPost[] = [
     title: "10 Best Design Agencies in Toronto to Hire",
     excerpt:
       "The 10 best design agencies in Toronto in 2026 include six2eight, Brand Vision, Orizon Design, and other firms recognized for their expertise in branding, UX/UI, web design, and digital transformation.",
-    image: "/images/blog_1.webp",
+    image: "/images/BestDesign.webp",
     categories: ["UI/UX Design", "Website Design"],
     readTime: "6 min read",
     date: "June 2026",
@@ -45,7 +45,7 @@ const blogPosts: BlogPost[] = [
     title: "AI Tokens Explained: Cost, Context, and Performance (2026)",
     excerpt:
       "AI tokens are the small building blocks that models like GPT, Claude, and Gemini use to process and generate text. Tokens are subword pieces, not fixed characters or words, and their pricing dictates model economics.",
-    image: "/images/blog_2.webp",
+    image: "/images/AI Token.webp",
     categories: ["UI/UX Design", "SaaS"],
     readTime: "5 min read",
     date: "May 2026",
@@ -60,7 +60,7 @@ const blogPosts: BlogPost[] = [
     title: "Figma Config 2026: Every Major Announcement You Need to Know",
     excerpt:
       "Figma Config 2026 introduced some of the biggest updates Figma has ever released, and if you use it every day, these changes are going to affect how you design, prototype, and build scalable design systems.",
-    image: "/images/blog_3.webp",
+    image: "/images/Figma Config.webp",
     categories: ["UI/UX Design", "Website Design"],
     readTime: "8 min read",
     date: "May 2026",
@@ -75,7 +75,7 @@ const blogPosts: BlogPost[] = [
     title: "Next.js 16 & Turbopack: Building Ultra-Fast Web Applications",
     excerpt:
       "How we achieve sub-second page transitions, dynamic server rendering, and zero-runtime CSS in high-traffic enterprise platforms.",
-    image: "/images/UIUXDigitalProduct.webp",
+    image: "/images/WebDev3.webp",
     categories: ["Web Development", "SaaS"],
     readTime: "7 min read",
     date: "April 2026",
@@ -105,13 +105,58 @@ const blogPosts: BlogPost[] = [
     title: "The Science of Micro-Interactions: Physics-Based UI Animation",
     excerpt:
       "Crafting delightful micro-animations with spring physics and GPU-accelerated shaders that elevate user retention without hurting performance.",
-    image: "/images/DigitalMarketingGrowth.webp",
+    image: "/images/UI1.webp",
     categories: ["Mobile App", "UI/UX Design"],
     readTime: "6 min read",
     date: "March 2026",
     author: {
       name: "Marcus Vance",
       role: "Lead Product Designer",
+    },
+  },
+  {
+    id: "post-7",
+    slug: "headless-wordpress-nextjs-enterprise-architecture",
+    title: "Headless WordPress & Next.js: Enterprise Speed with Zero Friction",
+    excerpt:
+      "Decoupling the WordPress backend to deliver sub-second global page loads while keeping content editors in their comfort zone.",
+    image: "/images/WordPressHeadlessCMS.webp",
+    categories: ["WordPress", "Web Development"],
+    readTime: "6 min read",
+    date: "March 2026",
+    author: {
+      name: "David Chen",
+      role: "Principal Engineer",
+    },
+  },
+  {
+    id: "post-8",
+    slug: "mobile-health-telemedicine-ux-design",
+    title: "Mobile Health & Telemedicine: Designing High-Empathy Interfaces",
+    excerpt:
+      "Principles for designing patient booking portals, physician schedules, and accessible medical interfaces for iOS and Android.",
+    image: "/images/Mobile Health.webp",
+    categories: ["Mobile App", "UI/UX Design"],
+    readTime: "5 min read",
+    date: "February 2026",
+    author: {
+      name: "Elena Rostova",
+      role: "AI Architecture Lead",
+    },
+  },
+  {
+    id: "post-9",
+    slug: "ecommerce-conversion-architecture-shopify-2026",
+    title: "E-Commerce Conversion Architecture: Scaling Headless Shopify in 2026",
+    excerpt:
+      "How modular design systems and 1-click checkout pipelines elevate Average Order Value and decrease cart abandonment across global markets.",
+    image: "/images/ShopifyECommerce.webp",
+    categories: ["Website Design", "Web Development"],
+    readTime: "7 min read",
+    date: "February 2026",
+    author: {
+      name: "Farhan Aprilianto",
+      role: "Founder & Creative Director",
     },
   },
 ];
@@ -206,53 +251,51 @@ export default function BlogPage() {
       {/* Filter Tabs & Search Bar */}
       <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-12">
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 pb-6 border-b border-neutral-200">
-          {/* Category Filter Pills dengan Interaksi Rolling Text Flip & Style Sesuai Gambar 1 */}
-          <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+          {/* Category Filter Pills: 4 on Row 1, 3 on Row 2 */}
+          <div className="flex flex-col gap-2.5">
             {[
-              "All",
-              "Website Design",
-              "Web Development",
-              "UI/UX Design",
-              "Mobile App",
-              "SaaS",
-            ].map((tab) => {
-              const isActive = activeCategory === tab;
-              const isAllActive = isActive && tab === "All";
-              const isOtherActive = isActive && tab !== "All";
+              ["All", "Website Design", "Web Development", "UI/UX Design"],
+              ["WordPress", "Mobile App", "SaaS"],
+            ].map((row, rowIdx) => (
+              <div key={rowIdx} className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+                {row.map((tab) => {
+                  const isActive = activeCategory === tab;
+                  const isAllActive = isActive && tab === "All";
+                  const isOtherActive = isActive && tab !== "All";
 
-              return (
-                <button
-                  key={tab}
-                  onClick={() => setActiveCategory(tab)}
-                  className={`group relative inline-flex items-center justify-center overflow-hidden rounded-full px-5 py-2.5 text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 cursor-pointer ${
-                    isAllActive
-                      ? "bg-[#d4f938] text-black font-bold border border-[#c4eb28] shadow-[0_3px_15px_rgba(212,249,56,0.4)]"
-                      : isOtherActive
-                      ? "bg-[#111111] text-[#d4f938] font-bold border border-black shadow-md"
-                      : "bg-white text-neutral-700 border border-neutral-200/90 shadow-sm hover:border-neutral-900 hover:bg-[#111111]"
-                  }`}
-                >
-                  {/* Kondisi Jika Sedang Aktif: Teks Tetap Stabil */}
-                  {isActive ? (
-                    <span className={isAllActive ? "text-black" : "text-[#d4f938]"}>
-                      {tab}
-                    </span>
-                  ) : (
-                    /* Kondisi Inaktif: Rolling Text Flip ke Atas saat Hover */
-                    <div className="relative overflow-hidden h-4 sm:h-5 flex flex-col justify-center font-['Questrial',sans-serif]">
-                      {/* Layer 1: Teks Abu/Hitam Normal (Meluncur keluar ke atas saat hover) */}
-                      <span className="block transform transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full text-neutral-700">
-                        {tab}
-                      </span>
-                      {/* Layer 2: Teks Hijau Neon (Meluncur masuk dari bawah ke tengah saat hover) */}
-                      <span className="absolute top-0 left-0 block transform translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0 text-[#d4f938] font-semibold">
-                        {tab}
-                      </span>
-                    </div>
-                  )}
-                </button>
-              );
-            })}
+                  return (
+                    <button
+                      key={tab}
+                      onClick={() => setActiveCategory(tab)}
+                      className={`group relative inline-flex items-center justify-center overflow-hidden rounded-full px-5 py-2.5 text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 cursor-pointer ${
+                        isAllActive
+                          ? "bg-[#d4f938] text-black font-bold border border-[#c4eb28] shadow-[0_3px_15px_rgba(212,249,56,0.4)]"
+                          : isOtherActive
+                          ? "bg-[#111111] text-[#d4f938] font-bold border border-black shadow-md"
+                          : "bg-white text-neutral-700 border border-neutral-200/90 shadow-sm hover:border-neutral-900 hover:bg-[#111111]"
+                      }`}
+                    >
+                      {/* Active State */}
+                      {isActive ? (
+                        <span className={isAllActive ? "text-black" : "text-[#d4f938]"}>
+                          {tab}
+                        </span>
+                      ) : (
+                        /* Inactive State: Rolling Text Flip on Hover */
+                        <div className="relative overflow-hidden h-4 sm:h-5 flex flex-col justify-center font-['Questrial',sans-serif]">
+                          <span className="block transform transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full text-neutral-700">
+                            {tab}
+                          </span>
+                          <span className="absolute top-0 left-0 block transform translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0 text-[#d4f938] font-semibold">
+                            {tab}
+                          </span>
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            ))}
           </div>
 
           {/* Interactive Search Input */}
@@ -299,7 +342,7 @@ export default function BlogPage() {
                 alt={featuredPost.title}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                className="object-cover object-center grayscale group-hover:grayscale-0 transition-[filter] duration-500"
               />
             </div>
 
@@ -349,7 +392,7 @@ export default function BlogPage() {
                     alt={post.title}
                     fill
                     sizes="(max-width: 640px) 100vw, 200px"
-                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="object-cover object-center grayscale group-hover:grayscale-0 transition-[filter] duration-500"
                   />
                 </div>
 
@@ -395,7 +438,7 @@ export default function BlogPage() {
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-9">
             {additionalPosts.map((post, idx) => (
               <motion.div
                 key={post.id}
@@ -411,7 +454,7 @@ export default function BlogPage() {
                     src={post.image}
                     alt={post.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="object-cover object-center grayscale group-hover:grayscale-0 transition-[filter] duration-500"
                   />
                 </div>
                 <div className="space-y-2">
@@ -458,7 +501,7 @@ export default function BlogPage() {
                   src={selectedArticle.image}
                   alt={selectedArticle.title}
                   fill
-                  className="object-cover"
+                  className="object-cover object-center"
                 />
                 <button
                   onClick={() => setSelectedArticle(null)}

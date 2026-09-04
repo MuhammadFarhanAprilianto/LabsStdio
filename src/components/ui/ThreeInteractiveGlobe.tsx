@@ -9,6 +9,7 @@ interface TestimonialPin {
   lng: number;
   city: string;
   country: string;
+  countryCode: string;
   flag: string;
   name: string;
   role: string;
@@ -25,6 +26,7 @@ const pinsData: TestimonialPin[] = [
     lng: 106.8,
     city: "Jakarta",
     country: "Indonesia",
+    countryCode: "ID",
     flag: "🇮🇩",
     name: "Rian Pratama",
     role: "VP of Product",
@@ -36,10 +38,11 @@ const pinsData: TestimonialPin[] = [
   },
   {
     id: "pin-ny",
-    lat: 40.7,
+    lat: 40.71,
     lng: -74.0,
     city: "New York",
     country: "United States",
+    countryCode: "US",
     flag: "🇺🇸",
     name: "Alex Rivera",
     role: "Head of Product",
@@ -52,9 +55,10 @@ const pinsData: TestimonialPin[] = [
   {
     id: "pin-london",
     lat: 51.5,
-    lng: -0.1,
+    lng: -0.12,
     city: "London",
     country: "United Kingdom",
+    countryCode: "GB",
     flag: "🇬🇧",
     name: "Marcus Vance",
     role: "Design Director",
@@ -66,10 +70,11 @@ const pinsData: TestimonialPin[] = [
   },
   {
     id: "pin-tokyo",
-    lat: 35.6,
-    lng: 139.6,
+    lat: 35.68,
+    lng: 139.69,
     city: "Tokyo",
     country: "Japan",
+    countryCode: "JP",
     flag: "🇯🇵",
     name: "Kenji Sato",
     role: "Founder & CEO",
@@ -81,10 +86,11 @@ const pinsData: TestimonialPin[] = [
   },
   {
     id: "pin-sydney",
-    lat: -33.8,
+    lat: -33.86,
     lng: 151.2,
     city: "Sydney",
     country: "Australia",
+    countryCode: "AU",
     flag: "🇦🇺",
     name: "Chloe Harrison",
     role: "Marketing Lead",
@@ -256,9 +262,9 @@ export default function ThreeInteractiveGlobe({
 
           const brightness = pixels[pixelIndex];
 
-          const x = -RADIUS * cosLat * Math.cos(lngRad);
+          const x = RADIUS * cosLat * Math.sin(lngRad);
           const y = RADIUS * sinLat;
-          const z = RADIUS * cosLat * Math.sin(lngRad);
+          const z = RADIUS * cosLat * Math.cos(lngRad);
 
           if (brightness > 90) {
             landPositions.push(x, y, z);
@@ -347,13 +353,17 @@ export default function ThreeInteractiveGlobe({
     globeGroup.add(glowMesh);
 
     // --- 6. Interactive 3D Glowing Hotspot Pins ---
+    // Mathematically aligned 1:1 with landPositions coordinate system
     const latLngToVector3 = (lat: number, lng: number, radius: number) => {
-      const phi = (90 - lat) * (Math.PI / 180);
-      const theta = (lng + 180) * (Math.PI / 180);
+      const latRad = THREE.MathUtils.degToRad(lat);
+      const lngRad = THREE.MathUtils.degToRad(lng);
+      const cosLat = Math.cos(latRad);
+      const sinLat = Math.sin(latRad);
+
       return new THREE.Vector3(
-        -radius * Math.sin(phi) * Math.cos(theta),
-        radius * Math.cos(phi),
-        radius * Math.sin(phi) * Math.sin(theta)
+        radius * cosLat * Math.sin(lngRad),
+        radius * sinLat,
+        radius * cosLat * Math.cos(lngRad)
       );
     };
 
@@ -394,7 +404,6 @@ export default function ThreeInteractiveGlobe({
     const starColors = new Float32Array(starCount * 3);
 
     for (let i = 0; i < starCount * 3; i += 3) {
-      // Posisi di sekitar pandangan kamera luar angkasa
       const dist = 2.4 + Math.random() * 5.2;
       const theta = Math.random() * Math.PI * 2;
       const phi = (Math.random() - 0.5) * Math.PI * 1.2;
@@ -405,17 +414,14 @@ export default function ThreeInteractiveGlobe({
 
       const randColor = Math.random();
       if (randColor > 0.82) {
-        // Neon Lime Sparkle Star
         starColors[i] = 0.83;
         starColors[i + 1] = 0.98;
         starColors[i + 2] = 0.22;
       } else if (randColor > 0.65) {
-        // Cyan Diamond Star
         starColors[i] = 0.45;
         starColors[i + 1] = 0.88;
         starColors[i + 2] = 1.0;
       } else {
-        // Pure Brilliant White Star
         starColors[i] = 1.0;
         starColors[i + 1] = 1.0;
         starColors[i + 2] = 1.0;
@@ -426,7 +432,7 @@ export default function ThreeInteractiveGlobe({
     starGeo.setAttribute("color", new THREE.BufferAttribute(starColors, 3));
 
     const starMat = new THREE.PointsMaterial({
-      size: 0.16, // Ukuran diperbesar dan sangat jelas bercahaya
+      size: 0.16,
       vertexColors: true,
       map: starTexture,
       transparent: true,
@@ -555,7 +561,8 @@ export default function ThreeInteractiveGlobe({
     window.addEventListener("mouseup", onMouseUp);
     container.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
-    // Viewport Intersection Observer - pause WebGL loop when offscreen
+
+    // Viewport Intersection Observer
     let isVisible = false;
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -565,7 +572,11 @@ export default function ThreeInteractiveGlobe({
     );
     observer.observe(container);
 
-    // --- 9. Animation Loop & Twinkling Galaxy Stars ---
+    // --- 9. Auto Center Tracking Logic (Looping Mulus & Teratur) ---
+    let lastTriggeredPinId: string | null = null;
+    let autoFocusActiveUntil = 0;
+
+    // --- 10. Animation Loop & Twinkling Galaxy Stars ---
     let animationFrameId: number;
     const tempVec = new THREE.Vector3();
     const clock = new THREE.Clock();
@@ -573,11 +584,12 @@ export default function ThreeInteractiveGlobe({
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
 
-      if (!isVisible) return; // Skip rendering and pin state updates when not in view
+      if (!isVisible) return;
 
       const elapsedTime = clock.getElapsedTime();
+      const now = Date.now();
 
-      const autoSpeed = isHovered ? 0.00035 : 0.0025;
+      const autoSpeed = isHovered ? 0.00035 : 0.0022;
 
       if (!isDragging) {
         globeGroup.rotation.y += autoSpeed;
@@ -590,7 +602,7 @@ export default function ThreeInteractiveGlobe({
         globeGroup.rotation.x += mouseVelocity.y;
       }
 
-      // Animasi Berkedip & Memantulkan Cahaya (Sparkling Pulse)
+      // Animasi Berkedip Bintang
       starMat.size = 0.15 + Math.sin(elapsedTime * 2.2) * 0.035;
       starMat.opacity = 0.85 + Math.sin(elapsedTime * 2.5) * 0.15;
       starPoints.rotation.y -= 0.0003;
@@ -599,15 +611,27 @@ export default function ThreeInteractiveGlobe({
       dustMat.opacity = 0.65 + Math.cos(elapsedTime * 1.8) * 0.2;
       dustPoints.rotation.y += 0.0002;
 
-      // Project 3D Hotspot positions to 2D Screen Space
+      // Project 3D Hotspot positions to 2D Screen Space & Find Center Pin
       if (container) {
         const cWidth = container.clientWidth;
         const cHeight = container.clientHeight;
 
+        let bestCenterPinId: string | null = null;
+        let minCenterDist = Infinity;
+
         const updatedPositions: PinScreenPosition[] = pinObjects.map((item) => {
           item.mesh.getWorldPosition(tempVec);
 
-          const isFacingCamera = tempVec.z > -0.2;
+          // Evaluasi seberapa dekat titik dengan meridian tengah depan (Center Facing Camera)
+          // tempVec.z bernilai positif saat menghadap kamera
+          const isFacingCamera = tempVec.z > 0.4;
+          const absX = Math.abs(tempVec.x);
+
+          if (isFacingCamera && absX < 0.45 && absX < minCenterDist) {
+            minCenterDist = absX;
+            bestCenterPinId = item.id;
+          }
+
           tempVec.project(camera);
 
           const screenX = (tempVec.x * 0.5 + 0.5) * cWidth;
@@ -627,6 +651,16 @@ export default function ThreeInteractiveGlobe({
           };
         });
 
+        // Trigger Auto-Focus Card bertahan selama 1.2 detik saat melewati bagian tengah
+        if (bestCenterPinId && now > autoFocusActiveUntil && bestCenterPinId !== lastTriggeredPinId) {
+          lastTriggeredPinId = bestCenterPinId;
+          setActivePinId(bestCenterPinId);
+          autoFocusActiveUntil = now + 1200; // Tahan 1.2 detik
+        } else if (now > autoFocusActiveUntil && !isHovered && activePinId) {
+          // Reset card saat durasi tayang selesai
+          setActivePinId(null);
+        }
+
         setScreenPins(updatedPositions);
       }
 
@@ -635,7 +669,7 @@ export default function ThreeInteractiveGlobe({
 
     animate();
 
-    // --- 10. Resize Observer ---
+    // --- 11. Resize Observer ---
     const handleResize = () => {
       if (!container) return;
       const w = container.clientWidth;
@@ -697,12 +731,12 @@ export default function ThreeInteractiveGlobe({
       ref={containerRef}
       className={`relative w-full h-full cursor-grab active:cursor-grabbing select-none ${className}`}
     >
-      {/* Interactive 2D Projected Hotspot Elements & Chat Bubbles */}
+      {/* Interactive 2D Projected Hotspot Elements & Tracking Rating Cards */}
       {screenPins.map((item) => {
         if (!item.isVisible) return null;
 
         const isCardActive = activePinId === item.id;
-        const isNearTop = item.y < 270;
+        const isNearTop = item.y < 210;
 
         return (
           <div
@@ -722,38 +756,39 @@ export default function ThreeInteractiveGlobe({
               setActivePinId(activePinId === item.id ? null : item.id);
             }}
           >
-            {/* Titik Neon Hijau Lebih Kecil & Halus */}
+            {/* Titik Neon Hijau Berdenyut (Hotspot Pin) */}
             <div className="relative group cursor-pointer flex items-center justify-center p-1.5">
-              <span className="absolute w-4 h-4 rounded-full bg-[#d4f938]/30 animate-ping pointer-events-none" />
-              <span className="relative w-2.5 h-2.5 rounded-full bg-[#d4f938] border border-black shadow-[0_0_8px_#d4f938] transition-transform duration-300 group-hover:scale-150" />
+              <span className="absolute w-4 h-4 rounded-full bg-[#d4f938]/35 animate-ping pointer-events-none" />
+              <span className="relative w-2 h-2 rounded-full bg-[#d4f938] border border-black shadow-[0_0_8px_#d4f938] transition-transform duration-300 group-hover:scale-150" />
             </div>
 
-            {/* Bubble Chat Testimonial Card */}
+            {/* Tracking Rating Testimonial Card (Desain Kompak & Elegan) */}
             <div
-              className={`absolute left-1/2 -translate-x-1/2 w-[280px] sm:w-[310px] rounded-[22px] bg-neutral-950/92 backdrop-blur-xl border border-white/20 p-4 sm:p-5 text-white shadow-[0_20px_50px_rgba(0,0,0,0.85)] transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-auto ${
-                isNearTop ? "top-full mt-3.5" : "bottom-full mb-3.5"
+              className={`absolute left-1/2 -translate-x-1/2 w-[225px] sm:w-[255px] rounded-[18px] bg-[#0c0d12]/96 backdrop-blur-2xl border border-white/20 p-3.5 sm:p-4 text-white shadow-[0_20px_50px_-10px_rgba(0,0,0,0.95)] transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-auto will-change-transform ${
+                isNearTop ? "top-full mt-2.5" : "bottom-full mb-2.5"
               } ${
                 isCardActive
                   ? "opacity-100 scale-100 translate-y-0"
-                  : `opacity-0 scale-90 ${
-                      isNearTop ? "-translate-y-2" : "translate-y-2"
-                    } pointer-events-none`
+                  : "opacity-0 scale-90 -translate-y-3 pointer-events-none"
               }`}
             >
-              {/* Country Badge & Stars */}
-              <div className="flex items-center justify-between gap-2 mb-2.5">
-                <div className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-2.5 py-0.5 text-xs text-white/90 font-['Questrial',sans-serif]">
-                  <span>{item.pin.flag}</span>
-                  <span className="font-semibold">{item.pin.city}</span>
+              {/* Header: Country Badge & Stars Rating */}
+              <div className="flex items-center justify-between gap-1.5 mb-2">
+                {/* Country Pill Badge: [JP] Tokyo • Japan */}
+                <div className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 text-[10px] text-white font-['Questrial',sans-serif]">
+                  <span className="font-bold text-[9px] uppercase px-1 py-0.2 rounded bg-white/20 text-white">
+                    {item.pin.countryCode}
+                  </span>
+                  <span className="font-semibold text-white">{item.pin.city}</span>
                   <span className="text-neutral-400">• {item.pin.country}</span>
                 </div>
 
-                {/* Star Rating */}
+                {/* 5 Stars Rating */}
                 <div className="flex items-center gap-0.5 text-[#d4f938]">
                   {[...Array(item.pin.rating)].map((_, i) => (
                     <svg
                       key={i}
-                      className="w-3.5 h-3.5 fill-current"
+                      className="w-3 h-3 fill-current drop-shadow-[0_0_4px_rgba(212,249,56,0.6)]"
                       viewBox="0 0 20 20"
                     >
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -763,22 +798,22 @@ export default function ThreeInteractiveGlobe({
               </div>
 
               {/* Testimonial Quote */}
-              <p className="text-xs sm:text-[13px] text-neutral-200 font-['Questrial',sans-serif] leading-relaxed mb-3">
+              <p className="text-[11px] sm:text-xs text-neutral-200 font-['Questrial',sans-serif] leading-snug mb-2.5 line-clamp-3">
                 &ldquo;{item.pin.content}&rdquo;
               </p>
 
-              {/* Client Info */}
-              <div className="flex items-center gap-2.5 pt-2.5 border-t border-white/10">
-                <div className="w-7 h-7 rounded-full bg-[#d4f938] text-black font-black text-[10px] flex items-center justify-center shadow">
+              {/* Author Footer */}
+              <div className="flex items-center gap-2 pt-2 border-t border-white/10">
+                <div className="w-6 h-6 rounded-full bg-[#d4f938] text-black font-black text-[9px] flex items-center justify-center shadow-md shadow-black/40 shrink-0 font-['Agrandir',sans-serif]">
                   {item.pin.avatar}
                 </div>
-                <div>
-                  <h4 className="text-xs font-bold text-white font-['Agrandir',sans-serif]">
+                <div className="min-w-0 flex-1">
+                  <h4 className="text-[11px] font-bold text-white font-['Agrandir',sans-serif] truncate leading-tight">
                     {item.pin.name}
                   </h4>
-                  <p className="text-[10px] text-neutral-400 font-['Questrial',sans-serif]">
+                  <p className="text-[9px] text-neutral-400 font-['Questrial',sans-serif] truncate leading-tight">
                     {item.pin.role},{" "}
-                    <span className="text-neutral-300 font-semibold">
+                    <span className="text-neutral-300 font-medium">
                       {item.pin.company}
                     </span>
                   </p>
@@ -787,9 +822,9 @@ export default function ThreeInteractiveGlobe({
 
               {/* Chat Bubble Arrow Tip */}
               {isNearTop ? (
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 -mb-0.5 border-solid border-b-neutral-950/92 border-b-8 border-x-transparent border-x-8 border-t-0" />
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 -mb-0.5 border-solid border-b-[#0c0d12]/96 border-b-6 border-x-transparent border-x-6 border-t-0" />
               ) : (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-0.5 border-solid border-t-neutral-950/92 border-t-8 border-x-transparent border-x-8 border-b-0" />
+                <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-0.5 border-solid border-t-[#0c0d12]/96 border-t-6 border-x-transparent border-x-6 border-b-0" />
               )}
             </div>
           </div>

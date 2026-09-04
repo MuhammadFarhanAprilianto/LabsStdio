@@ -9,15 +9,28 @@ export default function SmoothScrollProvider({
   children: React.ReactNode;
 }) {
   useEffect(() => {
-    // Initialize Lenis physics-based smooth scrolling
+    // Detect touch-capable devices (iOS Safari, Android, iPadOS)
+    const isTouchDevice =
+      typeof window !== "undefined" &&
+      (window.matchMedia("(pointer: coarse)").matches ||
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0);
+
+    // On mobile and touch devices, rely on 100% native hardware momentum scrolling
+    if (isTouchDevice) {
+      return;
+    }
+
+    // Initialize Lenis physics-based smooth scrolling exclusively for desktop mouse wheel
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 0,
+      syncTouch: false,
     });
 
     function raf(time: number) {

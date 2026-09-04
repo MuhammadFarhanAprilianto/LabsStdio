@@ -15,7 +15,7 @@ export default function Footer() {
           {/* Column 1: Headquarters (Jakarta, Indonesia) & Social Links */}
           <div className="lg:col-span-4 space-y-6">
             <div className="space-y-3">
-              <h4 className="text-xs sm:text-sm font-bold tracking-wider text-neutral-400 uppercase font-['Questrial',sans-serif] underline decoration-neutral-600 underline-offset-4">
+              <h4 className="text-xs sm:text-sm font-bold tracking-wider text-neutral-300 uppercase font-['Questrial',sans-serif] underline decoration-neutral-600 underline-offset-4">
                 Headquarters
               </h4>
               <p className="text-lg sm:text-xl font-bold text-white font-['Agrandir',sans-serif] leading-snug">
@@ -83,7 +83,7 @@ export default function Footer() {
                   className="group relative w-11 h-11 rounded-full bg-[#181a20] border border-neutral-800/80 flex items-center justify-center cursor-pointer transition-colors duration-300"
                 >
                   {/* Lingkaran Ikon Dalam: Default Gelap, saat Hover berubah menjadi Hijau Neon dengan cutout logo hitam (Persis seperti gambar referensi) */}
-                  <div className="w-8 h-8 rounded-full bg-[#242731] text-neutral-400 flex items-center justify-center transition-all duration-300 group-hover:bg-[#a6f30d] group-hover:text-black group-hover:shadow-[0_0_15px_rgba(166,243,13,0.7)]">
+                  <div className="w-8 h-8 rounded-full bg-[#242731] text-neutral-300 flex items-center justify-center transition-all duration-300 group-hover:bg-[#a6f30d] group-hover:text-black group-hover:shadow-[0_0_15px_rgba(166,243,13,0.7)]">
                     {social.svg}
                   </div>
                 </Link>
@@ -93,10 +93,10 @@ export default function Footer() {
 
           {/* Column 2: Design Services */}
           <div className="lg:col-span-3 space-y-4">
-            <h4 className="text-xs sm:text-sm font-bold tracking-wider text-neutral-400 uppercase font-['Questrial',sans-serif] underline decoration-neutral-600 underline-offset-4">
+            <h4 className="text-xs sm:text-sm font-bold tracking-wider text-neutral-300 uppercase font-['Questrial',sans-serif] underline decoration-neutral-600 underline-offset-4">
               Design Services
             </h4>
-            <ul className="space-y-2.5 text-sm sm:text-base text-neutral-400">
+            <ul className="space-y-2.5 text-sm sm:text-base text-neutral-300">
               {[
                 "Web Design",
                 "Mobile App Design",
@@ -118,10 +118,10 @@ export default function Footer() {
 
           {/* Column 3: Development Services */}
           <div className="lg:col-span-3 space-y-4">
-            <h4 className="text-xs sm:text-sm font-bold tracking-wider text-neutral-400 uppercase font-['Questrial',sans-serif] underline decoration-neutral-600 underline-offset-4">
+            <h4 className="text-xs sm:text-sm font-bold tracking-wider text-neutral-300 uppercase font-['Questrial',sans-serif] underline decoration-neutral-600 underline-offset-4">
               Development Services
             </h4>
-            <ul className="space-y-2.5 text-sm sm:text-base text-neutral-400">
+            <ul className="space-y-2.5 text-sm sm:text-base text-neutral-300">
               {[
                 "Web Development",
                 "Next.js & React Apps",
@@ -143,10 +143,10 @@ export default function Footer() {
 
           {/* Column 4: Company */}
           <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-xs sm:text-sm font-bold tracking-wider text-neutral-400 uppercase font-['Questrial',sans-serif] underline decoration-neutral-600 underline-offset-4">
+            <h4 className="text-xs sm:text-sm font-bold tracking-wider text-neutral-300 uppercase font-['Questrial',sans-serif] underline decoration-neutral-600 underline-offset-4">
               Company
             </h4>
-            <ul className="space-y-2.5 text-sm sm:text-base text-neutral-400">
+            <ul className="space-y-2.5 text-sm sm:text-base text-neutral-300">
               {[
                 { name: "About Us", href: "/about" },
                 { name: "Our Work", href: "/#portfolio" },
@@ -171,7 +171,7 @@ export default function Footer() {
         <div className="w-full h-px bg-neutral-800/80" />
 
         {/* Bottom Footer Bar: Copyright & Legal Links */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-neutral-500">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-neutral-400">
           <p>© 2026 Promethean Labs. All rights reserved.</p>
 
           <div className="flex items-center gap-6">

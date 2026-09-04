@@ -14,16 +14,7 @@ interface ServiceCardData {
 
 const servicesData: ServiceCardData[] = [
   {
-    id: "branding",
-    title: "Branding &\nCreative Design",
-    image: "/images/BrandingCreativeDesign.webp",
-    tags: ["Visual Identity", "Design System", "Art Direction"],
-    description:
-      "We craft distinctive visual identities, design systems, and creative direction that set your brand apart.",
-    href: "/services/branding",
-  },
-  {
-    id: "uiux",
+    id: "ui-ux",
     title: "UI/UX &\nDigital Product",
     image: "/images/UIUXDigitalProduct.webp",
     tags: ["User Research", "Wireframing", "Mobile & Web UI"],
@@ -32,22 +23,67 @@ const servicesData: ServiceCardData[] = [
     href: "/services/ui-ux",
   },
   {
-    id: "marketing",
-    title: "Digital Marketing\n& Growth",
-    image: "/images/DigitalMarketingGrowth.webp",
-    tags: ["Growth Funnels", "SEO & Content", "Performance Ads"],
+    id: "web-design",
+    title: "Web Design &\nLanding Pages",
+    image: "/images/WebDesignLandingPages.webp",
+    tags: ["Custom UI", "Responsive Design", "Conversion Focus"],
     description:
-      "Data-backed optimization strategies and scalable marketing funnels that drive real, measurable conversion.",
-    href: "/services/marketing",
+      "Modern, high-converting websites designed to turn visitors into loyal customers and elevate brand trust.",
+    href: "/services/web-design",
   },
   {
-    id: "content",
-    title: "Content &\nProduction",
-    image: "/images/ContentProduction.webp",
-    tags: ["3D Motion", "Video Production", "Social Creative"],
+    id: "mobile-apps",
+    title: "Mobile App &\nInterface Design",
+    image: "/images/MobileAppInterfaceDesign.webp",
+    tags: ["iOS & Android", "Design Systems", "Prototyping"],
     description:
-      "High-impact visual storytelling, creative motion design, and rich media assets that bring your story to life.",
-    href: "/services/content",
+      "Seamless mobile user experiences crafted with precision for iOS and Android platforms.",
+    href: "/services/mobile-apps",
+  },
+  {
+    id: "branding",
+    title: "Branding &\nVisual Identity",
+    image: "/images/BrandingCreativeDesign.webp",
+    tags: ["Visual Identity", "Design System", "Art Direction"],
+    description:
+      "Distinctive brand identities, logos, guidelines, and design systems that stand out in crowded markets.",
+    href: "/services/branding",
+  },
+  {
+    id: "web-development",
+    title: "Modern Web\nDevelopment",
+    image: "/images/UserPath.webp",
+    tags: ["Next.js & React", "High Performance", "Clean Architecture"],
+    description:
+      "Fast, scalable, and secure full-stack web applications engineered with cutting-edge technologies.",
+    href: "/services/web-development",
+  },
+  {
+    id: "wordpress",
+    title: "WordPress &\nHeadless CMS",
+    image: "/images/WordPressHeadlessCMS.webp",
+    tags: ["Custom Themes", "Easy CMS", "Enterprise Scale"],
+    description:
+      "Tailored, easy-to-manage WordPress ecosystems and headless CMS architectures built for scale.",
+    href: "/services/wordpress",
+  },
+  {
+    id: "shopify",
+    title: "Shopify &\nE-Commerce",
+    image: "/images/ShopifyECommerce.webp",
+    tags: ["E-Commerce", "Shopify Plus", "High Conversion"],
+    description:
+      "World-class e-commerce stores designed to maximize average order value and scale global sales.",
+    href: "/services/shopify",
+  },
+  {
+    id: "webflow",
+    title: "Webflow &\nInteractive Sites",
+    image: "/images/DigitalMarketingGrowth.webp",
+    tags: ["No-Code Speed", "Fluid Animations", "Custom Code"],
+    description:
+      "Pixel-perfect, animation-rich Webflow websites delivered with speed and zero compromises.",
+    href: "/services/webflow",
   },
 ];
 
@@ -64,6 +100,47 @@ export default function ServicesCardsCarousel() {
 
   // Duplikasi data 3 set untuk infinite scrolling yang seamless
   const marqueeItems = [...servicesData, ...servicesData, ...servicesData];
+
+  // Normalisasi posisi scroll agar looping terus-menerus tanpa pernah mentok (Infinite Loop Wrapping)
+  const normalizeScrollPosition = () => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const singleSetWidth = el.scrollWidth / 3;
+    if (singleSetWidth <= 10) return;
+
+    if (el.scrollLeft >= singleSetWidth * 2) {
+      el.scrollLeft -= singleSetWidth;
+      if (isDraggingRef.current) {
+        scrollLeftRef.current -= singleSetWidth;
+      }
+    } else if (el.scrollLeft <= 10) {
+      el.scrollLeft += singleSetWidth;
+      if (isDraggingRef.current) {
+        scrollLeftRef.current += singleSetWidth;
+      }
+    }
+  };
+
+  // Event listener scroll manual (Trackpad, Mouse Wheel, Touch Swipe)
+  const handleScroll = () => {
+    normalizeScrollPosition();
+  };
+
+  // Mouse Wheel: Scroll horizontal saat kursor berada di atas carousel
+  const handleWheel = (e: React.WheelEvent) => {
+    const el = carouselRef.current;
+    if (!el) return;
+
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      // User sedang swipe touchpad horizontal
+      return;
+    }
+
+    if (Math.abs(e.deltaY) > 2) {
+      el.scrollLeft += e.deltaY * 0.85;
+      normalizeScrollPosition();
+    }
+  };
 
   // Inisialisasi posisi scroll di tengah (set ke-2) agar bisa di-scroll bebas ke kiri & kanan
   useEffect(() => {
@@ -82,14 +159,7 @@ export default function ServicesCardsCarousel() {
       const el = carouselRef.current;
       if (el && !isPausedRef.current && !isDraggingRef.current) {
         el.scrollLeft += 0.85; // Kecepatan gerak lembut
-
-        const singleSetWidth = el.scrollWidth / 3;
-        // Wrapping mulus tanpa lonjakan
-        if (el.scrollLeft >= singleSetWidth * 2) {
-          el.scrollLeft -= singleSetWidth;
-        } else if (el.scrollLeft <= 10) {
-          el.scrollLeft += singleSetWidth;
-        }
+        normalizeScrollPosition();
       }
       animId = requestAnimationFrame(step);
     };
@@ -133,16 +203,7 @@ export default function ServicesCardsCarousel() {
       hasMovedRef.current = true;
     }
     el.scrollLeft = scrollLeftRef.current - walk;
-
-    // Infinite wrapping saat di-drag
-    const singleSetWidth = el.scrollWidth / 3;
-    if (el.scrollLeft >= singleSetWidth * 2) {
-      el.scrollLeft -= singleSetWidth;
-      scrollLeftRef.current -= singleSetWidth;
-    } else if (el.scrollLeft <= 10) {
-      el.scrollLeft += singleSetWidth;
-      scrollLeftRef.current += singleSetWidth;
-    }
+    normalizeScrollPosition();
   };
 
   const handleMouseUp = () => {
@@ -165,6 +226,8 @@ export default function ServicesCardsCarousel() {
       {/* Interactive Carousel Container dengan Drag-to-Scroll & Touch Support */}
       <div
         ref={carouselRef}
+        onScroll={handleScroll}
+        onWheel={handleWheel}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onMouseDown={handleMouseDown}
@@ -176,7 +239,10 @@ export default function ServicesCardsCarousel() {
         onTouchEnd={() => {
           if (!activeCardId) isPausedRef.current = false;
         }}
-        className="w-full overflow-x-auto scrollbar-none flex gap-6 sm:gap-8 px-6 sm:px-12 py-2 cursor-grab active:cursor-grabbing no-scrollbar"
+        tabIndex={0}
+        role="region"
+        aria-label="Services cards carousel"
+        className="w-full overflow-x-auto scrollbar-none flex gap-6 sm:gap-8 px-6 sm:px-12 py-2 cursor-grab active:cursor-grabbing no-scrollbar focus:outline-none focus-visible:ring-1 focus-visible:ring-black/20"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
@@ -194,12 +260,16 @@ export default function ServicesCardsCarousel() {
               onMouseEnter={handleMouseEnter}
               className="group relative w-[290px] sm:w-[340px] md:w-[370px] h-[390px] sm:h-[440px] md:h-[470px] rounded-[30px] overflow-hidden bg-neutral-900 border border-neutral-200/80 shadow-md hover:shadow-2xl transition-all duration-500 shrink-0 select-none cursor-pointer"
             >
-              {/* Gambar Latar Belakang (.webp) */}
+              {/* Gambar Latar Belakang (.webp): Black & White saat normal, Berwarna saat di-hover/aktif */}
               <img
                 src={item.image}
                 alt={item.title}
                 draggable={false}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 pointer-events-none"
+                className={`absolute inset-0 w-full h-full object-cover object-center transition-[filter] duration-700 ease-out pointer-events-none ${
+                  isCardActive
+                    ? "grayscale-0 contrast-100"
+                    : "grayscale contrast-105 group-hover:grayscale-0 group-hover:contrast-100"
+                }`}
               />
 
               {/* Dark Gradient Overlay Dasar */}
@@ -243,47 +313,47 @@ export default function ServicesCardsCarousel() {
               </div>
 
               {/* Normal State: Judul Teks Tebal Putih di Bawah */}
-              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 z-10 transition-opacity duration-300 group-hover:opacity-0 pointer-events-none">
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 z-10 transition-opacity duration-400 group-hover:opacity-0 pointer-events-none transform-gpu">
                 <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug whitespace-pre-line font-['Agrandir',sans-serif] drop-shadow-md">
                   {item.title}
                 </h3>
               </div>
 
-              {/* Hover / Active State: Frosted Glass Panel Penjelasan Lengkap (Sekarang berhenti total saat kursor di atas kartu ini) */}
+              {/* Hover / Active State: Full-Width Seamless Bottom Drawer (100% rapat ke sudut bawah kartu tanpa celah di pojok) */}
               <div
-                className={`absolute inset-x-3 bottom-3 z-20 rounded-[24px] bg-black/75 backdrop-blur-xl border border-white/20 p-5 sm:p-6 text-white transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-end ${
+                className={`absolute inset-x-0 bottom-0 z-20 rounded-b-[30px] bg-gradient-to-t from-[#0c0d12] via-[#0c0d12]/95 to-[#0c0d12]/80 border-t border-white/10 p-6 sm:p-7 text-white transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-end transform-gpu will-change-[transform,opacity] pointer-events-none ${
                   isCardActive
                     ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-6 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto"
+                    : "opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0"
                 }`}
               >
                 {/* Tag / Kategori Pills */}
-                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 pointer-events-none">
                   {item.tags.map((tag, tIdx) => (
                     <span
                       key={tIdx}
-                      className="inline-flex items-center gap-1.5 rounded-full bg-white/15 border border-white/20 px-2.5 py-0.5 sm:px-3 sm:py-1 text-[11px] sm:text-xs text-white/95 font-['Questrial',sans-serif]"
+                      className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/15 px-2.5 py-0.5 sm:px-3 sm:py-1 text-[11px] sm:text-xs text-white/95 font-['Questrial',sans-serif]"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#d4f938]" />
                       {tag}
                     </span>
                   ))}
                 </div>
 
                 {/* Judul Service */}
-                <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight leading-snug mb-1.5 font-['Agrandir',sans-serif]">
+                <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight leading-snug mb-1.5 font-['Agrandir',sans-serif] pointer-events-none">
                   {item.title.replace("\n", " ")}
                 </h3>
 
                 {/* Penjelasan Deskripsi Layanan */}
-                <p className="text-xs sm:text-[13px] text-neutral-300 font-['Questrial',sans-serif] leading-relaxed line-clamp-3 font-light mb-3">
+                <p className="text-xs sm:text-[13px] text-neutral-300 font-['Questrial',sans-serif] leading-relaxed line-clamp-3 font-light mb-3 pointer-events-none">
                   {item.description}
                 </p>
 
                 {/* Link Action */}
                 <Link
                   href={item.href}
-                  className="inline-flex items-center gap-2 text-xs font-semibold text-[#d4f938] hover:underline"
+                  className="inline-flex items-center gap-2 text-xs font-semibold text-[#d4f938] hover:underline pointer-events-auto self-start"
                 >
                   <span>Learn more</span>
                   <svg

@@ -10,8 +10,8 @@ export default function Hero() {
       {/* Three.js WebGL Points Wave & Handshake Connection Particle Field */}
       <ThreeHandshakeWave />
 
-      {/* Subtle Radial Gradient Mask di Tengah untuk Menjamin Teks 100% Jelas & Kontras */}
-      <div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(ellipse_60%_50%_at_50%_45%,rgba(255,255,255,0.85)_0%,rgba(255,255,255,0)_100%)]" />
+      {/* Subtle Radial Gradient Mask di Tengah untuk Menjamin Teks 100% Jelas & Kontras tanpa Menutupi Titik Ombak */}
+      <div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(ellipse_75%_65%_at_50%_42%,rgba(255,255,255,0.72)_0%,rgba(255,255,255,0)_100%)]" />
 
       {/* Hero Content Container */}
       <div className="relative z-10 mx-auto max-w-3xl text-center flex flex-col items-center justify-center -mt-8 sm:-mt-12">

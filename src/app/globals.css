@@ -45,17 +45,25 @@
 }
 
 .animate-marquee-left {
-  animation: marquee-left 52s linear infinite;
+  animation: marquee-left 75s linear infinite;
 }
 
 .animate-marquee-right {
-  animation: marquee-right 52s linear infinite;
+  animation: marquee-right 75s linear infinite;
 }
 
-html, body {
-  overflow-x: hidden;
+html {
+  overflow-x: clip;
   max-width: 100%;
   -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: clip;
+  max-width: 100%;
+  min-height: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Custom smooth scrollbar */

@@ -34,7 +34,7 @@ export default function Home() {
       </ScrollReveal>
 
       {/* Section Projects Completed For (3 Baris Marquee Bersilangan Kanan-Kiri & Kiri-Kanan) */}
-      <ScrollReveal distance={50} duration={900}>
+      <ScrollReveal distance={50} duration={1000}>
         <ProjectsCompletedSection />
       </ScrollReveal>
 

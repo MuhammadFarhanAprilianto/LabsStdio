@@ -10,12 +10,13 @@ export default function ThreeCardProjects() {
     const container = containerRef.current;
     if (!container) return;
 
+    // 1. Scene, Camera, Renderer
     const scene = new THREE.Scene();
     const width = container.clientWidth || 300;
     const height = container.clientHeight || 220;
 
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    camera.position.set(0, 0, 4.5);
+    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
+    camera.position.set(0, 0, 4.4);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -23,139 +24,226 @@ export default function ThreeCardProjects() {
       powerPreference: "high-performance",
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     container.appendChild(renderer.domElement);
 
-    const group = new THREE.Group();
-    scene.add(group);
+    // Main 3D Pivot Group
+    const mainGroup = new THREE.Group();
+    // Default dynamic isometric angle
+    mainGroup.rotation.x = 0.38;
+    mainGroup.rotation.y = -0.45;
+    mainGroup.rotation.z = 0.12;
+    scene.add(mainGroup);
 
-    // 1. Central Rounded Glass Card (Wireframe & Solid)
-    const cardShape = new THREE.Shape();
-    const w = 1.3;
-    const h = 1.0;
-    const r = 0.15;
-    cardShape.moveTo(-w / 2 + r, -h / 2);
-    cardShape.lineTo(w / 2 - r, -h / 2);
-    cardShape.quadraticCurveTo(w / 2, -h / 2, w / 2, -h / 2 + r);
-    cardShape.lineTo(w / 2, h / 2 - r);
-    cardShape.quadraticCurveTo(w / 2, h / 2, w / 2 - r, h / 2);
-    cardShape.lineTo(-w / 2 + r, h / 2);
-    cardShape.quadraticCurveTo(-w / 2, h / 2, -w / 2, h / 2 - r);
-    cardShape.lineTo(-w / 2, -h / 2 + r);
-    cardShape.quadraticCurveTo(-w / 2, -h / 2, -w / 2 + r, -h / 2);
+    // --- Helper: Create Rounded Rect 3D Mesh ---
+    const createRoundedCard = (
+      w: number,
+      h: number,
+      r: number,
+      depth: number,
+      color: number,
+      opacity: number,
+      borderColor: number
+    ) => {
+      const cardGroup = new THREE.Group();
 
-    const cardGeo = new THREE.ShapeGeometry(cardShape);
-    const cardMat = new THREE.MeshBasicMaterial({
-      color: 0x16181f,
-      transparent: true,
-      opacity: 0.85,
-    });
-    const cardMesh = new THREE.Mesh(cardGeo, cardMat);
-    group.add(cardMesh);
+      const shape = new THREE.Shape();
+      shape.moveTo(-w / 2 + r, -h / 2);
+      shape.lineTo(w / 2 - r, -h / 2);
+      shape.quadraticCurveTo(w / 2, -h / 2, w / 2, -h / 2 + r);
+      shape.lineTo(w / 2, h / 2 - r);
+      shape.quadraticCurveTo(w / 2, h / 2, w / 2 - r, h / 2);
+      shape.lineTo(-w / 2 + r, h / 2);
+      shape.quadraticCurveTo(-w / 2, h / 2, -w / 2, h / 2 - r);
+      shape.lineTo(-w / 2, -h / 2 + r);
+      shape.quadraticCurveTo(-w / 2, -h / 2, -w / 2 + r, -h / 2);
 
-    // Glowing Neon Lime Border
-    const edgesGeo = new THREE.EdgesGeometry(cardGeo);
-    const edgesMat = new THREE.LineBasicMaterial({
+      const geom = new THREE.ShapeGeometry(shape);
+
+      // Solid glass surface
+      const mat = new THREE.MeshBasicMaterial({
+        color,
+        transparent: true,
+        opacity,
+        side: THREE.DoubleSide,
+        depthWrite: false,
+      });
+      const mesh = new THREE.Mesh(geom, mat);
+      cardGroup.add(mesh);
+
+      // Glowing Wireframe Edge
+      const edges = new THREE.EdgesGeometry(geom);
+      const edgeMat = new THREE.LineBasicMaterial({
+        color: borderColor,
+        transparent: true,
+        opacity: 0.9,
+      });
+      const border = new THREE.LineSegments(edges, edgeMat);
+      border.position.z = 0.005;
+      cardGroup.add(border);
+
+      return cardGroup;
+    };
+
+    // --- Layer 1: Base Platform Card (Bottom Deck) ---
+    const layer1 = createRoundedCard(1.9, 1.3, 0.16, 0.05, 0x090b10, 0.7, 0x1e293b);
+    layer1.position.set(0, -0.3, -0.45);
+    mainGroup.add(layer1);
+
+    // --- Layer 2: Mid Analytics Card (Middle Deck) ---
+    const layer2 = createRoundedCard(1.8, 1.25, 0.16, 0.05, 0x0c0e16, 0.85, 0x334155);
+    layer2.position.set(0, -0.1, -0.15);
+    mainGroup.add(layer2);
+
+    // --- Layer 3: Top Hero Workspace Card (Primary Active UI Deck) ---
+    const layer3 = createRoundedCard(1.7, 1.2, 0.16, 0.05, 0x11131c, 0.95, 0xd4f938);
+    layer3.position.set(0, 0.12, 0.15);
+    mainGroup.add(layer3);
+
+    // --- UI Elements on Top Layer ---
+    // 1. Mini Animated Holographic 3D Bar Charts
+    const barCount = 4;
+    const barMeshes: THREE.Mesh[] = [];
+    const barHeights = [0.25, 0.45, 0.32, 0.58];
+
+    for (let i = 0; i < barCount; i++) {
+      const barGeo = new THREE.BoxGeometry(0.1, 1, 0.08);
+      const barMat = new THREE.MeshBasicMaterial({
+        color: i === 3 ? 0xd4f938 : 0x475569,
+        transparent: true,
+        opacity: i === 3 ? 0.95 : 0.65,
+      });
+      const bar = new THREE.Mesh(barGeo, barMat);
+      bar.position.set(-0.55 + i * 0.16, -0.15, 0.18);
+      bar.scale.y = barHeights[i];
+      layer3.add(bar);
+      barMeshes.push(bar);
+    }
+
+    // 2. Neon Metric Wave Line (3D Polyline)
+    const curvePoints: THREE.Vector3[] = [];
+    for (let i = 0; i < 12; i++) {
+      const px = -0.55 + (i / 11) * 1.1;
+      const py = 0.08 + Math.sin(i * 0.7) * 0.14;
+      curvePoints.push(new THREE.Vector3(px, py, 0.18));
+    }
+    const lineGeo = new THREE.BufferGeometry().setFromPoints(curvePoints);
+    const lineMat = new THREE.LineBasicMaterial({
       color: 0xd4f938,
       linewidth: 2,
-    });
-    const borderLine = new THREE.LineSegments(edgesGeo, edgesMat);
-    group.add(borderLine);
-
-    // Inner UI Grid Plus Icon (+)
-    const plusGeo = new THREE.BufferGeometry();
-    const plusVertices = new Float32Array([
-      -0.12, 0, 0.05, 0.12, 0, 0.05,
-      0, -0.12, 0.05, 0, 0.12, 0.05,
-    ]);
-    plusGeo.setAttribute("position", new THREE.BufferAttribute(plusVertices, 3));
-    const plusMat = new THREE.LineBasicMaterial({ color: 0xa6f30d, linewidth: 2 });
-    const plusMesh = new THREE.LineSegments(plusGeo, plusMat);
-    group.add(plusMesh);
-
-    // 2. Floating Cursor Pointer
-    const cursorGroup = new THREE.Group();
-    const cursorShape = new THREE.Shape();
-    cursorShape.moveTo(0, 0);
-    cursorShape.lineTo(0.18, -0.32);
-    cursorShape.lineTo(0.06, -0.3);
-    cursorShape.lineTo(0.01, -0.45);
-    cursorShape.lineTo(-0.06, -0.43);
-    cursorShape.lineTo(-0.01, -0.28);
-    cursorShape.lineTo(-0.16, -0.24);
-    cursorShape.closePath();
-
-    const cursorGeo = new THREE.ShapeGeometry(cursorShape);
-    const cursorMat = new THREE.MeshBasicMaterial({ color: 0xd4f938 });
-    const cursorMesh = new THREE.Mesh(cursorGeo, cursorMat);
-    cursorGroup.add(cursorMesh);
-    cursorGroup.position.set(-0.25, -0.25, 0.15);
-    cursorGroup.rotation.z = 0.35;
-    group.add(cursorGroup);
-
-    // 3. Floating Rocket Badge Icon (Top Right)
-    const badgeGeo = new THREE.CircleGeometry(0.24, 32);
-    const badgeMat = new THREE.MeshBasicMaterial({
-      color: 0x222630,
       transparent: true,
       opacity: 0.95,
     });
-    const badgeMesh = new THREE.Mesh(badgeGeo, badgeMat);
-    badgeMesh.position.set(0.65, 0.52, 0.2);
+    const waveLine = new THREE.Line(lineGeo, lineMat);
+    layer3.add(waveLine);
 
-    const badgeRingGeo = new THREE.RingGeometry(0.24, 0.26, 32);
-    const badgeRingMat = new THREE.MeshBasicMaterial({
-      color: 0xd4f938,
+    // 3. Glowing Peak Data Node Indicator
+    const peakNodeGeo = new THREE.SphereGeometry(0.045, 16, 16);
+    const peakNodeMat = new THREE.MeshBasicMaterial({ color: 0xd4f938 });
+    const peakNode = new THREE.Mesh(peakNodeGeo, peakNodeMat);
+    peakNode.position.set(curvePoints[8].x, curvePoints[8].y, 0.2);
+    layer3.add(peakNode);
+
+    // Glowing Pulse Ring around Peak Node
+    const nodeRingGeo = new THREE.RingGeometry(0.06, 0.085, 24);
+    const nodeRingMat = new THREE.MeshBasicMaterial({
+      color: 0xa6f30d,
       side: THREE.DoubleSide,
-    });
-    const badgeRing = new THREE.Mesh(badgeRingGeo, badgeRingMat);
-    badgeRing.position.set(0.65, 0.52, 0.21);
-
-    group.add(badgeMesh);
-    group.add(badgeRing);
-
-    // Ambient floating particles
-    const partCount = 40;
-    const partGeo = new THREE.BufferGeometry();
-    const partPos = new Float32Array(partCount * 3);
-    for (let i = 0; i < partCount * 3; i += 3) {
-      partPos[i] = (Math.random() - 0.5) * 3.5;
-      partPos[i + 1] = (Math.random() - 0.5) * 2.5;
-      partPos[i + 2] = (Math.random() - 0.5) * 1.5;
-    }
-    partGeo.setAttribute("position", new THREE.BufferAttribute(partPos, 3));
-    const partMat = new THREE.PointsMaterial({
-      color: 0xd4f938,
-      size: 0.04,
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.8,
     });
-    const particles = new THREE.Points(partGeo, partMat);
-    group.add(particles);
+    const nodeRing = new THREE.Mesh(nodeRingGeo, nodeRingMat);
+    nodeRing.position.set(curvePoints[8].x, curvePoints[8].y, 0.2);
+    layer3.add(nodeRing);
 
-    // Mouse tilt interaction
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetRotX = 0;
-    let targetRotY = 0;
+    // 4. Central Holographic Floating Octahedron (3D Core Project Crystal)
+    const crystalGeo = new THREE.OctahedronGeometry(0.22, 0);
+    const crystalMat = new THREE.MeshBasicMaterial({
+      color: 0xd4f938,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.9,
+    });
+    const crystalMesh = new THREE.Mesh(crystalGeo, crystalMat);
+    crystalMesh.position.set(0.42, -0.05, 0.28);
+    layer3.add(crystalMesh);
 
-    const handleMouseMove = (e: MouseEvent) => {
+    // Inner Glow Crystal
+    const innerCrystalGeo = new THREE.OctahedronGeometry(0.12, 0);
+    const innerCrystalMat = new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 0.85,
+    });
+    const innerCrystal = new THREE.Mesh(innerCrystalGeo, innerCrystalMat);
+    crystalMesh.add(innerCrystal);
+
+    // 5. Floating Ambient Sparkle Dust / Particles
+    const particleCount = 65;
+    const particleGeo = new THREE.BufferGeometry();
+    const particlePos = new Float32Array(particleCount * 3);
+    const particleColors = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount * 3; i += 3) {
+      particlePos[i] = (Math.random() - 0.5) * 2.8;
+      particlePos[i + 1] = (Math.random() - 0.5) * 2.2;
+      particlePos[i + 2] = (Math.random() - 0.5) * 1.8;
+
+      if (Math.random() > 0.6) {
+        // Lime
+        particleColors[i] = 0.83;
+        particleColors[i + 1] = 0.98;
+        particleColors[i + 2] = 0.22;
+      } else {
+        // Slate / White
+        particleColors[i] = 0.6;
+        particleColors[i + 1] = 0.7;
+        particleColors[i + 2] = 0.9;
+      }
+    }
+
+    particleGeo.setAttribute("position", new THREE.BufferAttribute(particlePos, 3));
+    particleGeo.setAttribute("color", new THREE.BufferAttribute(particleColors, 3));
+
+    const particleMat = new THREE.PointsMaterial({
+      size: 0.045,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.85,
+      blending: THREE.AdditiveBlending,
+    });
+    const particles = new THREE.Points(particleGeo, particleMat);
+    mainGroup.add(particles);
+
+    // --- Interactive Mouse Parallax & Gyroscope Physics ---
+    let targetRotX = 0.38;
+    let targetRotY = -0.45;
+    let isHovered = false;
+
+    const onMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
-      mouseX = x;
-      mouseY = y;
+      const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const ny = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+
+      targetRotX = 0.38 - ny * 0.35;
+      targetRotY = -0.45 + nx * 0.45;
     };
 
-    const handleMouseLeave = () => {
-      mouseX = 0;
-      mouseY = 0;
+    const onMouseEnter = () => {
+      isHovered = true;
     };
 
-    container.addEventListener("mousemove", handleMouseMove);
-    container.addEventListener("mouseleave", handleMouseLeave);
+    const onMouseLeave = () => {
+      isHovered = false;
+      targetRotX = 0.38;
+      targetRotY = -0.45;
+    };
 
-    // Viewport Intersection Observer - pause WebGL loop when offscreen
+    container.addEventListener("mousemove", onMouseMove);
+    container.addEventListener("mouseenter", onMouseEnter);
+    container.addEventListener("mouseleave", onMouseLeave);
+
+    // Viewport Intersection Observer
     let isVisible = false;
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -165,54 +253,72 @@ export default function ThreeCardProjects() {
     );
     observer.observe(container);
 
-    // Animation Loop
-    let animationId: number;
+    // --- Animation Loop ---
+    let animationFrameId: number;
     const clock = new THREE.Clock();
 
     const animate = () => {
-      animationId = requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
 
-      if (!isVisible) return; // Skip rendering when card is not in viewport
+      if (!isVisible) return;
 
-      const time = clock.getElapsedTime();
+      const elapsed = clock.getElapsedTime();
 
-      targetRotY = mouseX * 0.45;
-      targetRotX = -mouseY * 0.35;
+      // Smooth Parallax Damping
+      mainGroup.rotation.x += (targetRotX - mainGroup.rotation.x) * 0.06;
+      mainGroup.rotation.y += (targetRotY - mainGroup.rotation.y) * 0.06;
 
-      group.rotation.y += (targetRotY - group.rotation.y) * 0.08;
-      group.rotation.x += (targetRotX - group.rotation.x) * 0.08;
+      // Gentle floating bob
+      mainGroup.position.y = Math.sin(elapsed * 1.6) * 0.06;
 
-      // Floating oscillation
-      badgeMesh.position.y = 0.52 + Math.sin(time * 2.5) * 0.04;
-      badgeRing.position.y = 0.52 + Math.sin(time * 2.5) * 0.04;
-      cursorGroup.position.x = -0.25 + Math.cos(time * 1.8) * 0.05;
-      cursorGroup.position.y = -0.25 + Math.sin(time * 1.8) * 0.05;
+      // Layer 3 dynamic floating separation
+      layer3.position.z = 0.15 + Math.sin(elapsed * 2.0) * 0.035;
+      layer2.position.z = -0.15 + Math.sin(elapsed * 2.0 + 0.6) * 0.02;
 
-      particles.rotation.y = time * 0.05;
+      // Rotate Crystal Core
+      crystalMesh.rotation.x = elapsed * 1.2;
+      crystalMesh.rotation.y = elapsed * 1.8;
+
+      // Pulse Node Ring
+      nodeRing.scale.setScalar(1.0 + Math.sin(elapsed * 3.5) * 0.25);
+      nodeRingMat.opacity = 0.6 + Math.sin(elapsed * 3.5) * 0.3;
+
+      // Animated Bar Chart Heights
+      barMeshes.forEach((bar, idx) => {
+        const baseH = barHeights[idx];
+        bar.scale.y = baseH + Math.sin(elapsed * 2.2 + idx * 0.8) * 0.08;
+      });
+
+      // Ambient Particles Drift
+      particles.rotation.y = elapsed * 0.05;
 
       renderer.render(scene, camera);
     };
 
     animate();
 
+    // Resize handler
     const handleResize = () => {
       if (!container) return;
-      const w = container.clientWidth;
-      const h = container.clientHeight;
+      const w = container.clientWidth || 300;
+      const h = container.clientHeight || 220;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     };
 
-    const resizeObserver = new ResizeObserver(() => handleResize());
+    const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
 
+    // Cleanup
     return () => {
-      cancelAnimationFrame(animationId);
+      cancelAnimationFrame(animationFrameId);
       observer.disconnect();
       resizeObserver.disconnect();
-      container.removeEventListener("mousemove", handleMouseMove);
-      container.removeEventListener("mouseleave", handleMouseLeave);
+      container.removeEventListener("mousemove", onMouseMove);
+      container.removeEventListener("mouseenter", onMouseEnter);
+      container.removeEventListener("mouseleave", onMouseLeave);
+
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
@@ -220,5 +326,10 @@ export default function ThreeCardProjects() {
     };
   }, []);
 
-  return <div ref={containerRef} className="w-full h-[220px] select-none" />;
+  return (
+    <div
+      ref={containerRef}
+      className="relative w-full h-[220px] sm:h-[240px] flex items-center justify-center select-none pointer-events-auto cursor-pointer"
+    />
+  );
 }

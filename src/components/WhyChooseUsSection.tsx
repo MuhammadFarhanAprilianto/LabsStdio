@@ -29,7 +29,7 @@ export default function WhyChooseUsSection() {
               <h3 className="text-4xl sm:text-5xl font-medium text-white font-['Questrial',sans-serif] tracking-tight">
                 200+
               </h3>
-              <p className="text-sm sm:text-base text-neutral-400 font-['Agrandir',sans-serif]">
+              <p className="text-sm sm:text-base text-neutral-200 font-['Agrandir',sans-serif]">
                 Projects Delivered
               </p>
             </div>
@@ -37,7 +37,7 @@ export default function WhyChooseUsSection() {
               <ThreeCardProjects />
             </div>
             <div className="z-10 pt-2 border-t border-white/5">
-              <p className="text-xs sm:text-sm text-neutral-400 font-['Questrial',sans-serif] leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-300 font-['Questrial',sans-serif] leading-relaxed">
                 Behind every digital product we engineer is a human experience. We craft interfaces that blend aesthetic perfection with seamless utility.
               </p>
             </div>
@@ -50,7 +50,7 @@ export default function WhyChooseUsSection() {
               <h3 className="text-4xl sm:text-5xl font-medium text-white font-['Questrial',sans-serif] tracking-tight">
                 50+
               </h3>
-              <p className="text-sm sm:text-base text-neutral-400 font-['Agrandir',sans-serif]">
+              <p className="text-sm sm:text-base text-neutral-200 font-['Agrandir',sans-serif]">
                 Global Digital Specialists
               </p>
             </div>
@@ -58,7 +58,7 @@ export default function WhyChooseUsSection() {
               <ThreeCardGlobe />
             </div>
             <div className="z-10 pt-2 border-t border-white/5">
-              <p className="text-xs sm:text-sm text-neutral-400 font-['Questrial',sans-serif] leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-300 font-['Questrial',sans-serif] leading-relaxed">
                 What started as an ambitious studio is now 50+ elite designers &amp; digital engineers collaborating seamlessly across worldwide timezones.
               </p>
             </div>
@@ -71,7 +71,7 @@ export default function WhyChooseUsSection() {
               <h3 className="text-4xl sm:text-5xl font-medium text-white font-['Questrial',sans-serif] tracking-tight">
                 98%
               </h3>
-              <p className="text-sm sm:text-base text-neutral-400 font-['Agrandir',sans-serif]">
+              <p className="text-sm sm:text-base text-neutral-200 font-['Agrandir',sans-serif]">
                 Client Retention &amp; Trust
               </p>
             </div>
@@ -79,7 +79,7 @@ export default function WhyChooseUsSection() {
               <ThreeCardSatisfaction />
             </div>
             <div className="z-10 pt-2 border-t border-white/5">
-              <p className="text-xs sm:text-sm text-neutral-400 font-['Questrial',sans-serif] leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-300 font-['Questrial',sans-serif] leading-relaxed">
                 True partnership is measured by lasting impact. Our clients scale with us over the long term, backed by exceptional delivery and 5-star craft.
               </p>
             </div>
@@ -92,7 +92,7 @@ export default function WhyChooseUsSection() {
               <h3 className="text-4xl sm:text-5xl font-medium text-white font-['Questrial',sans-serif] tracking-tight">
                 15+
               </h3>
-              <p className="text-sm sm:text-base text-neutral-400 font-['Agrandir',sans-serif]">
+              <p className="text-sm sm:text-base text-neutral-200 font-['Agrandir',sans-serif]">
                 Industries Served
               </p>
             </div>
@@ -100,7 +100,7 @@ export default function WhyChooseUsSection() {
               <ThreeCardFunnel />
             </div>
             <div className="z-10 pt-2 border-t border-white/5">
-              <p className="text-xs sm:text-sm text-neutral-400 font-['Questrial',sans-serif] leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-300 font-['Questrial',sans-serif] leading-relaxed">
                 Fintech, SaaS, AI, Web3, and Enterprise — we adapt seamlessly to your domain with deep industry acumen and tailored product strategy.
               </p>
             </div>
@@ -113,7 +113,7 @@ export default function WhyChooseUsSection() {
               <h3 className="text-4xl sm:text-5xl font-medium text-white font-['Questrial',sans-serif] tracking-tight">
                 48hr
               </h3>
-              <p className="text-sm sm:text-base text-neutral-400 font-['Agrandir',sans-serif]">
+              <p className="text-sm sm:text-base text-neutral-200 font-['Agrandir',sans-serif]">
                 Average Kickoff Time
               </p>
             </div>
@@ -121,7 +121,7 @@ export default function WhyChooseUsSection() {
               <ThreeCardSpeed />
             </div>
             <div className="z-10 pt-2 border-t border-white/5">
-              <p className="text-xs sm:text-sm text-neutral-400 font-['Questrial',sans-serif] leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-300 font-['Questrial',sans-serif] leading-relaxed">
                 No prolonged onboarding or friction. We move at venture speed with agile sprints without ever cutting corners on engineering quality.
               </p>
             </div>
@@ -134,7 +134,7 @@ export default function WhyChooseUsSection() {
               <h3 className="text-4xl sm:text-5xl font-medium text-white font-['Questrial',sans-serif] tracking-tight">
                 $2B+
               </h3>
-              <p className="text-sm sm:text-base text-neutral-400 font-['Agrandir',sans-serif]">
+              <p className="text-sm sm:text-base text-neutral-200 font-['Agrandir',sans-serif]">
                 Revenue Influenced
               </p>
             </div>
@@ -142,7 +142,7 @@ export default function WhyChooseUsSection() {
               <ThreeCardRevenue />
             </div>
             <div className="z-10 pt-2 border-t border-white/5">
-              <p className="text-xs sm:text-sm text-neutral-400 font-['Questrial',sans-serif] leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-300 font-['Questrial',sans-serif] leading-relaxed">
                 Capital raised and enterprise valuation generated by our partners over the past decade. Exceptional design compounds returns.
               </p>
             </div>

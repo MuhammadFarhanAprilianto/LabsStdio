@@ -38,13 +38,6 @@ export default function ConsultationBannerSection() {
 
           {/* Left Column: Heading, Inline Team Avatars, Description, and Rolling Flip Button */}
           <div className="lg:col-span-6 space-y-7 z-10">
-            {/* Pill Badge: ● Let's talk */}
-            <div className="inline-flex items-center gap-2 rounded-full bg-white border border-neutral-200/90 shadow-sm px-4 py-1.5 text-xs">
-              <span className="h-2 w-2 rounded-full bg-[#a6f30d] animate-pulse" />
-              <span className="font-['Questrial',sans-serif] tracking-wider text-neutral-800 font-medium">
-                Let&apos;s talk
-              </span>
-            </div>
 
             {/* Main Title with Inline Avatar Stack */}
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-black tracking-tight text-neutral-950 leading-[1.18] font-['Agrandir',sans-serif]">

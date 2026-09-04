@@ -8,14 +8,6 @@ export default function ServicesHeadlineSection() {
   return (
     <section className="relative w-full bg-white text-gray-900 pt-20 sm:pt-28 pb-4 px-6 sm:px-12 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        {/* Services Pill Badge */}
-        <div className="mb-8">
-          <div className="inline-flex items-center gap-2 rounded-full bg-neutral-100 border border-neutral-200/80 px-3.5 py-1.5 text-xs text-neutral-800 shadow-sm">
-            <span className="h-2 w-2 rounded-full bg-[#a6f30d] border border-neutral-300 animate-pulse" />
-            <span className="font-['Questrial',sans-serif] tracking-wide font-medium">Services</span>
-          </div>
-        </div>
-
         {/* Main Grid Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Heading with Expanding Inline Photo (Font: Questrial) */}

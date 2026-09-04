@@ -558,13 +558,10 @@ export default function AboutPage() {
                   transition={{ duration: 0.6, delay: 0.1 }}
                   className="space-y-3 pb-8 border-b border-neutral-200"
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#16a34a] shadow-[0_0_8px_rgba(22,163,74,0.6)]" />
-                    <h3 className="text-xl sm:text-2xl font-bold text-black font-['Agrandir',sans-serif]">
-                      Design Plus Development
-                    </h3>
-                  </div>
-                  <p className="text-sm sm:text-base text-neutral-600 font-['Questrial',sans-serif] leading-relaxed pl-5">
+                  <h3 className="text-xl sm:text-2xl font-bold text-black font-['Agrandir',sans-serif]">
+                    Design Plus Development
+                  </h3>
+                  <p className="text-sm sm:text-base text-neutral-600 font-['Questrial',sans-serif] leading-relaxed">
                     Most agencies do one or the other. We handle design and development under one roof, so nothing gets lost between the mockup and the live, working site.
                   </p>
                 </motion.div>
@@ -577,13 +574,10 @@ export default function AboutPage() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="space-y-3 pb-8 border-b border-neutral-200"
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#16a34a] shadow-[0_0_8px_rgba(22,163,74,0.6)]" />
-                    <h3 className="text-xl sm:text-2xl font-bold text-black font-['Agrandir',sans-serif]">
-                      Founder-Led Expertise
-                    </h3>
-                  </div>
-                  <p className="text-sm sm:text-base text-neutral-600 font-['Questrial',sans-serif] leading-relaxed pl-5">
+                  <h3 className="text-xl sm:text-2xl font-bold text-black font-['Agrandir',sans-serif]">
+                    Founder-Led Expertise
+                  </h3>
+                  <p className="text-sm sm:text-base text-neutral-600 font-['Questrial',sans-serif] leading-relaxed">
                     Every project is guided by 25+ years of hands-on UI/UX and web development experience, never handed off to juniors learning on your budget.
                   </p>
                 </motion.div>
@@ -596,13 +590,10 @@ export default function AboutPage() {
                   transition={{ duration: 0.6, delay: 0.3 }}
                   className="space-y-3"
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#16a34a] shadow-[0_0_8px_rgba(22,163,74,0.6)]" />
-                    <h3 className="text-xl sm:text-2xl font-bold text-black font-['Agrandir',sans-serif]">
-                      Speed Without Shortcuts
-                    </h3>
-                  </div>
-                  <p className="text-sm sm:text-base text-neutral-600 font-['Questrial',sans-serif] leading-relaxed pl-5">
+                  <h3 className="text-xl sm:text-2xl font-bold text-black font-['Agrandir',sans-serif]">
+                    Speed Without Shortcuts
+                  </h3>
+                  <p className="text-sm sm:text-base text-neutral-600 font-['Questrial',sans-serif] leading-relaxed">
                     We move at venture velocity with rigorous code standards, ensuring your product launches fast while remaining scalable for enterprise growth.
                   </p>
                 </motion.div>
@@ -616,7 +607,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="relative w-full h-full min-h-[480px] lg:min-h-[580px] rounded-3xl bg-gradient-to-b from-[#0e1017] via-[#08090c] to-black p-6 border border-neutral-800 shadow-2xl overflow-hidden flex flex-col items-center justify-center"
+                className="relative w-full h-full min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] rounded-3xl bg-gradient-to-b from-[#0e1017] via-[#08090c] to-black p-6 border border-neutral-800 shadow-2xl overflow-hidden flex flex-col items-center justify-center"
               >
                 {/* Ambient Radial Color Glows */}
                 <div className="absolute top-0 right-1/4 w-56 h-56 bg-[radial-gradient(circle,rgba(212,249,56,0.2)_0%,transparent_70%)] pointer-events-none" />
@@ -629,8 +620,7 @@ export default function AboutPage() {
 
                 {/* Ambient Glass Tag Badge */}
                 <div className="absolute bottom-6 left-6 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs font-bold text-neutral-300 font-['Agrandir',sans-serif]">
-                  <span className="w-2 h-2 rounded-full bg-[#d4f938] animate-pulse" />
-                  <span>Interactive Liquid Glass 3D</span>
+                  <span>Interactive 3D Glass</span>
                 </div>
               </motion.div>
             </div>
@@ -973,10 +963,9 @@ export default function AboutPage() {
 
               {/* Interactive Graphic 5: Laptop with 5 Golden Stars */}
               <div className="h-36 sm:h-40 flex items-center justify-center relative my-2">
-                <div className="relative w-36 h-24 rounded-xl bg-neutral-50 border border-neutral-200 p-3 flex flex-col justify-between shadow-inner group-hover:border-[#16a34a]/40 transition-colors">
+                <div className="relative w-36 h-24 rounded-xl bg-neutral-50 border border-neutral-200 p-3 flex flex-col justify-between shadow-inner group-hover:border-neutral-400 transition-colors">
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] font-bold text-neutral-500">🔍</span>
-                    <span className="w-2 h-2 rounded-full bg-[#16a34a] animate-ping" />
                   </div>
                   {/* 5 Stars */}
                   <div className="flex items-center gap-1 text-amber-500 text-xs">

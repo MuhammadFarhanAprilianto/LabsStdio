@@ -8,16 +8,8 @@ export default function TestimonialsSection() {
   return (
     <section className="relative w-full bg-white text-gray-900 pt-24 sm:pt-32 pb-20 sm:pb-28 px-6 sm:px-12 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto space-y-10 sm:space-y-12">
-        {/* Section Header: Pill Badge & Main Title */}
+        {/* Section Header: Main Title */}
         <div className="text-center flex flex-col items-center justify-center space-y-5">
-          {/* Pill Badge: ● Testimonials */}
-          <div className="inline-flex items-center gap-2 rounded-full bg-black text-white px-4 py-1.5 text-xs font-medium shadow-md">
-            <span className="h-2 w-2 rounded-full bg-[#a6f30d] animate-pulse" />
-            <span className="font-['Questrial',sans-serif] tracking-wider">
-              Testimonials
-            </span>
-          </div>
-
           {/* Main Title: Words from the People We've Worked With */}
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-black leading-[1.14] font-['Agrandir',sans-serif] max-w-3xl">
             Words from the People
