@@ -381,7 +381,7 @@ export default function PortfolioSection() {
       );
 
   return (
-    <section className="relative w-full bg-white text-gray-900 pt-10 sm:pt-14 pb-12 sm:pb-16 px-6 sm:px-12 lg:px-16 overflow-hidden">
+    <section className="relative w-full bg-white text-gray-900 pt-14 sm:pt-16 pb-16 sm:pb-20 px-6 sm:px-12 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto space-y-8 sm:space-y-10">
         {/* Section Heading: Our portfolio (Font: Questrial) */}
         <ScrollReveal distance={28} blur={14} duration={850}>

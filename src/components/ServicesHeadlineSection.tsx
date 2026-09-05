@@ -8,7 +8,7 @@ import { ArrowUpRight01Icon } from "hugeicons-react";
 
 export default function ServicesHeadlineSection() {
   return (
-    <section className="relative w-full bg-white text-gray-900 pt-4 sm:pt-8 pb-4 px-6 sm:px-12 lg:px-16 overflow-hidden">
+    <section className="relative w-full bg-white text-gray-900 pt-8 sm:pt-10 pb-8 sm:pb-6 px-6 sm:px-12 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Main Grid Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">

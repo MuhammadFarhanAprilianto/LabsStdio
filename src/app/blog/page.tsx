@@ -191,7 +191,7 @@ export default function BlogPage() {
   return (
     <main className="min-h-screen bg-white text-gray-900 font-['Agrandir',sans-serif] pt-28 sm:pt-36 overflow-hidden">
       {/* Hero Section: Centered Clean White Layout */}
-      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pb-6 sm:pb-8">
+      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pb-10 sm:pb-12">
         {/* Subtle Ambient Radial Glow */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(212,249,56,0.18)_0%,transparent_70%)] pointer-events-none" />
 
@@ -250,7 +250,7 @@ export default function BlogPage() {
       </section>
 
       {/* Filter Tabs & Search Bar */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-6 sm:pb-8">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-10 sm:pb-10">
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 pb-6 border-b border-neutral-200">
           {/* Category Filter Pills: 4 on Row 1, 3 on Row 2 */}
           <div className="flex flex-col gap-2.5">
@@ -314,7 +314,7 @@ export default function BlogPage() {
       </section>
 
       {/* Main Bento Layout (Persis Sesuai Gambar User) */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-12 sm:pb-14">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-16 sm:pb-16">
         {/* Bento Grid 2 Kolom: Kiri (1 Besar) & Kanan (2 Baris) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           {/* Kolom Kiri: Featured Big Article Card (7 Cols) */}
@@ -420,7 +420,7 @@ export default function BlogPage() {
 
       {/* Additional Articles Grid (Jika ada lebih banyak artikel atau hasil filter) */}
       {additionalPosts.length > 0 && (
-        <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-14 sm:pb-18 border-t border-neutral-200 pt-10 sm:pt-12">
+        <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-18 sm:pb-20 border-t border-neutral-200 pt-14 sm:pt-16">
           <div className="space-y-2 pb-8">
             <div className="text-xs font-bold text-neutral-400 uppercase tracking-widest font-['Agrandir',sans-serif]">
               More Publications

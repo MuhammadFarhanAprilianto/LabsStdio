@@ -8,7 +8,7 @@ import { ArrowUpRight01Icon } from "hugeicons-react";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[85vh] sm:min-h-[88vh] w-full flex flex-col items-center justify-center overflow-hidden bg-white text-gray-900 pt-28 pb-10 px-6">
+    <section className="relative min-h-[85vh] sm:min-h-[88vh] w-full flex flex-col items-center justify-center overflow-hidden bg-white text-gray-900 pt-28 pb-14 sm:pb-12 px-6">
       {/* Three.js WebGL Points Wave & Handshake Connection Particle Field */}
       <ThreeHandshakeWave />
 

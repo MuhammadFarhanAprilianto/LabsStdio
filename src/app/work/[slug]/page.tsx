@@ -77,7 +77,7 @@ export default function CaseStudyPage({ params }: { params: Promise<{ slug: stri
   return (
     <main className="min-h-screen bg-white text-gray-900 font-['Agrandir',sans-serif] pt-28 sm:pt-36">
       {/* Hero Header */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-6 sm:pb-8">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-10 sm:pb-12">
         <div className="space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <Link
@@ -113,7 +113,7 @@ export default function CaseStudyPage({ params }: { params: Promise<{ slug: stri
       </section>
 
       {/* Interactive Before / After Comparison Showcase */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-10 sm:pb-14">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-14 sm:pb-16">
         <BeforeAfterSlider
           beforeImage={data.beforeImg}
           afterImage={data.afterImg}
@@ -125,7 +125,7 @@ export default function CaseStudyPage({ params }: { params: Promise<{ slug: stri
       </section>
 
       {/* Metrics Grid */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-12 sm:pb-16">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-16 sm:pb-18">
         <div className="p-8 sm:p-12 rounded-[36px] bg-[#0c0d12] text-white border border-neutral-800 shadow-2xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-neutral-800">
             {data.metrics.map((m, idx) => (
@@ -146,7 +146,7 @@ export default function CaseStudyPage({ params }: { params: Promise<{ slug: stri
       </section>
 
       {/* In-depth Narrative: Challenge & Solution */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-12 sm:pb-16">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-16 sm:pb-18">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
           <div className="md:col-span-4 space-y-4">
             <h3 className="text-2xl sm:text-3xl font-bold text-black font-['Questrial',sans-serif]">
@@ -176,7 +176,7 @@ export default function CaseStudyPage({ params }: { params: Promise<{ slug: stri
       </section>
 
       {/* Bottom CTA Banner */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-14 sm:pb-18 text-center">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-18 sm:pb-22 text-center">
         <div className="p-10 sm:p-16 rounded-[40px] bg-neutral-900 text-white relative overflow-hidden space-y-6">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,249,56,0.15)_0%,transparent_70%)] pointer-events-none" />
           <div className="max-w-2xl mx-auto space-y-4 relative z-10">

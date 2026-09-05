@@ -7,7 +7,7 @@ import ScrollReveal from "./ui/ScrollReveal";
 
 export default function TestimonialsSection() {
   return (
-    <section className="relative w-full bg-white text-gray-900 pt-8 sm:pt-12 pb-14 sm:pb-18 px-6 sm:px-12 lg:px-16 overflow-hidden">
+    <section className="relative w-full bg-white text-gray-900 pt-14 sm:pt-16 pb-18 sm:pb-20 px-6 sm:px-12 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto space-y-10 sm:space-y-12">
         {/* Section Header: Main Title */}
         <ScrollReveal distance={28} blur={14} duration={850}>

@@ -499,7 +499,7 @@ export default function ServiceDetailPage({
   return (
     <main className="min-h-screen bg-white text-gray-900 font-['Agrandir',sans-serif] pt-28 sm:pt-36">
       {/* 1. Hero Section with Blur-to-Clear Word Animation & Signature Rolling Flip Button */}
-      <section className="w-full px-6 sm:px-12 lg:px-16 pb-10 sm:pb-14 max-w-7xl mx-auto">
+      <section className="w-full px-6 sm:px-12 lg:px-16 pb-14 sm:pb-16 max-w-7xl mx-auto">
         {/* Breadcrumb Navigation with Blur */}
         <motion.div
           initial={{ opacity: 0, y: 15, filter: "blur(10px)" }}
@@ -630,7 +630,7 @@ export default function ServiceDetailPage({
       </section>
 
       {/* 2. Visual Showcase: 2x2 Grid Layout with Crisp Aspect Ratio (No Scaling/Stretching/Blur) */}
-      <section className="w-full bg-[#07080b] text-white py-12 sm:py-16 relative overflow-hidden">
+      <section className="w-full bg-[#07080b] text-white py-16 sm:py-20 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 space-y-12">
           <div className="max-w-3xl space-y-3">
             <motion.span
@@ -702,7 +702,7 @@ export default function ServiceDetailPage({
       </section>
 
       {/* 3. Core Deliverables Interactive Tabs Section */}
-      <section className="w-full bg-white py-12 sm:py-16">
+      <section className="w-full bg-white py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 space-y-8">
           <div className="max-w-3xl space-y-3">
             <motion.span
@@ -849,7 +849,7 @@ export default function ServiceDetailPage({
       </section>
 
       {/* 4. Step-by-Step Delivery Sprint Process */}
-      <section className="w-full bg-[#050608] text-white py-12 sm:py-16 relative overflow-hidden border-t border-neutral-900">
+      <section className="w-full bg-[#050608] text-white py-16 sm:py-20 relative overflow-hidden border-t border-neutral-900">
         <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 space-y-8">
           <div className="max-w-3xl space-y-3">
             <motion.span
@@ -915,7 +915,7 @@ export default function ServiceDetailPage({
       </section>
 
       {/* 5. Frequently Asked Questions (FAQ) Accordion */}
-      <section className="w-full bg-white py-12 sm:py-16">
+      <section className="w-full bg-white py-16 sm:py-20">
         <div className="max-w-4xl mx-auto px-6 sm:px-12 space-y-8">
           <div className="text-center space-y-3">
             <motion.span
@@ -995,7 +995,7 @@ export default function ServiceDetailPage({
       </section>
 
       {/* 6. Ready to Build Banner CTA with Rolling Flip Button */}
-      <section className="w-full bg-[#07080b] text-white py-12 sm:py-16 relative overflow-hidden border-t border-neutral-900">
+      <section className="w-full bg-[#07080b] text-white py-16 sm:py-20 relative overflow-hidden border-t border-neutral-900">
         <div className="max-w-4xl mx-auto px-6 sm:px-12 text-center space-y-6 relative z-10">
           <motion.span
             initial={{ opacity: 0, y: 20, filter: "blur(12px)" }}

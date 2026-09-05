@@ -116,15 +116,15 @@ export default function WorkPage() {
 
   return (
     <main className="min-h-screen bg-white text-gray-900 font-['Agrandir',sans-serif] pt-28 sm:pt-36 overflow-hidden">
-      {/* Hero Section: Centered Clean White Layout */}
-      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pb-8 sm:pb-10">
+      {/* Hero Section: Centered Minimalist Typography */}
+      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pb-12 sm:pb-14">
         {/* Subtle Ambient Radial Glow */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(212,249,56,0.18)_0%,transparent_70%)] pointer-events-none" />
 
         <div className="space-y-6 flex flex-col items-center relative z-10 max-w-5xl mx-auto w-full">
           {/* Main Headline: Blur-to-Clear Upward Animation with Responsive Wrapping */}
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-[72px] font-bold tracking-tight text-black leading-[1.15] text-center w-full break-words">
-            {/* Baris 1: Work that defines (Tebal) */}
+            {/* Baris 1: Work that delivers (Tebal) */}
             <span className="block pb-1 font-bold text-black font-['Questrial',sans-serif]">
               {headlineLine1.map((word, index) => (
                 <motion.span
@@ -143,8 +143,8 @@ export default function WorkPage() {
               ))}
             </span>
 
-            {/* Baris 2: industry standards. (Abu-abu / Muted Elegan) */}
-            <span className="block font-bold text-neutral-400 font-['Questrial',sans-serif]">
+            {/* Baris 2: measurable impact. (Abu-abu / Muted Elegan) */}
+            <span className="block pt-1 font-normal text-neutral-400 font-['Questrial',sans-serif]">
               {headlineLine2.map((word, index) => (
                 <motion.span
                   key={index}
@@ -201,7 +201,7 @@ export default function WorkPage() {
       </section>
 
       {/* Featured Video Showcase Section (Video02.webm) */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-10 sm:pb-14">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-14 sm:pb-16">
         <motion.div
           initial={{ opacity: 0, y: 35, filter: "blur(14px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -255,7 +255,7 @@ export default function WorkPage() {
       </section>
 
       {/* Featured Deep-Dive Case Studies Grid (1 x 1 Side-by-Side) */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-10 sm:pb-14">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-14 sm:pb-16">
         <div className="space-y-4 pb-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <h2 className="text-3xl sm:text-4xl font-bold text-black font-['Questrial',sans-serif] tracking-tight">
@@ -343,7 +343,7 @@ export default function WorkPage() {
       </section>
 
       {/* Interactive Project Inquiry & Testimonial Dual Bento Card (Persis Sesuai Gambar 2) */}
-      <section id="project-inquiry" className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-16 sm:pb-20 scroll-mt-28">
+      <section id="project-inquiry" className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-20 sm:pb-24 scroll-mt-28">
         <motion.div
           initial={{ opacity: 0, y: 40, filter: "blur(14px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}

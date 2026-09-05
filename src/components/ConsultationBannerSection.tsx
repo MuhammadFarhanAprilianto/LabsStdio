@@ -31,7 +31,7 @@ export default function ConsultationBannerSection() {
   ];
 
   return (
-    <section className="relative w-full bg-white text-gray-900 pt-8 sm:pt-12 pb-16 sm:pb-20 px-6 sm:px-12 lg:px-16 overflow-hidden">
+    <section className="relative w-full bg-white text-gray-900 pt-14 sm:pt-16 pb-18 sm:pb-20 px-6 sm:px-12 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Main Banner Card: Light Frosted Box with Stylized Keyboard Keys Grid */}
         <div className="relative rounded-[36px] sm:rounded-[44px] bg-[#f6f6f8] border border-neutral-200/80 shadow-[0_20px_50px_rgba(0,0,0,0.06)] overflow-hidden p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">

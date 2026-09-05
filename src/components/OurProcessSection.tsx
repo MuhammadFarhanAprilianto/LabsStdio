@@ -360,7 +360,7 @@ export default function OurProcessSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-black text-white pt-8 sm:pt-10 pb-16 sm:pb-20 px-6 sm:px-12 lg:px-16 overflow-hidden"
+      className="relative w-full bg-black text-white pt-14 sm:pt-16 pb-18 sm:pb-20 px-6 sm:px-12 lg:px-16 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
         {/* Main 2-Column Grid */}

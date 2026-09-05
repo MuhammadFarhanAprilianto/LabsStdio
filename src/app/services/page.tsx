@@ -161,7 +161,7 @@ export default function ServicesPage() {
   return (
     <main className="min-h-screen bg-white text-gray-900 font-['Agrandir',sans-serif] pt-28 sm:pt-36">
       {/* Header Section */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-6 sm:pb-8 text-center sm:text-left">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-10 sm:pb-12 text-center sm:text-left">
         <div className="space-y-4 max-w-3xl border-b border-neutral-200/80 pb-6">
           {/* Main Headline: Blur-to-Clear Upward Animation */}
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-black leading-[1.12] w-full break-words">
@@ -217,7 +217,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Category Tabs Filter */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-6">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-8 sm:pb-8">
         <motion.div
           initial={{ opacity: 0, y: 25, filter: "blur(8px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -267,7 +267,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Services Cards Bento Grid (Row 1: 3 cards, Row 2: 3 cards, Row 3: 1 wide full-width banner) */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-12 sm:pb-16">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-16 sm:pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 lg:gap-8">
           {filteredServices.map((service, idx) => {
             const isFullWidth = activeTab === "all" && idx === 6;
@@ -448,7 +448,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Engagement Models Section */}
-      <section className="w-full bg-[#f8f8fa] py-12 sm:py-16 border-y border-neutral-200">
+      <section className="w-full bg-[#f8f8fa] py-16 sm:py-20 border-y border-neutral-200">
         <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 space-y-8">
           <div className="text-center space-y-3 max-w-2xl mx-auto">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-black font-['Questrial',sans-serif] tracking-tight">

@@ -232,7 +232,7 @@ export default function ProjectsCompletedSection() {
   const marqueeRow3 = [...row3Logos, ...row3Logos, ...row3Logos, ...row3Logos];
 
   return (
-    <section className="relative w-full bg-black pt-8 sm:pt-10 pb-8 sm:pb-10 overflow-hidden select-none">
+    <section className="relative w-full bg-black pt-14 sm:pt-12 pb-14 sm:pb-12 overflow-hidden select-none">
       {/* Section Title: PROJECTS COMPLETED FOR */}
       <ScrollReveal distance={24} blur={12} duration={800}>
         <div className="max-w-7xl mx-auto px-6 text-center mb-6 sm:mb-8">

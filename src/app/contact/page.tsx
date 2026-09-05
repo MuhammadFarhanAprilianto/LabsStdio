@@ -128,7 +128,7 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-white text-gray-900 font-['Agrandir',sans-serif] pt-28 sm:pt-36">
       {/* Header Section */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-6 sm:pb-8 text-center sm:text-left">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-10 sm:pb-12 text-center sm:text-left">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 border-b border-neutral-200/80 pb-6">
           <div className="space-y-4 max-w-3xl">
             {/* Main Headline: Blur-to-Clear Upward Animation */}
@@ -196,7 +196,7 @@ export default function ContactPage() {
       </section>
 
       {/* Main Section: Calculator (Left) & Inquiry Review (Right) */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-14 sm:pb-18">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-18 sm:pb-22">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           {/* Left Column: Interactive Scope Calculator (7 Cols) */}
           <div className="lg:col-span-7 space-y-10">

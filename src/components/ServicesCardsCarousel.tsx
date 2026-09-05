@@ -208,7 +208,7 @@ export default function ServicesCardsCarousel() {
   };
 
   return (
-    <section className="relative w-full bg-white pt-2 sm:pt-4 pb-10 sm:pb-14 overflow-hidden select-none">
+    <section className="relative w-full bg-white pt-6 sm:pt-6 pb-14 sm:pb-16 overflow-hidden select-none">
       {/* Interactive Carousel Container with ScrollReveal Blur-to-Clear */}
       <ScrollReveal distance={32} blur={14} duration={850}>
         <div

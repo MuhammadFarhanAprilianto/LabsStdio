@@ -56,7 +56,7 @@ export default function WhyChooseUsSection() {
   ];
 
   return (
-    <section className="relative w-full bg-black text-white pt-14 sm:pt-18 pb-8 sm:pb-12 px-6 sm:px-12 lg:px-16 overflow-hidden">
+    <section className="relative w-full bg-black text-white pt-16 sm:pt-20 pb-14 sm:pb-16 px-6 sm:px-12 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto space-y-10 sm:space-y-12">
         {/* Section Heading */}
         <ScrollReveal distance={28} blur={14} duration={850}>

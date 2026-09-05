@@ -84,7 +84,7 @@ export default function ShowcaseCardSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full flex flex-col items-center justify-start pt-2 pb-6 sm:pb-8 px-4 sm:px-8 bg-white overflow-hidden"
+      className="relative w-full flex flex-col items-center justify-start pt-6 sm:pt-4 pb-12 sm:pb-10 px-4 sm:px-8 bg-white overflow-hidden"
     >
       {/* Audio Element: Memutar lagu Sport01Backsound.mp3 */}
       <audio

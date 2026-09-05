@@ -352,7 +352,7 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen bg-white text-gray-900 font-['Agrandir',sans-serif] pt-28 sm:pt-36 overflow-hidden">
       {/* Header Section: Rata Tengah Penuh Latar Putih (Clean White Centered Hero - Luas & Spacius) */}
-      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pb-8 sm:pb-12">
+      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pb-12 sm:pb-14">
         {/* Subtle Ambient Radial Glow */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(212,249,56,0.18)_0%,transparent_70%)] pointer-events-none" />
 
@@ -436,7 +436,7 @@ export default function AboutPage() {
       </section>
 
       {/* Single-Row Marquee Logo Carousel (Muter dari Kanan ke Kiri Tanpa Henti) */}
-      <section className="relative w-full py-4 pb-8 sm:pb-12 overflow-hidden select-none">
+      <section className="relative w-full py-4 pb-12 sm:pb-14 overflow-hidden select-none">
         {/* Edge gradient fade masks (Putih ke Transparan) di Kiri dan Kanan */}
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none" />
@@ -461,7 +461,7 @@ export default function AboutPage() {
 
 
       {/* What Makes Us Different From Others Section (Clean White Background, Studio Fonts - Tanpa Garis Pembatas) */}
-      <section className="w-full bg-white py-10 sm:py-14">
+      <section className="w-full bg-white py-16 sm:py-18">
         <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left Column: Heading & Key Differentiators (7 Cols) */}
@@ -669,7 +669,7 @@ export default function AboutPage() {
       </section>
 
       {/* Why Brands Choose Us Section (Clean White Background, Studio Fonts, Blur-to-Clear Animation) */}
-      <section className="w-full bg-white py-12 sm:py-16">
+      <section className="w-full bg-white py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 space-y-16">
           <div className="max-w-4xl mx-auto text-center space-y-4">
             <h2 className="text-3xl sm:text-5xl lg:text-[54px] font-black text-black font-['Questrial',sans-serif] tracking-tight leading-[1.15]">
@@ -1126,7 +1126,7 @@ export default function AboutPage() {
       </section>
 
       {/* Meet the Minds Behind the MAGIC from Around the World Section (Dark Black Background) */}
-      <section className="w-full bg-[#050507] text-white py-14 sm:py-18 relative overflow-hidden border-t border-neutral-900">
+      <section className="w-full bg-[#050507] text-white py-18 sm:py-22 relative overflow-hidden border-t border-neutral-900">
         {/* Ambient Subtle Radial Glow */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(212,249,56,0.06)_0%,transparent_70%)] pointer-events-none" />
 
