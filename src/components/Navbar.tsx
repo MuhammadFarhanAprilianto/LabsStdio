@@ -388,7 +388,7 @@ export default function Navbar() {
       {/* Mobile Drawer Dropdown Menu */}
       <div
         className={`pointer-events-auto md:hidden w-full max-w-sm transition-all duration-400 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden ${
-          isMobileMenuOpen ? "max-h-[500px] opacity-100 mt-2" : "max-h-0 opacity-0 mt-0 pointer-events-none"
+          isMobileMenuOpen ? "max-h-[600px] opacity-100 mt-2" : "max-h-0 opacity-0 mt-0 pointer-events-none"
         }`}
       >
         <div className="rounded-[28px] bg-white/95 backdrop-blur-xl border border-white/80 shadow-[0_20px_40px_rgba(0,0,0,0.12)] p-6 flex flex-col gap-3 text-left">
@@ -415,6 +415,15 @@ export default function Navbar() {
                 WordPress Dev
               </Link>
             </div>
+
+            {/* Mobile Explore Button */}
+            <Link
+              href="/services"
+              onClick={() => handleNavClick("/services")}
+              className="mt-3 w-full py-2.5 rounded-full bg-neutral-900 hover:bg-black text-white text-center text-xs font-bold font-['Agrandir',sans-serif] tracking-wider uppercase shadow-sm transition-all active:scale-98 block"
+            >
+              Explore
+            </Link>
           </div>
 
           <Link

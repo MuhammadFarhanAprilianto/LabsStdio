@@ -472,12 +472,12 @@ export default function AboutPage() {
                   {["What", "Makes", "Us"].map((word, index) => (
                     <motion.span
                       key={`diff-1-${index}`}
-                      initial={{ opacity: 0, y: 40, filter: "blur(18px)" }}
+                      initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
                       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                      viewport={{ once: true, margin: "-50px" }}
+                      viewport={{ once: true }}
                       transition={{
-                        duration: 0.85,
-                        delay: 0.1 + index * 0.08,
+                        duration: 0.7,
+                        delay: 0.08 + index * 0.07,
                         ease: [0.16, 1, 0.3, 1],
                       }}
                       className="inline-block mr-2.5 sm:mr-4 text-black"
@@ -492,12 +492,12 @@ export default function AboutPage() {
                   {["Different", "From"].map((word, index) => (
                     <motion.span
                       key={`diff-2-${index}`}
-                      initial={{ opacity: 0, y: 40, filter: "blur(18px)" }}
+                      initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
                       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                      viewport={{ once: true, margin: "-50px" }}
+                      viewport={{ once: true }}
                       transition={{
-                        duration: 0.85,
-                        delay: 0.35 + index * 0.09,
+                        duration: 0.7,
+                        delay: 0.28 + index * 0.07,
                         ease: [0.16, 1, 0.3, 1],
                       }}
                       className="inline-block mr-2.5 sm:mr-4 text-black"
@@ -512,12 +512,12 @@ export default function AboutPage() {
                   {["Others"].map((word, index) => (
                     <motion.span
                       key={`diff-3-${index}`}
-                      initial={{ opacity: 0, y: 40, filter: "blur(18px)" }}
+                      initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
                       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                      viewport={{ once: true, margin: "-50px" }}
+                      viewport={{ once: true }}
                       transition={{
-                        duration: 0.85,
-                        delay: 0.55 + index * 0.09,
+                        duration: 0.7,
+                        delay: 0.44 + index * 0.07,
                         ease: [0.16, 1, 0.3, 1],
                       }}
                       className="inline-block text-black"
@@ -672,21 +672,21 @@ export default function AboutPage() {
       <section className="w-full bg-white py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 space-y-16">
           <div className="max-w-4xl mx-auto text-center space-y-4">
-            <h2 className="text-3xl sm:text-5xl lg:text-[54px] font-black text-black font-['Questrial',sans-serif] tracking-tight leading-[1.15]">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-[54px] font-black text-black font-['Questrial',sans-serif] tracking-tight leading-[1.18] max-w-3xl mx-auto">
               {/* Baris 1: Why brands choose Labs Stdio for */}
-              <span className="block overflow-hidden pb-1">
+              <span className="block pb-1">
                 {["Why", "brands", "choose", "Labs", "Stdio", "for"].map((word, index) => (
                   <motion.span
                     key={`choose-1-${index}`}
-                    initial={{ opacity: 0, y: 40, filter: "blur(18px)" }}
+                    initial={{ opacity: 0, y: 25, filter: "blur(12px)" }}
                     whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    viewport={{ once: true, margin: "-50px" }}
+                    viewport={{ once: true }}
                     transition={{
-                      duration: 0.85,
-                      delay: 0.1 + index * 0.08,
+                      duration: 0.65,
+                      delay: 0.08 + index * 0.06,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="inline-block mr-2.5 sm:mr-3.5 text-black"
+                    className="inline-block mr-2 sm:mr-3.5 text-black"
                   >
                     {word}
                   </motion.span>
@@ -694,19 +694,19 @@ export default function AboutPage() {
               </span>
 
               {/* Baris 2: design & development? */}
-              <span className="block overflow-hidden pt-0.5">
+              <span className="block pt-0.5">
                 {["design", "&", "development?"].map((word, index) => (
                   <motion.span
                     key={`choose-2-${index}`}
-                    initial={{ opacity: 0, y: 40, filter: "blur(18px)" }}
+                    initial={{ opacity: 0, y: 25, filter: "blur(12px)" }}
                     whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    viewport={{ once: true, margin: "-50px" }}
+                    viewport={{ once: true }}
                     transition={{
-                      duration: 0.85,
-                      delay: 0.55 + index * 0.08,
+                      duration: 0.65,
+                      delay: 0.42 + index * 0.06,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="inline-block mr-2.5 sm:mr-3.5 text-black"
+                    className="inline-block mr-2 sm:mr-3.5 text-black"
                   >
                     {word}
                   </motion.span>
@@ -1139,12 +1139,12 @@ export default function AboutPage() {
                 {["Meet", "the", "minds", "behind"].map((word, index) => (
                   <motion.span
                     key={`minds-1-${index}`}
-                    initial={{ opacity: 0, y: 40, filter: "blur(18px)" }}
+                    initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
                     whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    viewport={{ once: true, margin: "-50px" }}
+                    viewport={{ once: true }}
                     transition={{
-                      duration: 0.85,
-                      delay: 0.1 + index * 0.08,
+                      duration: 0.7,
+                      delay: 0.08 + index * 0.07,
                       ease: [0.16, 1, 0.3, 1],
                     }}
                     className="inline-block mr-2 sm:mr-3.5 text-white"
@@ -1159,12 +1159,12 @@ export default function AboutPage() {
                 {["the", "MAGIC", "from", "around", "the", "world!"].map((word, index) => (
                   <motion.span
                     key={`minds-2-${index}`}
-                    initial={{ opacity: 0, y: 40, filter: "blur(18px)" }}
+                    initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
                     whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    viewport={{ once: true, margin: "-50px" }}
+                    viewport={{ once: true }}
                     transition={{
-                      duration: 0.85,
-                      delay: 0.45 + index * 0.08,
+                      duration: 0.7,
+                      delay: 0.36 + index * 0.07,
                       ease: [0.16, 1, 0.3, 1],
                     }}
                     className={`inline-block mr-2 sm:mr-3.5 ${

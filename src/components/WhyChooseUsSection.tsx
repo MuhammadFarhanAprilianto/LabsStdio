@@ -70,7 +70,7 @@ export default function WhyChooseUsSection() {
         </ScrollReveal>
 
         {/* 6 Interactive 3D WebGL Cards (2 Rows x 3 Columns) with ScrollReveal per Card */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {cards.map((card, idx) => (
             <ScrollReveal
               key={idx}
