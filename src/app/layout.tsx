@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={questrial.variable}>
-      <body className={`${questrial.className} antialiased bg-white text-gray-900 selection:bg-[#d4f938] selection:text-black`}>
+      <body className="antialiased bg-white text-gray-900 selection:bg-[#d4f938] selection:text-black">
         <SmoothScrollProvider>
           <CustomCursor />
           <Navbar />

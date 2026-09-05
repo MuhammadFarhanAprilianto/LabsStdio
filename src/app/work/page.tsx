@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "@/components/Footer";
 import SoundWaveVisualizer from "@/components/ui/SoundWaveVisualizer";
+import { ArrowUpRight01Icon, ArrowDown01Icon, Tick01Icon, ArrowRight01Icon } from "hugeicons-react";
 
 const testimonials = [
   {
@@ -114,17 +115,17 @@ export default function WorkPage() {
   const headlineLine2 = ["industry", "standards."];
 
   return (
-    <main className="min-h-screen bg-white text-gray-900 font-['Questrial',sans-serif] pt-28 sm:pt-36 overflow-hidden">
+    <main className="min-h-screen bg-white text-gray-900 font-['Agrandir',sans-serif] pt-28 sm:pt-36 overflow-hidden">
       {/* Hero Section: Centered Clean White Layout */}
-      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pb-12 sm:pb-16">
+      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pb-8 sm:pb-10">
         {/* Subtle Ambient Radial Glow */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(212,249,56,0.18)_0%,transparent_70%)] pointer-events-none" />
 
         <div className="space-y-6 flex flex-col items-center relative z-10 max-w-5xl mx-auto w-full">
-          {/* Main Headline: Tepat 2 Baris Saja dengan Blur-to-Clear Upward Animation */}
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[72px] font-bold tracking-tight text-black leading-[1.12] text-center w-full">
+          {/* Main Headline: Blur-to-Clear Upward Animation with Responsive Wrapping */}
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-[72px] font-bold tracking-tight text-black leading-[1.15] text-center w-full break-words">
             {/* Baris 1: Work that defines (Tebal) */}
-            <span className="block overflow-hidden pb-1 font-bold text-black font-['Agrandir',sans-serif] whitespace-nowrap">
+            <span className="block pb-1 font-bold text-black font-['Questrial',sans-serif]">
               {headlineLine1.map((word, index) => (
                 <motion.span
                   key={index}
@@ -143,7 +144,7 @@ export default function WorkPage() {
             </span>
 
             {/* Baris 2: industry standards. (Abu-abu / Muted Elegan) */}
-            <span className="block overflow-hidden font-bold text-neutral-400 font-['Agrandir',sans-serif] whitespace-nowrap">
+            <span className="block font-bold text-neutral-400 font-['Questrial',sans-serif]">
               {headlineLine2.map((word, index) => (
                 <motion.span
                   key={index}
@@ -167,7 +168,7 @@ export default function WorkPage() {
             initial={{ opacity: 0, y: 25, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            className="text-neutral-600 text-sm sm:text-base md:text-lg max-w-[920px] mx-auto leading-relaxed font-['Questrial',sans-serif] px-2 text-center"
+            className="text-neutral-600 text-sm sm:text-base md:text-lg max-w-[920px] mx-auto leading-relaxed font-['Agrandir',sans-serif] px-2 text-center"
           >
             We design and build award-winning websites, high-conversion SaaS platforms, and bespoke mobile apps for high-growth startups and global enterprise leaders worldwide.
           </motion.p>
@@ -177,7 +178,7 @@ export default function WorkPage() {
             initial={{ opacity: 0, scale: 0.95, filter: "blur(6px)" }}
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="pt-2 flex items-center justify-center font-['Questrial',sans-serif]"
+            className="pt-2 flex items-center justify-center font-['Agrandir',sans-serif]"
           >
             <Link
               href="#project-inquiry"
@@ -185,35 +186,13 @@ export default function WorkPage() {
             >
               {/* Layer 1: Teks & Ikon Hitam Awal (Meluncur keluar ke atas saat hover) */}
               <div className="flex items-center gap-2 text-black transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-[160%]">
-                <svg
-                  className="w-3.5 h-3.5 shrink-0"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="7" y1="17" x2="17" y2="7" />
-                  <polyline points="7 7 17 7 17 17" />
-                </svg>
+                <ArrowUpRight01Icon className="w-3.5 h-3.5 shrink-0 stroke-[2.4]" />
                 <span>Book a Free Consultation</span>
               </div>
 
               {/* Layer 2: Teks & Ikon Hijau Neon (Meluncur masuk dari bawah ke tengah saat hover) */}
               <div className="absolute inset-0 flex items-center justify-center gap-2 text-[#d4f938] translate-y-[160%] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
-                <svg
-                  className="w-3.5 h-3.5 shrink-0"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="7" y1="17" x2="17" y2="7" />
-                  <polyline points="7 7 17 7 17 17" />
-                </svg>
+                <ArrowUpRight01Icon className="w-3.5 h-3.5 shrink-0 stroke-[2.4]" />
                 <span>Book a Free Consultation</span>
               </div>
             </Link>
@@ -222,11 +201,11 @@ export default function WorkPage() {
       </section>
 
       {/* Featured Video Showcase Section (Video02.webm) */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-16 sm:pb-24">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-10 sm:pb-14">
         <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 35, filter: "blur(14px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="relative w-full rounded-[32px] sm:rounded-[44px] overflow-hidden bg-neutral-950 border border-neutral-800 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] group"
         >
@@ -276,16 +255,16 @@ export default function WorkPage() {
       </section>
 
       {/* Featured Deep-Dive Case Studies Grid (1 x 1 Side-by-Side) */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-20">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-10 sm:pb-14">
         <div className="space-y-4 pb-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <h2 className="text-3xl sm:text-4xl font-bold text-black font-['Agrandir',sans-serif] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-bold text-black font-['Questrial',sans-serif] tracking-tight">
               Featured Case Studies
             </h2>
             <Link
               href="/work/blanqs-ai"
               data-cursor="view"
-              className="inline-flex items-center gap-2 text-xs font-bold text-black hover:text-[#16a34a] font-['Questrial',sans-serif] uppercase tracking-wider transition-colors"
+              className="inline-flex items-center gap-2 text-xs font-bold text-black hover:text-[#16a34a] font-['Agrandir',sans-serif] uppercase tracking-wider transition-colors"
             >
               <span>Explore All Case Studies</span>
               <span>→</span>
@@ -319,10 +298,10 @@ export default function WorkPage() {
                   SaaS & AI Infrastructure
                 </span>
               </div>
-              <h3 className="text-lg sm:text-2xl font-bold text-white font-['Agrandir',sans-serif] group-hover:text-[#d4f938] transition-colors leading-snug">
+              <h3 className="text-lg sm:text-2xl font-bold text-white font-['Questrial',sans-serif] group-hover:text-[#d4f938] transition-colors leading-snug">
                 Reimagining Venture-Grade Analytics for 100K+ Active Users
               </h3>
-              <p className="text-xs sm:text-sm text-neutral-300 font-['Questrial',sans-serif] line-clamp-2 leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-300 font-['Agrandir',sans-serif] line-clamp-2 leading-relaxed">
                 Discover how we overhauled user retention with dark glassmorphism surfaces, interactive charts, and sub-second Next.js Turbopack pipelines.
               </p>
             </div>
@@ -352,10 +331,10 @@ export default function WorkPage() {
                   Web Architecture & Next.js
                 </span>
               </div>
-              <h3 className="text-lg sm:text-2xl font-bold text-white font-['Agrandir',sans-serif] group-hover:text-[#d4f938] transition-colors leading-snug">
+              <h3 className="text-lg sm:text-2xl font-bold text-white font-['Questrial',sans-serif] group-hover:text-[#d4f938] transition-colors leading-snug">
                 High-Performance E-Commerce & Interactive Web App
               </h3>
-              <p className="text-xs sm:text-sm text-neutral-300 font-['Questrial',sans-serif] line-clamp-2 leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-300 font-['Agrandir',sans-serif] line-clamp-2 leading-relaxed">
                 Engineered lightning-fast digital storefront with bespoke headless checkout, 3D WebGL interactions, and global edge routing.
               </p>
             </div>
@@ -364,14 +343,15 @@ export default function WorkPage() {
       </section>
 
       {/* Interactive Project Inquiry & Testimonial Dual Bento Card (Persis Sesuai Gambar 2) */}
-      <section id="project-inquiry" className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-28 sm:pb-36 scroll-mt-28">
+      <section id="project-inquiry" className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-16 sm:pb-20 scroll-mt-28">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 40, filter: "blur(14px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="rounded-[36px] sm:rounded-[44px] bg-white border border-neutral-200/90 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.08)] overflow-hidden grid grid-cols-1 lg:grid-cols-12"
         >
+
           {/* Kolom Kiri (Testimonial Slider & Social Proof) */}
           <div className="lg:col-span-5 bg-[#fbfbfb] p-8 sm:p-12 lg:p-14 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-neutral-200/80 relative">
             <div className="space-y-8">
@@ -385,7 +365,7 @@ export default function WorkPage() {
                     className="object-cover"
                   />
                 </div>
-                <span className="text-xs sm:text-sm font-medium text-neutral-500 font-['Questrial',sans-serif]">
+                <span className="text-xs sm:text-sm font-medium text-neutral-500 font-['Agrandir',sans-serif]">
                   {testimonials[activeTestimonial].company}
                 </span>
               </div>
@@ -400,10 +380,10 @@ export default function WorkPage() {
                   transition={{ duration: 0.4 }}
                   className="space-y-4"
                 >
-                  <h3 className="text-2xl sm:text-3xl lg:text-[32px] font-black text-black font-['Agrandir',sans-serif] leading-snug tracking-tight">
+                  <h3 className="text-2xl sm:text-3xl lg:text-[32px] font-black text-black font-['Questrial',sans-serif] leading-snug tracking-tight">
                     &ldquo;{testimonials[activeTestimonial].quote}&rdquo;
                   </h3>
-                  <p className="text-xs sm:text-sm text-neutral-500 font-['Questrial',sans-serif] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-neutral-500 font-['Agrandir',sans-serif] leading-relaxed">
                     {testimonials[activeTestimonial].feedback}
                   </p>
                 </motion.div>
@@ -420,7 +400,7 @@ export default function WorkPage() {
                   />
                 </div>
                 <div>
-                  <div className="font-bold text-sm text-black font-['Agrandir',sans-serif]">
+                  <div className="font-bold text-sm text-black font-['Questrial',sans-serif]">
                     {testimonials[activeTestimonial].company}
                   </div>
                 </div>
@@ -434,7 +414,7 @@ export default function WorkPage() {
                 <div className="flex items-center gap-1 text-black text-sm">
                   {"★".repeat(testimonials[activeTestimonial].rating)}
                 </div>
-                <p className="text-xs text-neutral-500 font-['Questrial',sans-serif]">
+                <p className="text-xs text-neutral-500 font-['Agrandir',sans-serif]">
                   {testimonials[activeTestimonial].happyCount}
                 </p>
               </div>
@@ -473,13 +453,13 @@ export default function WorkPage() {
           <div className="lg:col-span-7 p-8 sm:p-12 lg:p-14 space-y-7 bg-white">
             {/* Header Badge & Title */}
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 text-white text-xs font-semibold font-['Questrial',sans-serif]">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 text-white text-xs font-semibold font-['Agrandir',sans-serif]">
                 <span>Get in Touch</span>
               </div>
-              <h3 className="text-3xl sm:text-4xl font-black text-black font-['Agrandir',sans-serif] tracking-tight">
+              <h3 className="text-3xl sm:text-4xl font-black text-black font-['Questrial',sans-serif] tracking-tight">
                 Let&apos;s Talk About Your Project
               </h3>
-              <p className="text-xs sm:text-sm text-neutral-500 font-['Questrial',sans-serif]">
+              <p className="text-xs sm:text-sm text-neutral-500 font-['Agrandir',sans-serif]">
                 Tell us what you&apos;re building. We design and build high-quality digital products globally.
               </p>
             </div>
@@ -489,7 +469,7 @@ export default function WorkPage() {
               {/* Row 1: Name + Services Dropdown */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-neutral-700 font-['Questrial',sans-serif]">
+                  <label className="text-xs font-semibold text-neutral-700 font-['Agrandir',sans-serif]">
                     Hi, I&apos;m
                   </label>
                   <input
@@ -498,12 +478,12 @@ export default function WorkPage() {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="Your full name"
-                    className="w-full px-4 py-3 rounded-2xl bg-neutral-100/90 border border-neutral-200/80 text-sm text-black placeholder:text-neutral-400 focus:outline-none focus:border-black focus:bg-white transition-colors font-['Questrial',sans-serif]"
+                    className="w-full px-4 py-3 rounded-2xl bg-neutral-100/90 border border-neutral-200/80 text-sm text-black placeholder:text-neutral-400 focus:outline-none focus:border-black focus:bg-white transition-colors font-['Agrandir',sans-serif]"
                   />
                 </div>
 
                 <div className="space-y-1.5 relative" ref={serviceDropdownRef}>
-                  <label className="text-xs font-semibold text-neutral-700 font-['Questrial',sans-serif]">
+                  <label className="text-xs font-semibold text-neutral-700 font-['Agrandir',sans-serif]">
                     I need help with
                   </label>
                   <div className="relative">
@@ -511,26 +491,18 @@ export default function WorkPage() {
                     <button
                       type="button"
                       onClick={() => setIsServiceDropdownOpen(!isServiceDropdownOpen)}
-                      className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl bg-neutral-100/90 border text-sm text-black transition-all duration-300 font-['Questrial',sans-serif] cursor-pointer ${
+                      className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl bg-neutral-100/90 border text-sm text-black transition-all duration-300 font-['Agrandir',sans-serif] cursor-pointer ${
                         isServiceDropdownOpen
                           ? "border-black bg-white shadow-md ring-2 ring-[#d4f938]/60"
                           : "border-neutral-200/80 hover:border-neutral-400 hover:bg-white"
                       }`}
                     >
                       <span className="font-medium text-neutral-900">{selectedService}</span>
-                      <svg
-                        className={`w-4 h-4 transition-transform duration-300 ${
+                      <ArrowDown01Icon
+                        className={`w-4 h-4 transition-transform duration-300 stroke-[2.4] ${
                           isServiceDropdownOpen ? "rotate-180 text-black" : "text-neutral-500"
                         }`}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.4"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <polyline points="6 9 12 15 18 9" />
-                      </svg>
+                      />
                     </button>
 
                     {/* Animated Dropdown Menu dengan Hover Kuning Stabilo (#d4f938) */}
@@ -553,7 +525,7 @@ export default function WorkPage() {
                                   setSelectedService(option);
                                   setIsServiceDropdownOpen(false);
                                 }}
-                                className={`group w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-left text-xs sm:text-sm font-medium font-['Questrial',sans-serif] transition-all duration-200 cursor-pointer ${
+                                className={`group w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-left text-xs sm:text-sm font-medium font-['Agrandir',sans-serif] transition-all duration-200 cursor-pointer ${
                                   isSelected
                                     ? "bg-black text-[#d4f938] font-bold shadow-sm"
                                     : "bg-transparent text-neutral-600 hover:bg-transparent hover:text-[#84cc16] hover:font-bold"
@@ -563,11 +535,9 @@ export default function WorkPage() {
                                   {option}
                                 </span>
                                 {isSelected ? (
-                                  <span className="text-[#d4f938] font-black text-xs">✓</span>
+                                  <Tick01Icon className="w-3.5 h-3.5 text-[#d4f938] stroke-[3]" />
                                 ) : (
-                                  <span className="opacity-0 group-hover:opacity-100 text-[#84cc16] transition-all duration-200 text-xs font-bold -translate-x-1 group-hover:translate-x-0">
-                                    →
-                                  </span>
+                                  <ArrowRight01Icon className="opacity-0 group-hover:opacity-100 text-[#84cc16] transition-all duration-200 w-3.5 h-3.5 -translate-x-1 group-hover:translate-x-0 stroke-[2.5]" />
                                 )}
                               </button>
                             );
@@ -581,7 +551,7 @@ export default function WorkPage() {
 
               {/* Row 2: Email */}
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-neutral-700 font-['Questrial',sans-serif]">
+                <label className="text-xs font-semibold text-neutral-700 font-['Agrandir',sans-serif]">
                   Email
                 </label>
                 <input
@@ -590,13 +560,13 @@ export default function WorkPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@company.com"
-                  className="w-full px-4 py-3 rounded-2xl bg-neutral-100/90 border border-neutral-200/80 text-sm text-black placeholder:text-neutral-400 focus:outline-none focus:border-black focus:bg-white transition-colors font-['Questrial',sans-serif]"
+                  className="w-full px-4 py-3 rounded-2xl bg-neutral-100/90 border border-neutral-200/80 text-sm text-black placeholder:text-neutral-400 focus:outline-none focus:border-black focus:bg-white transition-colors font-['Agrandir',sans-serif]"
                 />
               </div>
 
               {/* Row 3: Budget Range Selectors with Rolling Flip Transition */}
               <div className="space-y-2">
-                <label className="text-xs font-semibold text-neutral-700 font-['Questrial',sans-serif]">
+                <label className="text-xs font-semibold text-neutral-700 font-['Agrandir',sans-serif]">
                   Budget range
                 </label>
                 <div className="flex flex-wrap gap-2">
@@ -607,7 +577,7 @@ export default function WorkPage() {
                         key={tier}
                         type="button"
                         onClick={() => setSelectedBudget(tier)}
-                        className={`group/btn relative inline-flex items-center justify-center overflow-hidden rounded-full px-4.5 py-2 text-xs font-semibold font-['Questrial',sans-serif] transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] cursor-pointer active:scale-95 ${
+                        className={`group/btn relative inline-flex items-center justify-center overflow-hidden rounded-full px-4.5 py-2 text-xs font-semibold font-['Agrandir',sans-serif] transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] cursor-pointer active:scale-95 ${
                           isSelected
                             ? "bg-black text-[#d4f938] border border-black shadow-md hover:bg-[#d4f938] hover:border-[#c4eb28]"
                             : "bg-white text-neutral-700 border border-neutral-300 hover:border-black hover:bg-black"
@@ -638,7 +608,7 @@ export default function WorkPage() {
 
               {/* Row 4: Additional info */}
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-neutral-700 font-['Questrial',sans-serif]">
+                <label className="text-xs font-semibold text-neutral-700 font-['Agrandir',sans-serif]">
                   Additional info?
                 </label>
                 <textarea
@@ -646,36 +616,31 @@ export default function WorkPage() {
                   value={additionalInfo}
                   onChange={(e) => setAdditionalInfo(e.target.value)}
                   placeholder="Goals, scope, timeline, or helpful links"
-                  className="w-full px-4 py-3 rounded-2xl bg-neutral-100/90 border border-neutral-200/80 text-sm text-black placeholder:text-neutral-400 focus:outline-none focus:border-black focus:bg-white transition-colors resize-none font-['Questrial',sans-serif]"
+                  className="w-full px-4 py-3 rounded-2xl bg-neutral-100/90 border border-neutral-200/80 text-sm text-black placeholder:text-neutral-400 focus:outline-none focus:border-black focus:bg-white transition-colors resize-none font-['Agrandir',sans-serif]"
                 />
               </div>
 
               {/* Submit CTA Button with Signature Rolling Flip Transition */}
               <button
                 type="submit"
-                className="group/btn relative w-full inline-flex items-center justify-center overflow-hidden rounded-full bg-[#d4f938] py-3.5 sm:py-4 px-6 text-sm sm:text-base font-bold font-['Questrial',sans-serif] text-black border border-[#c4eb28] shadow-[0_4px_20px_rgba(212,249,56,0.35)] transition-colors duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] hover:bg-[#111111] hover:border-black hover:shadow-[0_8px_25px_rgba(0,0,0,0.25)] active:scale-[0.98] cursor-pointer"
+                className="group/btn relative w-full inline-flex items-center justify-center overflow-hidden rounded-full bg-[#d4f938] py-3.5 sm:py-4 px-6 text-sm sm:text-base font-bold font-['Agrandir',sans-serif] text-black border border-[#c4eb28] shadow-[0_4px_20px_rgba(212,249,56,0.35)] transition-colors duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] hover:bg-[#111111] hover:border-black hover:shadow-[0_8px_25px_rgba(0,0,0,0.25)] active:scale-[0.98] cursor-pointer"
               >
                 {isSubmitted ? (
                   <span className="text-[#16a34a] flex items-center gap-1.5 font-black">
-                    ✓ Request Received! We&apos;ll be in touch.
+                    <Tick01Icon className="w-4 h-4 stroke-[3]" />
+                    <span>Request Received! We&apos;ll be in touch.</span>
                   </span>
                 ) : (
                   <>
                     {/* Layer 1: Teks & Icon Hitam Awal */}
                     <div className="flex items-center gap-2 text-black transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/btn:-translate-y-[160%]">
-                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
-                        <line x1="7" y1="17" x2="17" y2="7" />
-                        <polyline points="7 7 17 7 17 17" />
-                      </svg>
+                      <ArrowUpRight01Icon className="w-4 h-4 stroke-[2.4]" />
                       <span>Get in Touch</span>
                     </div>
 
                     {/* Layer 2: Teks & Icon Hijau Neon Meluncur Masuk */}
                     <div className="absolute inset-0 flex items-center justify-center gap-2 text-[#d4f938] translate-y-[160%] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/btn:translate-y-0">
-                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
-                        <line x1="7" y1="17" x2="17" y2="7" />
-                        <polyline points="7 7 17 7 17 17" />
-                      </svg>
+                      <ArrowUpRight01Icon className="w-4 h-4 stroke-[2.4]" />
                       <span>Get in Touch</span>
                     </div>
                   </>

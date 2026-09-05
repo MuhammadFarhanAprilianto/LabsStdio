@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useCallback } from "react";
 import Image from "next/image";
+import { ArrowLeftRightIcon } from "hugeicons-react";
 
 interface BeforeAfterSliderProps {
   beforeImage?: string;
@@ -55,7 +56,7 @@ export default function BeforeAfterSlider({
       {/* Top Header Labels */}
       <div className="flex items-center justify-between text-xs font-semibold px-2">
         <div className="flex items-center gap-2">
-          <span className="text-neutral-500 font-['Questrial',sans-serif]">BEFORE: {beforeLabel}</span>
+          <span className="text-neutral-500 font-['Agrandir',sans-serif]">BEFORE: {beforeLabel}</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-black font-bold font-['Agrandir',sans-serif]">AFTER: {afterLabel}</span>
@@ -104,7 +105,7 @@ export default function BeforeAfterSlider({
           {/* Before Tag Badge */}
           <div className="absolute bottom-6 left-6 px-4 py-2 rounded-2xl bg-black/75 backdrop-blur-md border border-white/10 text-white flex items-center gap-2 shadow-xl pointer-events-none">
             <span className="w-2 h-2 rounded-full bg-neutral-400" />
-            <span className="text-xs font-semibold text-neutral-300 font-['Questrial',sans-serif]">{beforeTag}</span>
+            <span className="text-xs font-semibold text-neutral-300 font-['Agrandir',sans-serif]">{beforeTag}</span>
           </div>
         </div>
 
@@ -114,14 +115,14 @@ export default function BeforeAfterSlider({
           style={{ left: `${sliderPosition}%` }}
         >
           {/* Center Handle Knob */}
-          <div className="w-10 h-10 -ml-4.5 rounded-full bg-[#d4f938] text-black shadow-[0_0_20px_rgba(212,249,56,0.8)] border-2 border-white flex items-center justify-center text-xs font-black">
-            ↔
+          <div className="w-10 h-10 -ml-4.5 rounded-full bg-[#d4f938] text-black shadow-[0_0_20px_rgba(212,249,56,0.8)] border-2 border-white flex items-center justify-center">
+            <ArrowLeftRightIcon className="w-4 h-4 text-black stroke-[2.5]" />
           </div>
         </div>
       </div>
 
       <div className="text-center">
-        <span className="text-xs text-neutral-400 font-['Questrial',sans-serif]">
+        <span className="text-xs text-neutral-400 font-['Agrandir',sans-serif]">
           ← Drag slider left or right to compare UX transformation →
         </span>
       </div>

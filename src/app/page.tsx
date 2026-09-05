@@ -10,68 +10,46 @@ import OurProcessSection from "@/components/OurProcessSection";
 import ConsultationBannerSection from "@/components/ConsultationBannerSection";
 import Footer from "@/components/Footer";
 import FooterBrandShowcase from "@/components/FooterBrandShowcase";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white text-gray-900 font-['Questrial',sans-serif]">
+    <main className="min-h-screen bg-white text-gray-900 font-['Agrandir',sans-serif]">
       {/* Hero Section dengan Animasi Titik Ombak / Handshake Dot Matrix */}
       <Hero />
 
       {/* Section Kotak Interaktif Membesar saat Di-scroll (Showcase Video Card) */}
-      <ScrollReveal distance={50} duration={900}>
-        <ShowcaseCardSection />
-      </ScrollReveal>
+      <ShowcaseCardSection />
 
       {/* Section Headline Layanan dengan Foto Interaktif Muncul di Tengah Teks */}
-      <ScrollReveal distance={50} duration={900}>
-        <ServicesHeadlineSection />
-      </ScrollReveal>
+      <ServicesHeadlineSection />
 
       {/* Section Looping Marquee Cards Layanan (Kanan ke Kiri & Hover / Click Pause) */}
-      <ScrollReveal distance={50} duration={900}>
-        <ServicesCardsCarousel />
-      </ScrollReveal>
+      <ServicesCardsCarousel />
 
       {/* Section Projects Completed For (3 Baris Marquee Bersilangan Kanan-Kiri & Kiri-Kanan) */}
-      <ScrollReveal distance={50} duration={1000}>
-        <ProjectsCompletedSection />
-      </ScrollReveal>
+      <ProjectsCompletedSection />
 
       {/* Section Our Portfolio dengan Filter Tabs & Interaksi Cursor See Full Project */}
-      <ScrollReveal distance={50} duration={900}>
-        <PortfolioSection />
-      </ScrollReveal>
+      <PortfolioSection />
 
       {/* Section Testimonials (Words from the People We've Worked With) */}
-      <ScrollReveal distance={50} duration={900}>
-        <TestimonialsSection />
-      </ScrollReveal>
+      <TestimonialsSection />
 
       {/* Section Why Choose Us */}
-      <ScrollReveal distance={50} duration={900}>
-        <WhyChooseUsSection />
-      </ScrollReveal>
+      <WhyChooseUsSection />
 
       {/* Section Our Process (How We Get It Done) */}
-      <ScrollReveal distance={50} duration={900}>
-        <OurProcessSection />
-      </ScrollReveal>
+      <OurProcessSection />
 
       {/* Section Consult Strategy & Free Consultation Banner */}
-      <ScrollReveal distance={50} duration={900}>
-        <ConsultationBannerSection />
-      </ScrollReveal>
+      <ConsultationBannerSection />
 
       {/* Footer Section */}
-      <ScrollReveal distance={40} duration={850}>
-        <Footer />
-      </ScrollReveal>
+      <Footer />
 
       {/* 3-Layer Brand Finale Banner (Globe 3D -> Black 50% Overlay -> Promethean Labs Logo) */}
-      <ScrollReveal distance={40} duration={850}>
-        <FooterBrandShowcase />
-      </ScrollReveal>
+      <FooterBrandShowcase />
     </main>
   );
 }
+

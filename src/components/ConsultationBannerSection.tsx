@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import ThreeKey3DIcon from "@/components/ui/ThreeKey3DIcon";
 
+import ScrollReveal from "@/components/ui/ScrollReveal";
+
 export default function ConsultationBannerSection() {
   const [activeKey, setActiveKey] = useState<string | null>(null);
 
@@ -29,7 +31,7 @@ export default function ConsultationBannerSection() {
   ];
 
   return (
-    <section className="relative w-full bg-white text-gray-900 pt-10 sm:pt-16 pb-24 sm:pb-32 px-6 sm:px-12 lg:px-16 overflow-hidden">
+    <section className="relative w-full bg-white text-gray-900 pt-8 sm:pt-12 pb-16 sm:pb-20 px-6 sm:px-12 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Main Banner Card: Light Frosted Box with Stylized Keyboard Keys Grid */}
         <div className="relative rounded-[36px] sm:rounded-[44px] bg-[#f6f6f8] border border-neutral-200/80 shadow-[0_20px_50px_rgba(0,0,0,0.06)] overflow-hidden p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
@@ -38,60 +40,63 @@ export default function ConsultationBannerSection() {
 
           {/* Left Column: Heading, Inline Team Avatars, Description, and Rolling Flip Button */}
           <div className="lg:col-span-6 space-y-7 z-10">
+            <ScrollReveal distance={28} blur={14} duration={850}>
+              {/* Main Title with Inline Avatar Stack */}
+              <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-[46px] font-black tracking-tight text-neutral-950 leading-[1.18] font-['Questrial',sans-serif] break-words">
+                Consult{" "}
+                <span className="inline-flex items-center align-middle -space-x-2 sm:-space-x-2.5 mx-1.5">
+                  {teamAvatars.map((member, i) => (
+                    <div
+                      key={i}
+                      title={`${member.name} • ${member.role}`}
+                      className="relative w-7 h-7 sm:w-10 sm:h-10 rounded-full border-2 border-white overflow-hidden bg-neutral-200 shadow-md transform transition-transform hover:scale-115 hover:z-20 cursor-pointer"
+                    >
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        width={48}
+                        height={48}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </span>{" "}
+                strategy
+                <br />
+                to build stronger product
+              </h2>
 
-            {/* Main Title with Inline Avatar Stack */}
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-black tracking-tight text-neutral-950 leading-[1.18] font-['Agrandir',sans-serif]">
-              Consult{" "}
-              <span className="inline-flex items-center align-middle -space-x-2 sm:-space-x-2.5 mx-1.5">
-                {teamAvatars.map((member, i) => (
-                  <div
-                    key={i}
-                    title={`${member.name} • ${member.role}`}
-                    className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white overflow-hidden bg-neutral-200 shadow-md transform transition-transform hover:scale-115 hover:z-20 cursor-pointer"
-                  >
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      width={48}
-                      height={48}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </span>{" "}
-              strategy
-              <br />
-              to build stronger product
-            </h2>
+              {/* Subtitle / Description */}
+              <p className="text-sm sm:text-base text-neutral-600 font-['Agrandir',sans-serif] leading-relaxed max-w-md pt-4">
+                30 minutes to understand your product, uncover the real problems, and figure out what actually needs to change to accelerate growth.
+              </p>
 
-            {/* Subtitle / Description */}
-            <p className="text-sm sm:text-base text-neutral-600 font-['Questrial',sans-serif] leading-relaxed max-w-md">
-              30 minutes to understand your product, uncover the real problems, and figure out what actually needs to change to accelerate growth.
-            </p>
+              {/* Action Button: Book a Free Consultation dengan Rolling Flip Animation */}
+              <div className="pt-6">
+                <Link
+                  href="/contact"
+                  className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-[#d4f938] px-8 sm:px-9 py-3.5 sm:py-4 text-xs sm:text-sm font-bold tracking-wide text-black border border-[#c4eb28] shadow-md transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] hover:bg-[#111111] hover:border-black hover:shadow-xl active:scale-95"
+                >
+                  {/* Layer 1: Teks Hitam Awal (Meluncur keluar ke atas saat hover) */}
+                  <span className="inline-flex items-center gap-2 font-['Agrandir',sans-serif] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-[160%]">
+                    Book a Free Consultation
+                  </span>
 
-            {/* Action Button: Book a Free Consultation dengan Rolling Flip Animation (Sama seperti Explore Our Services) */}
-            <div className="pt-2">
-              <Link
-                href="/contact"
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-[#d4f938] px-8 sm:px-9 py-3.5 sm:py-4 text-xs sm:text-sm font-bold tracking-wide text-black border border-[#c4eb28] shadow-md transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] hover:bg-[#111111] hover:border-black hover:shadow-xl active:scale-95"
-              >
-                {/* Layer 1: Teks Hitam Awal (Meluncur keluar ke atas saat hover) */}
-                <span className="inline-flex items-center gap-2 font-['Questrial',sans-serif] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-[160%]">
-                  Book a Free Consultation
-                </span>
-
-                {/* Layer 2: Teks Hijau Neon (Meluncur masuk dari bawah ke tengah saat hover) */}
-                <span className="absolute inset-0 flex items-center justify-center gap-2 text-[#d4f938] font-['Questrial',sans-serif] translate-y-[160%] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
-                  Book a Free Consultation
-                </span>
-              </Link>
-            </div>
+                  {/* Layer 2: Teks Hijau Neon (Meluncur masuk dari bawah ke tengah saat hover) */}
+                  <span className="absolute inset-0 flex items-center justify-center gap-2 text-[#d4f938] font-['Agrandir',sans-serif] translate-y-[160%] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
+                    Book a Free Consultation
+                  </span>
+                </Link>
+              </div>
+            </ScrollReveal>
           </div>
 
           {/* Right Column: Stylized 3D Keyboard Keys Graphic Grid with Feature Tiles */}
           <div className="lg:col-span-6 relative w-full flex items-center justify-center">
-            {/* Keyboard Frame Container */}
-            <div className="relative w-full max-w-lg bg-[#ececf0] rounded-[28px] p-4 sm:p-5 shadow-[inset_0_2px_4px_rgba(255,255,255,0.8),0_15px_35px_rgba(0,0,0,0.06)] border border-neutral-300/70 select-none">
+            <ScrollReveal distance={32} blur={14} delay={120} duration={850}>
+              {/* Keyboard Frame Container */}
+              <div className="relative w-full max-w-lg bg-[#ececf0] rounded-[28px] p-4 sm:p-5 shadow-[inset_0_2px_4px_rgba(255,255,255,0.8),0_15px_35px_rgba(0,0,0,0.06)] border border-neutral-300/70 select-none">
+
 
               {/* Row 1: Function Keys (F1, F2, F3, F4) */}
               <div className="grid grid-cols-4 gap-2 mb-2.5 opacity-60">
@@ -200,9 +205,12 @@ export default function ConsultationBannerSection() {
                 ))}
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
   );
 }
+
+

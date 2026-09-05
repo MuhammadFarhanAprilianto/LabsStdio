@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight01Icon } from "hugeicons-react";
 
 interface ProjectItem {
   id: string;
@@ -327,18 +328,7 @@ function ProjectCard({ project }: { project: ProjectItem }) {
             }}
             className="pointer-events-none absolute z-30 flex h-28 w-28 sm:h-32 sm:w-32 flex-col items-center justify-center rounded-full bg-[#d4f938] text-black shadow-2xl shadow-black/60 border border-[#c4eb28]"
           >
-            <svg
-              className="w-5 h-5 sm:w-6 sm:h-6 mb-1"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="7" y1="17" x2="17" y2="7" />
-              <polyline points="7 7 17 7 17 17" />
-            </svg>
+            <ArrowUpRight01Icon className="w-5 h-5 sm:w-6 sm:h-6 mb-1 text-black" />
             <span className="text-center font-['Agrandir',sans-serif] text-[11px] sm:text-xs font-bold leading-tight uppercase tracking-tight">
               See Full
               <br />
@@ -359,24 +349,26 @@ function ProjectCard({ project }: { project: ProjectItem }) {
               <span className="w-2.5 h-2.5 rounded-full bg-[#1abcfe]" />
             </div>
           </div>
-          <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white/90 text-xs font-semibold tracking-wide font-['Questrial',sans-serif]">
+          <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white/90 text-xs font-semibold tracking-wide font-['Agrandir',sans-serif]">
             {project.category}
           </span>
         </div>
 
-        {/* Project Title (Font: Agrandir) */}
-        <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight font-['Agrandir',sans-serif]">
+        {/* Project Title (Font: Questrial) */}
+        <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight font-['Questrial',sans-serif]">
           {project.title}
         </h3>
 
-        {/* Project Description */}
-        <p className="text-xs sm:text-sm text-neutral-300 font-['Questrial',sans-serif] leading-relaxed font-light">
+        {/* Project Description (Font: Agrandir) */}
+        <p className="text-xs sm:text-sm text-neutral-300 font-['Agrandir',sans-serif] leading-relaxed font-light">
           {project.description}
         </p>
       </div>
     </div>
   );
 }
+
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function PortfolioSection() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -389,66 +381,79 @@ export default function PortfolioSection() {
       );
 
   return (
-    <section className="relative w-full bg-white text-gray-900 py-24 sm:py-32 px-6 sm:px-12 lg:px-16 overflow-hidden">
-      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
-        {/* Section Heading: Our portfolio (Font: Agrandir) */}
-        <div className="text-center space-y-3">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-black font-['Agrandir',sans-serif]">
-            Our Portfolio
-          </h2>
-        </div>
+    <section className="relative w-full bg-white text-gray-900 pt-10 sm:pt-14 pb-12 sm:pb-16 px-6 sm:px-12 lg:px-16 overflow-hidden">
+      <div className="max-w-7xl mx-auto space-y-8 sm:space-y-10">
+        {/* Section Heading: Our portfolio (Font: Questrial) */}
+        <ScrollReveal distance={28} blur={14} duration={850}>
+          <div className="text-center space-y-3">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-black font-['Questrial',sans-serif] break-words">
+              Our Portfolio
+            </h2>
+          </div>
+        </ScrollReveal>
 
-        {/* Filter Tabs / Pills: 4 on Top Row, 3 on Bottom Row */}
-        <div className="flex flex-col items-center gap-2.5 sm:gap-3 font-['Questrial',sans-serif]">
-          {[
-            ["All", "Website Design", "Web Development", "UI/UX Design"],
-            ["WordPress", "Mobile App", "SaaS"],
-          ].map((row, rowIdx) => (
-            <div key={rowIdx} className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
-              {row.map((cat) => {
-                const isActive = activeCategory === cat;
+        {/* Filter Tabs / Pills: 4 on Top Row, 3 on Bottom Row (Font: Agrandir) */}
+        <ScrollReveal distance={24} blur={12} delay={80} duration={850}>
+          <div className="flex flex-col items-center gap-2.5 sm:gap-3 font-['Agrandir',sans-serif]">
+            {[
+              ["All", "Website Design", "Web Development", "UI/UX Design"],
+              ["WordPress", "Mobile App", "SaaS"],
+            ].map((row, rowIdx) => (
+              <div key={rowIdx} className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+                {row.map((cat) => {
+                  const isActive = activeCategory === cat;
 
-                return (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`group relative inline-flex items-center justify-center overflow-hidden rounded-full px-5 sm:px-6 py-2.5 text-xs sm:text-sm font-medium tracking-wide transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] cursor-pointer active:scale-95 border ${
-                      isActive
-                        ? "bg-[#d4f938] text-black border-[#c4eb28] shadow-sm"
-                        : "bg-white text-neutral-800 border-neutral-300/80 hover:bg-[#111111] hover:border-black hover:shadow-md"
-                    }`}
-                  >
-                    {/* Teks Layer 1 */}
-                    <div
-                      className={`transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => setActiveCategory(cat)}
+                      className={`group relative inline-flex items-center justify-center overflow-hidden rounded-full px-5 sm:px-6 py-2.5 text-xs sm:text-sm font-medium tracking-wide transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] cursor-pointer active:scale-95 border ${
                         isActive
-                          ? "text-black"
-                          : "text-neutral-800 group-hover:-translate-y-[160%]"
+                          ? "bg-[#d4f938] text-black border-[#c4eb28] shadow-sm"
+                          : "bg-white text-neutral-800 border-neutral-300/80 hover:bg-[#111111] hover:border-black hover:shadow-md"
                       }`}
                     >
-                      {cat}
-                    </div>
-
-                    {/* Teks Layer 2: Neon Lime */}
-                    {!isActive && (
-                      <div className="absolute inset-0 flex items-center justify-center text-[#d4f938] translate-y-[160%] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
+                      {/* Teks Layer 1 */}
+                      <div
+                        className={`transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${
+                          isActive
+                            ? "text-black"
+                            : "text-neutral-800 group-hover:-translate-y-[160%]"
+                        }`}
+                      >
                         {cat}
                       </div>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          ))}
-        </div>
 
-        {/* Grid Kartu Portofolio (2 Kolom) */}
+                      {/* Teks Layer 2: Neon Lime */}
+                      {!isActive && (
+                        <div className="absolute inset-0 flex items-center justify-center text-[#d4f938] translate-y-[160%] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
+                          {cat}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
+
+        {/* Grid Kartu Portofolio (2 Kolom dengan Blur-to-Clear per Kartu) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 pt-2">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {filteredProjects.map((project, idx) => (
+            <ScrollReveal
+              key={project.id}
+              distance={36}
+              blur={14}
+              delay={idx % 2 === 1 ? 120 : 0}
+              duration={900}
+            >
+              <ProjectCard project={project} />
+            </ScrollReveal>
           ))}
         </div>
       </div>
     </section>
   );
 }
+

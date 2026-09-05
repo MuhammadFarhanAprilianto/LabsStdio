@@ -223,6 +223,8 @@ const row3Logos = [
   },
 ];
 
+import ScrollReveal from "@/components/ui/ScrollReveal";
+
 export default function ProjectsCompletedSection() {
   // Duplikasi baris untuk infinite marquee tanpa celah
   const marqueeRow1 = [...row1Logos, ...row1Logos, ...row1Logos, ...row1Logos];
@@ -230,62 +232,67 @@ export default function ProjectsCompletedSection() {
   const marqueeRow3 = [...row3Logos, ...row3Logos, ...row3Logos, ...row3Logos];
 
   return (
-    <section className="relative w-full bg-black py-14 sm:py-18 overflow-hidden select-none">
+    <section className="relative w-full bg-black pt-8 sm:pt-10 pb-8 sm:pb-10 overflow-hidden select-none">
       {/* Section Title: PROJECTS COMPLETED FOR */}
-      <div className="max-w-7xl mx-auto px-6 text-center mb-8 sm:mb-12">
-        <h2 className="text-base sm:text-lg md:text-xl font-bold tracking-[0.32em] text-[#a6f30d] uppercase font-['Agrandir',sans-serif]">
-          PROJECTS COMPLETED FOR
-        </h2>
-      </div>
+      <ScrollReveal distance={24} blur={12} duration={800}>
+        <div className="max-w-7xl mx-auto px-6 text-center mb-6 sm:mb-8">
+          <h2 className="text-base sm:text-lg md:text-xl font-bold tracking-[0.32em] text-[#a6f30d] uppercase font-['Questrial',sans-serif]">
+            PROJECTS COMPLETED FOR
+          </h2>
+        </div>
+      </ScrollReveal>
 
       {/* Edge gradient fade mask hitam pekat */}
       <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-44 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-44 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
 
-      {/* Marquee Rows Container - Spacing lebih rapat & proporsional */}
-      <div className="space-y-7 sm:space-y-9 overflow-hidden">
-        {/* Baris 1: Bergerak dari KANAN ke KIRI */}
-        <div className="flex overflow-hidden">
-          <div className="flex items-center gap-16 sm:gap-24 shrink-0 animate-marquee-left will-change-transform py-1.5">
-            {marqueeRow1.map((item, idx) => (
-              <div
-                key={`r1-${idx}`}
-                className="flex items-center justify-center shrink-0 min-w-[180px] sm:min-w-[220px] opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-pointer"
-              >
-                {item.element}
-              </div>
-            ))}
+      {/* Marquee Rows Container with Blur-to-Clear Scroll Reveal */}
+      <ScrollReveal distance={32} blur={14} delay={100} duration={850}>
+        <div className="space-y-7 sm:space-y-9 overflow-hidden">
+          {/* Baris 1: Bergerak dari KANAN ke KIRI */}
+          <div className="flex overflow-hidden">
+            <div className="flex items-center gap-16 sm:gap-24 shrink-0 animate-marquee-left will-change-transform py-1.5">
+              {marqueeRow1.map((item, idx) => (
+                <div
+                  key={`r1-${idx}`}
+                  className="flex items-center justify-center shrink-0 min-w-[180px] sm:min-w-[220px] opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-pointer"
+                >
+                  {item.element}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Baris 2: Bergerak dari KIRI ke KANAN */}
-        <div className="flex overflow-hidden">
-          <div className="flex items-center gap-16 sm:gap-24 shrink-0 animate-marquee-right will-change-transform py-1.5">
-            {marqueeRow2.map((item, idx) => (
-              <div
-                key={`r2-${idx}`}
-                className="flex items-center justify-center shrink-0 min-w-[180px] sm:min-w-[220px] opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-pointer"
-              >
-                {item.element}
-              </div>
-            ))}
+          {/* Baris 2: Bergerak dari KIRI ke KANAN */}
+          <div className="flex overflow-hidden">
+            <div className="flex items-center gap-16 sm:gap-24 shrink-0 animate-marquee-right will-change-transform py-1.5">
+              {marqueeRow2.map((item, idx) => (
+                <div
+                  key={`r2-${idx}`}
+                  className="flex items-center justify-center shrink-0 min-w-[180px] sm:min-w-[220px] opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-pointer"
+                >
+                  {item.element}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Baris 3: Bergerak dari KANAN ke KIRI */}
-        <div className="flex overflow-hidden">
-          <div className="flex items-center gap-16 sm:gap-24 shrink-0 animate-marquee-left will-change-transform py-1.5">
-            {marqueeRow3.map((item, idx) => (
-              <div
-                key={`r3-${idx}`}
-                className="flex items-center justify-center shrink-0 min-w-[180px] sm:min-w-[220px] opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-pointer"
-              >
-                {item.element}
-              </div>
-            ))}
+          {/* Baris 3: Bergerak dari KANAN ke KIRI */}
+          <div className="flex overflow-hidden">
+            <div className="flex items-center gap-16 sm:gap-24 shrink-0 animate-marquee-left will-change-transform py-1.5">
+              {marqueeRow3.map((item, idx) => (
+                <div
+                  key={`r3-${idx}`}
+                  className="flex items-center justify-center shrink-0 min-w-[180px] sm:min-w-[220px] opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-pointer"
+                >
+                  {item.element}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }
+

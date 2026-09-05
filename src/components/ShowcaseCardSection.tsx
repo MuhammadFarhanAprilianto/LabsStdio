@@ -84,7 +84,7 @@ export default function ShowcaseCardSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-[90vh] flex flex-col items-center justify-start pt-2 pb-24 px-4 sm:px-8 bg-white overflow-hidden"
+      className="relative w-full flex flex-col items-center justify-start pt-2 pb-6 sm:pb-8 px-4 sm:px-8 bg-white overflow-hidden"
     >
       {/* Audio Element: Memutar lagu Sport01Backsound.mp3 */}
       <audio
@@ -104,7 +104,7 @@ export default function ShowcaseCardSection() {
           borderRadius,
           opacity,
         }}
-        className="group relative mx-auto max-w-7xl aspect-[16/9] min-h-[420px] sm:min-h-[580px] bg-black shadow-[0_30px_90px_-20px_rgba(15,23,42,0.4)] border border-slate-800/80 overflow-hidden flex flex-col items-center justify-center will-change-transform transform-gpu cursor-pointer"
+        className="group relative mx-auto max-w-7xl aspect-[16/9] min-h-[420px] sm:min-h-[580px] bg-black border border-slate-800/80 overflow-hidden flex flex-col items-center justify-center will-change-transform transform-gpu cursor-pointer"
       >
         {/* Video Player: Video01.webm (selalu muted agar tidak bentrok dengan soundtrack MP3) */}
         <video

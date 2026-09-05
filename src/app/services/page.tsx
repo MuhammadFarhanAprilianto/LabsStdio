@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
+import { ArrowUpRight01Icon, Clock01Icon, FlashIcon, RepeatIcon } from "hugeicons-react";
 
 interface ServiceDetail {
   id: string;
@@ -158,14 +159,14 @@ export default function ServicesPage() {
   const headlineLine2 = ["That", "Command", "Growth."];
 
   return (
-    <main className="min-h-screen bg-white text-gray-900 font-['Questrial',sans-serif] pt-28 sm:pt-36">
+    <main className="min-h-screen bg-white text-gray-900 font-['Agrandir',sans-serif] pt-28 sm:pt-36">
       {/* Header Section */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-12 sm:pb-16 text-center sm:text-left">
-        <div className="space-y-4 max-w-3xl border-b border-neutral-200/80 pb-10">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-6 sm:pb-8 text-center sm:text-left">
+        <div className="space-y-4 max-w-3xl border-b border-neutral-200/80 pb-6">
           {/* Main Headline: Blur-to-Clear Upward Animation */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-black leading-[1.08] w-full">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-black leading-[1.12] w-full break-words">
             {/* Baris 1: Crafting Digital Products (Tebal) */}
-            <span className="block overflow-hidden pb-1 font-bold text-black font-['Agrandir',sans-serif]">
+            <span className="block pb-1 font-bold text-black font-['Questrial',sans-serif]">
               {headlineLine1.map((word, index) => (
                 <motion.span
                   key={index}
@@ -184,7 +185,7 @@ export default function ServicesPage() {
             </span>
 
             {/* Baris 2: That Command Growth. (Abu-abu / Muted Elegan) */}
-            <span className="block overflow-hidden font-bold text-neutral-400 font-['Agrandir',sans-serif]">
+            <span className="block font-bold text-neutral-400 font-['Questrial',sans-serif]">
               {headlineLine2.map((word, index) => (
                 <motion.span
                   key={index}
@@ -216,7 +217,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Category Tabs Filter */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-8">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-6">
         <motion.div
           initial={{ opacity: 0, y: 25, filter: "blur(8px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -266,7 +267,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Services Cards Bento Grid (Row 1: 3 cards, Row 2: 3 cards, Row 3: 1 wide full-width banner) */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-24 sm:pb-32">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-12 sm:pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 lg:gap-8">
           {filteredServices.map((service, idx) => {
             const isFullWidth = activeTab === "all" && idx === 6;
@@ -292,13 +293,13 @@ export default function ServicesPage() {
                           {service.badge}
                         </span>
                       </div>
-                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white font-['Agrandir',sans-serif] tracking-tight leading-tight">
+                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white font-['Questrial',sans-serif] tracking-tight leading-tight">
                         {service.title}
                       </h3>
-                      <p className="text-sm sm:text-base font-semibold text-[#d4f938] font-['Questrial',sans-serif]">
+                      <p className="text-sm sm:text-base font-semibold text-[#d4f938] font-['Agrandir',sans-serif]">
                         {service.subtitle}
                       </p>
-                      <p className="text-xs sm:text-sm text-neutral-400 font-['Questrial',sans-serif] leading-relaxed">
+                      <p className="text-xs sm:text-sm text-neutral-400 font-['Agrandir',sans-serif] leading-relaxed">
                         {service.description}
                       </p>
                     </div>
@@ -377,22 +378,19 @@ export default function ServicesPage() {
                       {service.badge}
                     </span>
                     <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-[#d4f938] group-hover:text-black transition-colors">
-                      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <line x1="7" y1="17" x2="17" y2="7" />
-                        <polyline points="7 7 17 7 17 17" />
-                      </svg>
+                      <ArrowUpRight01Icon className="w-3.5 h-3.5 stroke-[2.5]" />
                     </div>
                   </div>
 
                   {/* Service Title & Subtitle */}
                   <div className="space-y-1.5">
-                    <h3 className="text-xl sm:text-2xl font-black text-white font-['Agrandir',sans-serif] tracking-tight leading-tight">
+                    <h3 className="text-xl sm:text-2xl font-black text-white font-['Questrial',sans-serif] tracking-tight leading-tight">
                       {service.title}
                     </h3>
-                    <p className="text-xs sm:text-[13px] font-semibold text-[#d4f938] font-['Questrial',sans-serif]">
+                    <p className="text-xs sm:text-[13px] font-semibold text-[#d4f938] font-['Agrandir',sans-serif]">
                       {service.subtitle}
                     </p>
-                    <p className="text-xs text-neutral-400 font-['Questrial',sans-serif] leading-relaxed pt-1">
+                    <p className="text-xs text-neutral-400 font-['Agrandir',sans-serif] leading-relaxed pt-1">
                       {service.description}
                     </p>
                   </div>
@@ -450,10 +448,10 @@ export default function ServicesPage() {
       </section>
 
       {/* Engagement Models Section */}
-      <section className="w-full bg-[#f8f8fa] py-20 sm:py-28 border-y border-neutral-200">
-        <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 space-y-12">
+      <section className="w-full bg-[#f8f8fa] py-12 sm:py-16 border-y border-neutral-200">
+        <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 space-y-8">
           <div className="text-center space-y-3 max-w-2xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-black font-['Agrandir',sans-serif] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-black font-['Questrial',sans-serif] tracking-tight">
               {["Engagement", "Models"].map((word, index) => (
                 <motion.span
                   key={index}
@@ -476,7 +474,7 @@ export default function ServicesPage() {
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="text-sm sm:text-base text-neutral-600 font-['Questrial',sans-serif]"
+              className="text-sm sm:text-base text-neutral-600 font-['Agrandir',sans-serif]"
             >
               Flexible partnership structures designed around your product stage and velocity.
             </motion.p>
@@ -491,15 +489,12 @@ export default function ServicesPage() {
               className="bg-white rounded-3xl p-8 border border-neutral-200 shadow-sm space-y-4"
             >
               <div className="text-xs font-bold text-neutral-400 uppercase tracking-wider">Model 01</div>
-              <h3 className="text-xl font-bold text-black font-['Agrandir',sans-serif]">Project-Based Sprints</h3>
+              <h3 className="text-xl font-bold text-black font-['Questrial',sans-serif]">Project-Based Sprints</h3>
               <p className="text-xs text-neutral-600 leading-relaxed">
                 Fixed scope, timeline, and milestone-driven deliverables. Perfect for discrete product redesigns, landing page overhauls, or brand launches.
               </p>
               <div className="pt-2 text-xs font-bold text-black flex items-center gap-1.5">
-                <svg className="w-3.5 h-3.5 text-neutral-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10" />
-                  <polyline points="12 6 12 12 16 14" />
-                </svg>
+                <Clock01Icon className="w-3.5 h-3.5 text-neutral-800 stroke-[2]" />
                 <span>Timeline: 3 - 8 Weeks</span>
               </div>
             </motion.div>
@@ -515,14 +510,12 @@ export default function ServicesPage() {
                 Most Popular
               </div>
               <div className="text-xs font-bold text-[#d4f938] uppercase tracking-wider">Model 02</div>
-              <h3 className="text-xl font-bold text-white font-['Agrandir',sans-serif]">Dedicated Product Squad</h3>
+              <h3 className="text-xl font-bold text-white font-['Questrial',sans-serif]">Dedicated Product Squad</h3>
               <p className="text-xs text-neutral-400 leading-relaxed">
                 An embedded team of senior designers &amp; engineers working exclusively as an extension of your in-house product team with daily syncs.
               </p>
               <div className="pt-2 text-xs font-bold text-[#d4f938] flex items-center gap-1.5">
-                <svg className="w-3.5 h-3.5 fill-current text-[#d4f938]" viewBox="0 0 24 24">
-                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                </svg>
+                <FlashIcon className="w-3.5 h-3.5 fill-current text-[#d4f938]" />
                 <span>High-Velocity Product Scaling</span>
               </div>
             </motion.div>
@@ -535,14 +528,12 @@ export default function ServicesPage() {
               className="bg-white rounded-3xl p-8 border border-neutral-200 shadow-sm space-y-4"
             >
               <div className="text-xs font-bold text-neutral-400 uppercase tracking-wider">Model 03</div>
-              <h3 className="text-xl font-bold text-black font-['Agrandir',sans-serif]">Monthly Retainer</h3>
+              <h3 className="text-xl font-bold text-black font-['Questrial',sans-serif]">Monthly Retainer</h3>
               <p className="text-xs text-neutral-600 leading-relaxed">
                 Guaranteed monthly development and design bandwidth for ongoing feature releases, CRO experimentation, and continuous improvements.
               </p>
               <div className="pt-2 text-xs font-bold text-black flex items-center gap-1.5">
-                <svg className="w-3.5 h-3.5 text-neutral-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
-                </svg>
+                <RepeatIcon className="w-3.5 h-3.5 text-neutral-800 stroke-[2]" />
                 <span>Continuous Evolution</span>
               </div>
             </motion.div>

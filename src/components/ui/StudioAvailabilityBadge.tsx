@@ -45,7 +45,7 @@ export default function StudioAvailabilityBadge({
 
   if (variant === "pill") {
     return (
-      <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-neutral-200 text-xs font-semibold text-neutral-800 shadow-sm font-['Questrial',sans-serif]">
+      <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-neutral-200 text-xs font-semibold text-neutral-800 shadow-sm font-['Agrandir',sans-serif]">
         <span className="font-bold text-black">Available for Q3/Q4</span>
         <span className="text-neutral-400">•</span>
         <span className="text-neutral-500 hidden sm:inline">2 Slots Left</span>
@@ -57,7 +57,7 @@ export default function StudioAvailabilityBadge({
     return (
       <div className="p-6 rounded-3xl bg-neutral-900 border border-neutral-800 text-white space-y-4 shadow-xl">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-bold text-white font-['Agrandir',sans-serif]">
+          <span className="text-sm font-bold text-white font-['Questrial',sans-serif]">
             Studio Capacity: Available
           </span>
           <span className="text-xs font-bold text-[#d4f938] px-2.5 py-1 rounded-full bg-[#d4f938]/15 border border-[#d4f938]/30">
@@ -65,7 +65,7 @@ export default function StudioAvailabilityBadge({
           </span>
         </div>
 
-        <p className="text-xs text-neutral-400 font-['Questrial',sans-serif] leading-relaxed">
+        <p className="text-xs text-neutral-400 font-['Agrandir',sans-serif] leading-relaxed">
           Currently taking new engagements for Q3/Q4 sprint cycles. Average initial consultation response time is under <strong>2 hours</strong>.
         </p>
 
@@ -89,7 +89,7 @@ export default function StudioAvailabilityBadge({
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-3 text-xs text-neutral-500 font-['Questrial',sans-serif]">
+    <div className="flex flex-wrap items-center gap-3 text-xs text-neutral-500 font-['Agrandir',sans-serif]">
       <span className="text-neutral-800 font-bold">
         Studio Active
       </span>

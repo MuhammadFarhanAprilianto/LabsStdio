@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
+import { ArrowLeft01Icon, ArrowRight01Icon } from "hugeicons-react";
 
 interface CaseStudyData {
   slug: string;
@@ -74,16 +75,17 @@ export default function CaseStudyPage({ params }: { params: Promise<{ slug: stri
   const data = caseStudies[resolvedParams.slug] || caseStudies["blanqs-ai"];
 
   return (
-    <main className="min-h-screen bg-white text-gray-900 font-['Questrial',sans-serif] pt-28 sm:pt-36">
+    <main className="min-h-screen bg-white text-gray-900 font-['Agrandir',sans-serif] pt-28 sm:pt-36">
       {/* Hero Header */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-12">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-6 sm:pb-8">
         <div className="space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <Link
               href="/work"
-              className="inline-flex items-center gap-2 text-xs font-bold text-neutral-500 hover:text-black transition-colors uppercase tracking-wider"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-500 hover:text-black transition-colors uppercase tracking-wider"
             >
-              <span>← Back to Work</span>
+              <ArrowLeft01Icon className="w-3.5 h-3.5 stroke-[2.4]" />
+              <span>Back to Work</span>
             </Link>
           </div>
 
@@ -91,7 +93,7 @@ export default function CaseStudyPage({ params }: { params: Promise<{ slug: stri
             <div className="text-xs font-bold uppercase tracking-widest text-[#16a34a] font-['Agrandir',sans-serif]">
               {data.client} • {data.category} ({data.year})
             </div>
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-black font-['Agrandir',sans-serif] leading-tight">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-black font-['Questrial',sans-serif] leading-tight">
               {data.title}
             </h1>
           </div>
@@ -111,7 +113,7 @@ export default function CaseStudyPage({ params }: { params: Promise<{ slug: stri
       </section>
 
       {/* Interactive Before / After Comparison Showcase */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-20">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-10 sm:pb-14">
         <BeforeAfterSlider
           beforeImage={data.beforeImg}
           afterImage={data.afterImg}
@@ -123,18 +125,18 @@ export default function CaseStudyPage({ params }: { params: Promise<{ slug: stri
       </section>
 
       {/* Metrics Grid */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-24">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-12 sm:pb-16">
         <div className="p-8 sm:p-12 rounded-[36px] bg-[#0c0d12] text-white border border-neutral-800 shadow-2xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-neutral-800">
             {data.metrics.map((m, idx) => (
               <div key={idx} className={`space-y-2 ${idx > 0 ? "pt-6 md:pt-0 md:pl-8" : ""}`}>
-                <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#d4f938] font-['Agrandir',sans-serif]">
+                <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#d4f938] font-['Questrial',sans-serif]">
                   {m.value}
                 </div>
                 <div className="text-xs font-bold text-white uppercase tracking-wider">
                   {m.label}
                 </div>
-                <p className="text-xs text-neutral-400 font-['Questrial',sans-serif] leading-relaxed">
+                <p className="text-xs text-neutral-400 font-['Agrandir',sans-serif] leading-relaxed">
                   {m.desc}
                 </p>
               </div>
@@ -144,27 +146,27 @@ export default function CaseStudyPage({ params }: { params: Promise<{ slug: stri
       </section>
 
       {/* In-depth Narrative: Challenge & Solution */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-28">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-12 sm:pb-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
           <div className="md:col-span-4 space-y-4">
-            <h3 className="text-2xl sm:text-3xl font-bold text-black font-['Agrandir',sans-serif]">
+            <h3 className="text-2xl sm:text-3xl font-bold text-black font-['Questrial',sans-serif]">
               The Strategic Transformation
             </h3>
-            <p className="text-sm text-neutral-600 font-['Questrial',sans-serif] leading-relaxed">
+            <p className="text-sm text-neutral-600 font-['Agrandir',sans-serif] leading-relaxed">
               How we partnered with executive founders to re-engineer user retention and market positioning.
             </p>
           </div>
 
-          <div className="md:col-span-8 space-y-8 text-neutral-700 font-['Questrial',sans-serif] text-base leading-relaxed">
+          <div className="md:col-span-8 space-y-8 text-neutral-700 font-['Agrandir',sans-serif] text-base leading-relaxed">
             <div className="p-7 rounded-3xl bg-neutral-50 border border-neutral-200 space-y-2">
-              <h4 className="text-base font-bold text-black font-['Agrandir',sans-serif]">
+              <h4 className="text-base font-bold text-black font-['Questrial',sans-serif]">
                 01. The Challenge
               </h4>
               <p className="text-sm text-neutral-600 leading-relaxed">{data.challenge}</p>
             </div>
 
             <div className="p-7 rounded-3xl bg-neutral-50 border border-neutral-200 space-y-2">
-              <h4 className="text-base font-bold text-black font-['Agrandir',sans-serif]">
+              <h4 className="text-base font-bold text-black font-['Questrial',sans-serif]">
                 02. The Architectural Solution
               </h4>
               <p className="text-sm text-neutral-600 leading-relaxed">{data.solution}</p>
@@ -174,22 +176,23 @@ export default function CaseStudyPage({ params }: { params: Promise<{ slug: stri
       </section>
 
       {/* Bottom CTA Banner */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-28 text-center">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-14 sm:pb-18 text-center">
         <div className="p-10 sm:p-16 rounded-[40px] bg-neutral-900 text-white relative overflow-hidden space-y-6">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,249,56,0.15)_0%,transparent_70%)] pointer-events-none" />
           <div className="max-w-2xl mx-auto space-y-4 relative z-10">
-            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white font-['Agrandir',sans-serif]">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white font-['Questrial',sans-serif]">
               Ready for a similar transformation?
             </h3>
-            <p className="text-sm sm:text-base text-neutral-400 font-['Questrial',sans-serif]">
+            <p className="text-sm sm:text-base text-neutral-400 font-['Agrandir',sans-serif]">
               Let&apos;s evaluate your current product metrics and craft a venture-grade digital experience.
             </p>
             <div className="pt-4 flex justify-center">
               <Link
                 href="/contact"
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-[#d4f938] px-8 py-3.5 text-sm font-bold text-black shadow-lg transition-all duration-300 hover:bg-white hover:text-black active:scale-95"
+                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-[#d4f938] px-8 py-3.5 text-sm font-bold text-black shadow-lg transition-all duration-300 hover:bg-white hover:text-black active:scale-95"
               >
-                <span>Calculate Your Project Scope →</span>
+                <span>Calculate Your Project Scope</span>
+                <ArrowRight01Icon className="w-4 h-4 stroke-[2.5]" />
               </Link>
             </div>
           </div>

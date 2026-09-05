@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
+import ScrollReveal from "./ui/ScrollReveal";
 
 interface ProcessStep {
   id: string;
@@ -199,6 +200,10 @@ const processSteps: ProcessStep[] = [
 ];
 
 export default function OurProcessSection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [isInView, setIsInView] = useState<boolean>(false);
+  const hasBeenSeenRef = useRef<boolean>(false);
+
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
   const [progress, setProgress] = useState<number>(0);
   const [isPaused, setIsPaused] = useState<boolean>(false);
@@ -211,6 +216,27 @@ export default function OurProcessSection() {
   const scrollLeftRef = useRef<number>(0);
 
   const currentStep = processSteps[activeTabIndex] || processSteps[0];
+
+  // Observe section visibility so auto-advance only starts when user scrolls to this section
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+        if (entry.isIntersecting && !hasBeenSeenRef.current) {
+          hasBeenSeenRef.current = true;
+          setActiveTabIndex(0);
+          setProgress(0);
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   // Repeat cards so infinite scroll is smooth in both directions (minimum 3 sets or 12 cards)
   const repeatCount = useMemo(() => {
@@ -237,7 +263,7 @@ export default function OurProcessSection() {
     } else if (el.scrollLeft <= 10) {
       el.scrollLeft += singleSetWidth;
       if (isDraggingRef.current) {
-        scrollLeftRef.current += singleSetWidth;
+        scrollLeftRef.current -= singleSetWidth;
       }
     }
   };
@@ -274,23 +300,24 @@ export default function OurProcessSection() {
 
   // Auto-advance loop antar tab (0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 0)
   useEffect(() => {
-    if (isPaused || isDragging) return;
+    if (!isInView || isPaused || isDragging) return;
 
     const DURATION = 6000; // 6 detik per tahap
     const INTERVAL = 40; // update setiap 40ms
-    let localProgress = 0;
 
     const timer = setInterval(() => {
-      localProgress += (INTERVAL / DURATION) * 100;
-      if (localProgress >= 100) {
-        localProgress = 0;
-        setActiveTabIndex((prev) => (prev + 1) % processSteps.length);
-      }
-      setProgress(localProgress);
+      setProgress((prev) => {
+        const next = prev + (INTERVAL / DURATION) * 100;
+        if (next >= 100) {
+          setActiveTabIndex((tab) => (tab + 1) % processSteps.length);
+          return 0;
+        }
+        return next;
+      });
     }, INTERVAL);
 
     return () => clearInterval(timer);
-  }, [isPaused, isDragging]);
+  }, [isInView, isPaused, isDragging]);
 
   const handleTabClick = (index: number) => {
     setActiveTabIndex(index);
@@ -326,155 +353,145 @@ export default function OurProcessSection() {
     setIsPaused(false);
   };
 
-  // Wheel / Trackpad scroll horizontal
-  const handleWheel = (e: React.WheelEvent) => {
-    const el = carouselRef.current;
-    if (!el) return;
-
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      // User is scrolling horizontally
-      normalizeScrollPosition();
-      return;
-    }
-
-    if (Math.abs(e.deltaY) > 1) {
-      el.scrollLeft += e.deltaY * 0.9;
-      normalizeScrollPosition();
-    }
-  };
-
   const handleScroll = () => {
     normalizeScrollPosition();
   };
 
   return (
-    <section className="relative w-full bg-black text-white pt-24 sm:pt-32 pb-24 sm:pb-32 px-6 sm:px-12 lg:px-16 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative w-full bg-black text-white pt-8 sm:pt-10 pb-16 sm:pb-20 px-6 sm:px-12 lg:px-16 overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Main 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left Column: Heading & Description */}
           <div className="lg:col-span-5 flex flex-col justify-center space-y-6">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-[1.08] font-['Questrial',sans-serif]">
-              How We Get It
-              <br />
-              Done.
-            </h2>
+            <ScrollReveal distance={28} blur={14} duration={850}>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12] font-['Questrial',sans-serif] break-words">
+                How We Get It
+                <br />
+                Done.
+              </h2>
 
-            <p className="text-sm sm:text-base text-neutral-300 font-['Questrial',sans-serif] leading-relaxed max-w-md">
-              Every step, done right. From discovery to launch structured,
-              smooth, and built to deliver exceptional digital experiences.
-            </p>
+              <p className="text-sm sm:text-base text-neutral-300 font-['Agrandir',sans-serif] leading-relaxed max-w-md pt-5">
+                Every step, done right. From discovery to launch structured,
+                smooth, and built to deliver exceptional digital experiences.
+              </p>
+            </ScrollReveal>
           </div>
 
           {/* Right Column: Top Navigation Tabs + Process Display Card */}
-          <div className="lg:col-span-7 flex flex-col justify-center space-y-4 w-full">
-            {/* Top Navigation Tabs */}
-            <div className="w-full flex items-center justify-center gap-3 sm:gap-6 lg:gap-7 pb-1.5 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-              {processSteps.map((step, idx) => {
-                const isActive = activeTabIndex === idx;
-                return (
-                  <button
-                    key={step.id}
-                    onClick={() => handleTabClick(idx)}
-                    className={`group relative py-1 text-xs sm:text-sm tracking-wide transition-colors duration-300 font-['Questrial',sans-serif] cursor-pointer whitespace-nowrap ${
-                      isActive
-                        ? "text-white font-bold"
-                        : "text-neutral-400 hover:text-white font-normal"
-                    }`}
-                  >
-                    {step.tabTitle}
+          <div className="lg:col-span-7 flex flex-col justify-center w-full">
+            <ScrollReveal distance={32} blur={14} delay={100} duration={850}>
+              {/* Top Navigation Tabs dengan Gap Ringkas (0.5) */}
+              <div className="w-full flex items-center justify-center gap-3.5 sm:gap-6 lg:gap-7 pb-1.5 mb-2 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                {processSteps.map((step, idx) => {
+                  const isActive = activeTabIndex === idx;
+                  return (
+                    <button
+                      key={step.id}
+                      onClick={() => handleTabClick(idx)}
+                      className={`group relative pb-1.5 text-xs sm:text-sm tracking-wide transition-colors duration-300 font-['Agrandir',sans-serif] cursor-pointer whitespace-nowrap ${
+                        isActive
+                          ? "text-white font-bold"
+                          : "text-neutral-400 hover:text-white font-normal"
+                      }`}
+                    >
+                      {step.tabTitle}
 
-                    {/* Active tab progress line */}
-                    {isActive ? (
-                      <div className="absolute bottom-[-5px] left-0 right-0 h-[2px] bg-neutral-800/50 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-[#d4f938] shadow-[0_0_8px_#d4f938] rounded-full transition-all duration-75 ease-linear"
-                          style={{ width: `${progress}%` }}
-                        />
-                      </div>
-                    ) : (
-                      <div className="absolute bottom-[-5px] left-0 right-0 h-[2px] bg-white/40 rounded-full opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out" />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Process Display Card Container */}
-            <div
-              className="relative rounded-[32px] sm:rounded-[36px] bg-[#10121a] border border-neutral-800/90 p-6 sm:p-9 shadow-2xl overflow-hidden min-h-[420px] sm:min-h-[480px] flex flex-col justify-between transition-all duration-500 hover:border-neutral-700"
-              onMouseEnter={() => {
-                setIsPaused(true);
-                isHoveredRef.current = true;
-              }}
-              onMouseLeave={handleMouseLeaveContainer}
-            >
-              {/* Glowing Ambient Background Aura */}
-              <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-[radial-gradient(circle,rgba(212,249,56,0.1)_0%,transparent_70%)] pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-[radial-gradient(circle,rgba(34,197,94,0.08)_0%,transparent_70%)] pointer-events-none" />
-
-              {/* Step Headline & Description */}
-              <div className="relative z-10 text-center my-4 space-y-2">
-                <h3 className="text-2xl sm:text-3xl font-black text-white font-['Agrandir',sans-serif] tracking-tight">
-                  {currentStep.headline}
-                </h3>
-                <p className="text-xs sm:text-sm text-neutral-300 font-['Questrial',sans-serif] max-w-lg mx-auto leading-relaxed">
-                  {currentStep.subheadline}
-                </p>
+                      {/* Active tab progress line */}
+                      {isActive ? (
+                        <div className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-neutral-800/80 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-[#d4f938] shadow-[0_0_10px_#d4f938] rounded-full transition-all duration-75 ease-linear"
+                            style={{ width: `${progress}%` }}
+                          />
+                        </div>
+                      ) : (
+                        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/30 rounded-full opacity-0 -translate-y-0.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out" />
+                      )}
+                    </button>
+                  );
+                })}
               </div>
 
-              {/* Infinite Looping Cards Showcase */}
+              {/* Process Display Card Container */}
               <div
-                ref={carouselRef}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-                onWheel={handleWheel}
-                onScroll={handleScroll}
-                tabIndex={0}
-                role="region"
-                aria-label="Process step cards infinite showcase"
-                className={`relative z-10 w-full overflow-x-auto py-6 sm:py-8 select-none focus:outline-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${
-                  isDragging ? "cursor-grabbing" : "cursor-grab"
-                }`}
+                className="relative rounded-[32px] sm:rounded-[36px] bg-[#10121a] border border-neutral-800/90 p-6 sm:p-9 shadow-2xl overflow-hidden min-h-[420px] sm:min-h-[480px] flex flex-col justify-between transition-all duration-500 hover:border-neutral-700"
+                onMouseEnter={() => {
+                  setIsPaused(true);
+                  isHoveredRef.current = true;
+                }}
+                onMouseLeave={handleMouseLeaveContainer}
               >
-                <div className="inline-flex items-center -space-x-3 sm:-space-x-5 hover:space-x-2 transition-[spacing] duration-500 px-6">
-                  {displayCards.map((card, idx) => {
-                    const rot = ((idx % currentStep.cards.length) - Math.floor(currentStep.cards.length / 2)) * 2.5;
-                    return (
-                      <div
-                        key={idx}
-                        className={`relative w-[135px] sm:w-[160px] h-[165px] sm:h-[190px] flex-shrink-0 rounded-[20px] sm:rounded-[24px] p-4 flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.6)] border border-black/15 transform transition-all duration-300 hover:-translate-y-4 hover:scale-105 hover:z-30 cursor-pointer ${
-                          card.color
-                        } ${card.textColor} select-none`}
-                        style={{
-                          transform: `rotate(${rot}deg)`,
-                        }}
-                      >
-                        <div className="space-y-1">
-                          <h4 className="text-xs sm:text-[13px] font-bold leading-tight font-['Agrandir',sans-serif]">
-                            {card.title}
-                          </h4>
-                          <p className="text-[9px] sm:text-[10px] opacity-85 font-['Questrial',sans-serif] leading-tight">
-                            {card.subtitle}
-                          </p>
-                        </div>
+                {/* Glowing Ambient Background Aura */}
+                <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-[radial-gradient(circle,rgba(212,249,56,0.1)_0%,transparent_70%)] pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-[radial-gradient(circle,rgba(34,197,94,0.08)_0%,transparent_70%)] pointer-events-none" />
 
-                        {/* Bottom Wireframe Bars */}
-                        <div className="space-y-1 pt-2">
-                          <div className="h-1.5 w-12 rounded-full bg-black/20" />
-                          <div className="h-1.5 w-7 rounded-full bg-black/15" />
+                {/* Step Headline & Description */}
+                <div className="relative z-10 text-center my-4 space-y-2">
+                  <h3 className="text-2xl sm:text-3xl font-black text-white font-['Questrial',sans-serif] tracking-tight">
+                    {currentStep.headline}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-neutral-300 font-['Agrandir',sans-serif] max-w-lg mx-auto leading-relaxed">
+                    {currentStep.subheadline}
+                  </p>
+                </div>
+
+                {/* Infinite Looping Cards Showcase */}
+                <div
+                  ref={carouselRef}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                  onScroll={handleScroll}
+                  tabIndex={0}
+                  role="region"
+                  aria-label="Process step cards infinite showcase"
+                  className={`relative z-10 w-full overflow-x-auto py-6 sm:py-8 select-none focus:outline-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${
+                    isDragging ? "cursor-grabbing" : "cursor-grab"
+                  }`}
+                >
+                  <div className="inline-flex items-center -space-x-3 sm:-space-x-5 hover:space-x-2 transition-[spacing] duration-500 px-6">
+                    {displayCards.map((card, idx) => {
+                      const rot = ((idx % currentStep.cards.length) - Math.floor(currentStep.cards.length / 2)) * 2.5;
+                      return (
+                        <div
+                          key={idx}
+                          className={`relative w-[135px] sm:w-[160px] h-[165px] sm:h-[190px] flex-shrink-0 rounded-[20px] sm:rounded-[24px] p-4 flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.6)] border border-black/15 transform transition-all duration-300 hover:-translate-y-4 hover:scale-105 hover:z-30 cursor-pointer ${
+                            card.color
+                          } ${card.textColor} select-none`}
+                          style={{
+                            transform: `rotate(${rot}deg)`,
+                          }}
+                        >
+                          <div className="space-y-1">
+                            <h4 className="text-xs sm:text-[13px] font-bold leading-tight font-['Questrial',sans-serif]">
+                              {card.title}
+                            </h4>
+                            <p className="text-[9px] sm:text-[10px] opacity-85 font-['Agrandir',sans-serif] leading-tight">
+                              {card.subtitle}
+                            </p>
+                          </div>
+
+                          {/* Bottom Wireframe Bars */}
+                          <div className="space-y-1 pt-2">
+                            <div className="h-1.5 w-12 rounded-full bg-black/20" />
+                            <div className="h-1.5 w-7 rounded-full bg-black/15" />
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 

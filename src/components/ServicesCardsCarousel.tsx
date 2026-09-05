@@ -2,6 +2,8 @@
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
+import ScrollReveal from "@/components/ui/ScrollReveal";
+import { ArrowUpRight01Icon, ArrowRight01Icon } from "hugeicons-react";
 
 interface ServiceCardData {
   id: string;
@@ -121,25 +123,9 @@ export default function ServicesCardsCarousel() {
     }
   };
 
-  // Event listener scroll manual (Trackpad, Mouse Wheel, Touch Swipe)
+  // Event listener scroll manual (Trackpad / Touch Swipe)
   const handleScroll = () => {
     normalizeScrollPosition();
-  };
-
-  // Mouse Wheel: Scroll horizontal saat kursor berada di atas carousel
-  const handleWheel = (e: React.WheelEvent) => {
-    const el = carouselRef.current;
-    if (!el) return;
-
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      // User sedang swipe touchpad horizontal
-      return;
-    }
-
-    if (Math.abs(e.deltaY) > 2) {
-      el.scrollLeft += e.deltaY * 0.85;
-      normalizeScrollPosition();
-    }
   };
 
   // Inisialisasi posisi scroll di tengah (set ke-2) agar bisa di-scroll bebas ke kiri & kanan
@@ -222,33 +208,34 @@ export default function ServicesCardsCarousel() {
   };
 
   return (
-    <section className="relative w-full bg-white pt-2 sm:pt-4 pb-20 sm:pb-28 overflow-hidden select-none">
-      {/* Interactive Carousel Container dengan Drag-to-Scroll & Touch Support */}
-      <div
-        ref={carouselRef}
-        onScroll={handleScroll}
-        onWheel={handleWheel}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onTouchStart={() => {
-          isPausedRef.current = true;
-        }}
-        onTouchEnd={() => {
-          if (!activeCardId) isPausedRef.current = false;
-        }}
-        tabIndex={0}
-        role="region"
-        aria-label="Services cards carousel"
-        className="w-full overflow-x-auto scrollbar-none flex gap-6 sm:gap-8 px-6 sm:px-12 py-2 cursor-grab active:cursor-grabbing no-scrollbar focus:outline-none focus-visible:ring-1 focus-visible:ring-black/20"
-        style={{
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-          WebkitOverflowScrolling: "touch",
-        }}
-      >
+    <section className="relative w-full bg-white pt-2 sm:pt-4 pb-10 sm:pb-14 overflow-hidden select-none">
+      {/* Interactive Carousel Container with ScrollReveal Blur-to-Clear */}
+      <ScrollReveal distance={32} blur={14} duration={850}>
+        <div
+          ref={carouselRef}
+          onScroll={handleScroll}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onTouchStart={() => {
+            isPausedRef.current = true;
+          }}
+          onTouchEnd={() => {
+            if (!activeCardId) isPausedRef.current = false;
+          }}
+          tabIndex={0}
+          role="region"
+          aria-label="Services cards carousel"
+          className="w-full overflow-x-auto scrollbar-none flex gap-6 sm:gap-8 px-6 sm:px-12 py-2 cursor-grab active:cursor-grabbing no-scrollbar focus:outline-none focus-visible:ring-1 focus-visible:ring-black/20"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+          }}
+        >
+
         {marqueeItems.map((item, index) => {
           const uniqueId = `${item.id}-${index}`;
           const isCardActive = activeCardId === uniqueId;
@@ -280,41 +267,19 @@ export default function ServicesCardsCarousel() {
                 <div className="relative w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#d4f938] border border-[#c4eb28] overflow-hidden flex items-center justify-center shadow-lg shadow-black/20 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-105 group-hover:bg-[#111111] group-hover:border-black group-hover:shadow-2xl">
                   {/* Layer 1: Ikon Hitam Awal */}
                   <div className="flex items-center justify-center text-black transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-[160%]">
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.4"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="7" y1="17" x2="17" y2="7" />
-                      <polyline points="7 7 17 7 17 17" />
-                    </svg>
+                    <ArrowUpRight01Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
 
                   {/* Layer 2: Ikon Hijau Neon */}
                   <div className="absolute inset-0 flex items-center justify-center text-[#d4f938] translate-y-[160%] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.4"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="7" y1="17" x2="17" y2="7" />
-                      <polyline points="7 7 17 7 17 17" />
-                    </svg>
+                    <ArrowUpRight01Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                 </div>
               </div>
 
-              {/* Normal State: Judul Teks Tebal Putih di Bawah */}
+              {/* Normal State: Judul Teks Tebal Putih di Bawah (Font: Questrial) */}
               <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 z-10 transition-opacity duration-400 group-hover:opacity-0 pointer-events-none transform-gpu">
-                <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug whitespace-pre-line font-['Agrandir',sans-serif] drop-shadow-md">
+                <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug whitespace-pre-line font-['Questrial',sans-serif] drop-shadow-md">
                   {item.title}
                 </h3>
               </div>
@@ -327,12 +292,12 @@ export default function ServicesCardsCarousel() {
                     : "opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0"
                 }`}
               >
-                {/* Tag / Kategori Pills */}
+                {/* Tag / Kategori Pills (Font: Agrandir) */}
                 <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 pointer-events-none">
                   {item.tags.map((tag, tIdx) => (
                     <span
                       key={tIdx}
-                      className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/15 px-2.5 py-0.5 sm:px-3 sm:py-1 text-[11px] sm:text-xs text-white/95 font-['Questrial',sans-serif]"
+                      className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/15 px-2.5 py-0.5 sm:px-3 sm:py-1 text-[11px] sm:text-xs text-white/95 font-['Agrandir',sans-serif]"
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-[#d4f938]" />
                       {tag}
@@ -340,40 +305,31 @@ export default function ServicesCardsCarousel() {
                   ))}
                 </div>
 
-                {/* Judul Service */}
-                <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight leading-snug mb-1.5 font-['Agrandir',sans-serif] pointer-events-none">
+                {/* Judul Service (Font: Questrial) */}
+                <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight leading-snug mb-1.5 font-['Questrial',sans-serif] pointer-events-none">
                   {item.title.replace("\n", " ")}
                 </h3>
 
-                {/* Penjelasan Deskripsi Layanan */}
-                <p className="text-xs sm:text-[13px] text-neutral-300 font-['Questrial',sans-serif] leading-relaxed line-clamp-3 font-light mb-3 pointer-events-none">
+                {/* Penjelasan Deskripsi Layanan (Font: Agrandir) */}
+                <p className="text-xs sm:text-[13px] text-neutral-300 font-['Agrandir',sans-serif] leading-relaxed line-clamp-3 font-light mb-3 pointer-events-none">
                   {item.description}
                 </p>
 
                 {/* Link Action */}
                 <Link
                   href={item.href}
-                  className="inline-flex items-center gap-2 text-xs font-semibold text-[#d4f938] hover:underline pointer-events-auto self-start"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#d4f938] hover:underline pointer-events-auto self-start"
                 >
                   <span>Learn more</span>
-                  <svg
-                    className="w-3.5 h-3.5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
+                  <ArrowRight01Icon className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>
           );
         })}
-      </div>
+        </div>
+      </ScrollReveal>
     </section>
   );
 }
+

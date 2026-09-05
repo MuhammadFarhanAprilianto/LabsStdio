@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "@/components/Footer";
 import StudioAvailabilityBadge from "@/components/ui/StudioAvailabilityBadge";
+import { Tick01Icon, FlashIcon, ArrowRight01Icon, LockKeyIcon } from "hugeicons-react";
 
 interface ProductType {
   id: string;
@@ -125,15 +126,15 @@ export default function ContactPage() {
   const headlineLine2 = ["Launch", "Faster."];
 
   return (
-    <main className="min-h-screen bg-white text-gray-900 font-['Questrial',sans-serif] pt-28 sm:pt-36">
+    <main className="min-h-screen bg-white text-gray-900 font-['Agrandir',sans-serif] pt-28 sm:pt-36">
       {/* Header Section */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-12 sm:pb-16 text-center sm:text-left">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 border-b border-neutral-200/80 pb-10">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-6 sm:pb-8 text-center sm:text-left">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 border-b border-neutral-200/80 pb-6">
           <div className="space-y-4 max-w-3xl">
             {/* Main Headline: Blur-to-Clear Upward Animation */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-black leading-[1.08] w-full">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-black leading-[1.12] w-full break-words">
               {/* Baris 1: Estimate Your Scope. (Tebal) */}
-              <span className="block overflow-hidden pb-1 font-bold text-black font-['Agrandir',sans-serif]">
+              <span className="block pb-1 font-bold text-black font-['Questrial',sans-serif]">
                 {headlineLine1.map((word, index) => (
                   <motion.span
                     key={index}
@@ -152,7 +153,7 @@ export default function ContactPage() {
               </span>
 
               {/* Baris 2: Launch Faster. (Abu-abu / Muted Elegan) */}
-              <span className="block overflow-hidden font-bold text-neutral-400 font-['Agrandir',sans-serif]">
+              <span className="block font-bold text-neutral-400 font-['Questrial',sans-serif]">
                 {headlineLine2.map((word, index) => (
                   <motion.span
                     key={index}
@@ -176,7 +177,7 @@ export default function ContactPage() {
               initial={{ opacity: 0, y: 25, filter: "blur(10px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              className="text-neutral-600 text-base sm:text-lg max-w-xl leading-relaxed"
+              className="text-neutral-600 text-base sm:text-lg max-w-xl leading-relaxed font-['Agrandir',sans-serif]"
             >
               Use our live project scope &amp; cost calculator below to estimate sprint timelines, deliverables, and investment before submitting your brief.
             </motion.p>
@@ -195,7 +196,7 @@ export default function ContactPage() {
       </section>
 
       {/* Main Section: Calculator (Left) & Inquiry Review (Right) */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-28">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-14 sm:pb-18">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           {/* Left Column: Interactive Scope Calculator (7 Cols) */}
           <div className="lg:col-span-7 space-y-10">
@@ -213,7 +214,7 @@ export default function ContactPage() {
                 </span>
                 <span className="text-xs font-semibold text-neutral-500">Select Architecture</span>
               </div>
-              <h3 className="text-2xl font-bold text-black font-['Agrandir',sans-serif]">
+              <h3 className="text-2xl font-bold text-black font-['Questrial',sans-serif]">
                 What are we building together?
               </h3>
 
@@ -258,9 +259,9 @@ export default function ContactPage() {
                 <span className="text-xs font-bold uppercase tracking-widest text-neutral-400 font-['Agrandir',sans-serif]">
                   Step 02 / 03
                 </span>
-                <span className="text-xs font-semibold text-neutral-500">Select Add-ons</span>
+                <span className="text-xs font-semibold text-neutral-500 font-['Agrandir',sans-serif]">Select Add-ons</span>
               </div>
-              <h3 className="text-2xl font-bold text-black font-['Agrandir',sans-serif]">
+              <h3 className="text-2xl font-bold text-black font-['Questrial',sans-serif]">
                 Enhance with Specialized Capabilities
               </h3>
 
@@ -272,7 +273,7 @@ export default function ContactPage() {
                       key={feat.id}
                       type="button"
                       onClick={() => toggleFeature(feat.id)}
-                      className={`p-4 rounded-2xl text-left transition-all flex items-center justify-between border cursor-pointer ${
+                      className={`p-4 rounded-2xl text-left transition-all flex items-center justify-between border cursor-pointer font-['Agrandir',sans-serif] ${
                         isChecked
                           ? "bg-[#111111] text-[#d4f938] border-black shadow-md"
                           : "bg-white text-neutral-700 border-neutral-200 hover:border-neutral-400"
@@ -280,7 +281,7 @@ export default function ContactPage() {
                     >
                       <div className="flex items-center gap-3">
                         <span className={`w-5 h-5 rounded-md flex items-center justify-center border text-xs ${isChecked ? "bg-[#d4f938] text-black border-[#d4f938] font-bold" : "border-neutral-300"}`}>
-                          {isChecked ? "✓" : ""}
+                          {isChecked ? <Tick01Icon className="w-3.5 h-3.5 stroke-[2.5]" /> : null}
                         </span>
                         <span className="text-xs sm:text-sm font-medium">{feat.name}</span>
                       </div>
@@ -302,9 +303,9 @@ export default function ContactPage() {
                 <span className="text-xs font-bold uppercase tracking-widest text-neutral-400 font-['Agrandir',sans-serif]">
                   Step 03 / 03
                 </span>
-                <span className="text-xs font-semibold text-neutral-500">Deployment Velocity</span>
+                <span className="text-xs font-semibold text-neutral-500 font-['Agrandir',sans-serif]">Deployment Velocity</span>
               </div>
-              <h3 className="text-2xl font-bold text-black font-['Agrandir',sans-serif]">
+              <h3 className="text-2xl font-bold text-black font-['Questrial',sans-serif]">
                 Target Sprint Delivery Speed
               </h3>
 
@@ -318,8 +319,8 @@ export default function ContactPage() {
                       : "bg-neutral-50 text-neutral-700 border-neutral-200 hover:bg-white"
                   }`}
                 >
-                  <div className="text-sm font-bold font-['Agrandir',sans-serif]">Standard Studio Sprint</div>
-                  <div className="text-xs text-neutral-600 mt-1">Iterative, thorough QA, and calibrated user tests.</div>
+                  <div className="text-sm font-bold font-['Questrial',sans-serif]">Standard Studio Sprint</div>
+                  <div className="text-xs text-neutral-600 mt-1 font-['Agrandir',sans-serif]">Iterative, thorough QA, and calibrated user tests.</div>
                 </button>
 
                 <button
@@ -331,8 +332,11 @@ export default function ContactPage() {
                       : "bg-neutral-50 text-neutral-700 border-neutral-200 hover:bg-white"
                   }`}
                 >
-                  <div className="text-sm font-bold font-['Agrandir',sans-serif]">⚡ Express Fast-Track (Priority)</div>
-                  <div className="text-xs text-neutral-400 mt-1">Dedicated senior pair-engineers for rush launch deadlines.</div>
+                  <div className="text-sm font-bold font-['Questrial',sans-serif] flex items-center gap-1.5">
+                    <FlashIcon className="w-4 h-4 fill-current text-[#d4f938]" />
+                    <span>Express Fast-Track (Priority)</span>
+                  </div>
+                  <div className="text-xs text-neutral-400 mt-1 font-['Agrandir',sans-serif]">Dedicated senior pair-engineers for rush launch deadlines.</div>
                 </button>
               </div>
             </motion.div>
@@ -354,7 +358,7 @@ export default function ContactPage() {
                 <div className="text-xs font-bold text-[#d4f938] uppercase tracking-widest font-['Agrandir',sans-serif]">
                   Live Scope Estimate
                 </div>
-                <h4 className="text-2xl font-black font-['Agrandir',sans-serif]">
+                <h4 className="text-2xl font-black font-['Questrial',sans-serif]">
                   {calculation.productName}
                 </h4>
               </div>
@@ -362,35 +366,35 @@ export default function ContactPage() {
               {/* Estimate Numbers */}
               <div className="grid grid-cols-2 gap-4 pt-4 border-t border-neutral-800">
                 <div>
-                  <div className="text-[11px] text-neutral-400 uppercase font-semibold">Ballpark Investment</div>
-                  <div className="text-2xl sm:text-3xl font-black text-[#d4f938] font-['Agrandir',sans-serif] mt-1">
+                  <div className="text-[11px] text-neutral-400 uppercase font-semibold font-['Agrandir',sans-serif]">Ballpark Investment</div>
+                  <div className="text-2xl sm:text-3xl font-black text-[#d4f938] font-['Questrial',sans-serif] mt-1">
                     ${formatPrice(calculation.estimatedPriceMin)} - ${formatPrice(calculation.estimatedPriceMax)}
                   </div>
                 </div>
                 <div>
-                  <div className="text-[11px] text-neutral-400 uppercase font-semibold">Target Timeline</div>
-                  <div className="text-2xl sm:text-3xl font-black text-white font-['Agrandir',sans-serif] mt-1">
+                  <div className="text-[11px] text-neutral-400 uppercase font-semibold font-['Agrandir',sans-serif]">Target Timeline</div>
+                  <div className="text-2xl sm:text-3xl font-black text-white font-['Questrial',sans-serif] mt-1">
                     ~{calculation.estimatedWeeks} Weeks
                   </div>
                 </div>
               </div>
 
-              <div className="text-xs text-neutral-400 font-['Questrial',sans-serif] leading-relaxed pt-2">
+              <div className="text-xs text-neutral-400 font-['Agrandir',sans-serif] leading-relaxed pt-2">
                 Includes full design system source files, production code deployment, sub-second Turbopack build, and post-launch maintenance.
               </div>
             </div>
 
             {/* Direct Submission Form */}
-            <div className="rounded-[36px] bg-[#fafafa] border border-neutral-200/90 p-7 sm:p-9 shadow-sm">
+            <div className="rounded-[36px] bg-[#fafafa] border border-neutral-200/90 p-7 sm:p-9 shadow-sm font-['Agrandir',sans-serif]">
               {isSubmitted ? (
                 <div className="py-8 text-center space-y-4">
                   <div className="w-14 h-14 rounded-full bg-[#d4f938] text-black mx-auto flex items-center justify-center shadow-lg font-bold text-xl">
-                    ✓
+                    <Tick01Icon className="w-7 h-7 stroke-[2.5]" />
                   </div>
-                  <h4 className="text-2xl font-black text-black font-['Agrandir',sans-serif]">
+                  <h4 className="text-2xl font-black text-black font-['Questrial',sans-serif]">
                     Inquiry Locked In!
                   </h4>
-                  <p className="text-xs text-neutral-600 leading-relaxed font-['Questrial',sans-serif]">
+                  <p className="text-xs text-neutral-600 leading-relaxed font-['Agrandir',sans-serif]">
                     Thank you, <strong className="text-black">{fullName}</strong>. We received your estimated scope for <strong>{calculation.productName}</strong> and will follow up under 2 hours.
                   </p>
                   <button
@@ -414,7 +418,7 @@ export default function ContactPage() {
                       placeholder="Your Full Name *"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="w-full bg-white border border-neutral-300 rounded-2xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-black transition-all"
+                      className="w-full bg-white border border-neutral-300 rounded-2xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-black transition-all font-['Agrandir',sans-serif]"
                     />
                   </div>
 
@@ -425,7 +429,7 @@ export default function ContactPage() {
                       placeholder="Your Work Email *"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-white border border-neutral-300 rounded-2xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-black transition-all"
+                      className="w-full bg-white border border-neutral-300 rounded-2xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-black transition-all font-['Agrandir',sans-serif]"
                     />
                   </div>
 
@@ -435,7 +439,7 @@ export default function ContactPage() {
                       placeholder="Company Name / Current URL"
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
-                      className="w-full bg-white border border-neutral-300 rounded-2xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-black transition-all"
+                      className="w-full bg-white border border-neutral-300 rounded-2xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-black transition-all font-['Agrandir',sans-serif]"
                     />
                   </div>
 
@@ -445,26 +449,27 @@ export default function ContactPage() {
                       placeholder="Any specific feature or requirement you'd like to highlight..."
                       value={projectDetails}
                       onChange={(e) => setProjectDetails(e.target.value)}
-                      className="w-full bg-white border border-neutral-300 rounded-2xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-black transition-all resize-none"
+                      className="w-full bg-white border border-neutral-300 rounded-2xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-black transition-all resize-none font-['Agrandir',sans-serif]"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="group relative w-full inline-flex items-center justify-center overflow-hidden rounded-full bg-[#d4f938] px-6 py-3.5 text-xs sm:text-sm font-bold tracking-wide text-black border border-[#c4eb28] shadow-md transition-all duration-500 hover:bg-black hover:text-[#d4f938] hover:border-black active:scale-[0.99] cursor-pointer disabled:opacity-50"
+                    className="group relative w-full inline-flex items-center justify-center overflow-hidden rounded-full bg-[#d4f938] px-6 py-3.5 text-xs sm:text-sm font-bold tracking-wide text-black border border-[#c4eb28] shadow-md transition-all duration-500 hover:bg-black hover:text-[#d4f938] hover:border-black active:scale-[0.99] cursor-pointer disabled:opacity-50 font-['Agrandir',sans-serif]"
                   >
                     {isSubmitting ? (
                       <span>Transmitting Estimate...</span>
                     ) : (
                       <span className="flex items-center gap-2">
                         <span>Book Project With This Scope</span>
-                        <span>→</span>
+                        <ArrowRight01Icon className="w-4 h-4 stroke-[2.5]" />
                       </span>
                     )}
                   </button>
-                  <p className="text-center text-[10px] text-neutral-400 font-['Questrial',sans-serif]">
-                    🔒 All estimates and briefs are protected under strict mutual NDA.
+                  <p className="text-center text-[10px] text-neutral-400 font-['Agrandir',sans-serif] flex items-center justify-center gap-1.5">
+                    <LockKeyIcon className="w-3 h-3 text-neutral-400" />
+                    <span>All estimates and briefs are protected under strict mutual NDA.</span>
                   </p>
                 </form>
               )}

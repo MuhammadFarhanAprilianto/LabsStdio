@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "@/components/Footer";
 import ThreeLiquidGlass from "@/components/ui/ThreeLiquidGlass";
+import { ArrowUpRight01Icon } from "hugeicons-react";
 
 // Kumpulan Semua Logo Brand dari Projects Completed For (Lengkap dengan Ikon Asli)
 const allCompletedLogos = [
@@ -349,17 +350,17 @@ export default function AboutPage() {
   const headlineLine2 = ["feel", "effortless."];
 
   return (
-    <main className="min-h-screen bg-white text-gray-900 font-['Questrial',sans-serif] pt-28 sm:pt-36 overflow-hidden">
+    <main className="min-h-screen bg-white text-gray-900 font-['Agrandir',sans-serif] pt-28 sm:pt-36 overflow-hidden">
       {/* Header Section: Rata Tengah Penuh Latar Putih (Clean White Centered Hero - Luas & Spacius) */}
-      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pb-14 sm:pb-20">
+      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pb-8 sm:pb-12">
         {/* Subtle Ambient Radial Glow */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(212,249,56,0.18)_0%,transparent_70%)] pointer-events-none" />
 
         <div className="space-y-6 flex flex-col items-center relative z-10 max-w-5xl mx-auto w-full">
-          {/* Main Headline: Tepat 2 Baris Saja dengan Blur-to-Clear Upward Animation */}
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[72px] font-bold tracking-tight text-black leading-[1.12] text-center w-full">
-            {/* Baris 1: We make complex products (1 Baris Utuh, Tebal) */}
-            <span className="block overflow-hidden pb-1 font-bold text-black font-['Agrandir',sans-serif] whitespace-nowrap">
+          {/* Main Headline: Blur-to-Clear Upward Animation with Responsive Wrapping */}
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-[72px] font-bold tracking-tight text-black leading-[1.15] text-center w-full break-words">
+            {/* Baris 1: We make complex products (Tebal) */}
+            <span className="block pb-1 font-bold text-black font-['Questrial',sans-serif]">
               {headlineLine1.map((word, index) => (
                 <motion.span
                   key={index}
@@ -377,8 +378,8 @@ export default function AboutPage() {
               ))}
             </span>
 
-            {/* Baris 2: feel effortless. (1 Baris Utuh, Normal Weight) */}
-            <span className="block overflow-hidden pt-1 font-normal text-neutral-400 font-['Questrial',sans-serif] whitespace-nowrap">
+            {/* Baris 2: feel effortless. (Normal Weight) */}
+            <span className="block pt-1 font-normal text-neutral-400 font-['Questrial',sans-serif]">
               {headlineLine2.map((word, index) => (
                 <motion.span
                   key={index}
@@ -402,7 +403,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 25, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            className="text-neutral-600 text-sm sm:text-base md:text-lg max-w-[920px] mx-auto leading-relaxed font-['Questrial',sans-serif] px-2 text-center"
+            className="text-neutral-600 text-sm sm:text-base md:text-lg max-w-[920px] mx-auto leading-relaxed font-['Agrandir',sans-serif] px-2 text-center"
           >
             We are a global UI/UX design and web development agency. We design websites, SaaS platforms, and mobile apps that people actually enjoy using, then build them into fast, scalable products that grow your business.
           </motion.p>
@@ -412,7 +413,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, scale: 0.95, filter: "blur(6px)" }}
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
             transition={{ duration: 0.6, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
-            className="pt-2 font-['Questrial',sans-serif]"
+            className="pt-2 font-['Agrandir',sans-serif]"
           >
             <Link
               href="/contact"
@@ -420,35 +421,13 @@ export default function AboutPage() {
             >
               {/* Layer 1: Teks & Ikon Hitam Awal (Meluncur keluar ke atas saat hover) */}
               <div className="flex items-center gap-2 text-black transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-[160%]">
-                <svg
-                  className="w-3.5 h-3.5 shrink-0"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="7" y1="17" x2="17" y2="7" />
-                  <polyline points="7 7 17 7 17 17" />
-                </svg>
+                <ArrowUpRight01Icon className="w-3.5 h-3.5 shrink-0 stroke-[2.4]" />
                 <span>Book a Free Consultation</span>
               </div>
 
               {/* Layer 2: Teks & Ikon Hijau Neon (Meluncur masuk dari bawah ke tengah saat hover) */}
               <div className="absolute inset-0 flex items-center justify-center gap-2 text-[#d4f938] translate-y-[160%] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
-                <svg
-                  className="w-3.5 h-3.5 shrink-0"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="7" y1="17" x2="17" y2="7" />
-                  <polyline points="7 7 17 7 17 17" />
-                </svg>
+                <ArrowUpRight01Icon className="w-3.5 h-3.5 shrink-0 stroke-[2.4]" />
                 <span>Book a Free Consultation</span>
               </div>
             </Link>
@@ -457,7 +436,7 @@ export default function AboutPage() {
       </section>
 
       {/* Single-Row Marquee Logo Carousel (Muter dari Kanan ke Kiri Tanpa Henti) */}
-      <section className="relative w-full py-6 pb-20 sm:pb-28 overflow-hidden select-none">
+      <section className="relative w-full py-4 pb-8 sm:pb-12 overflow-hidden select-none">
         {/* Edge gradient fade masks (Putih ke Transparan) di Kiri dan Kanan */}
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none" />
@@ -482,14 +461,14 @@ export default function AboutPage() {
 
 
       {/* What Makes Us Different From Others Section (Clean White Background, Studio Fonts - Tanpa Garis Pembatas) */}
-      <section className="w-full bg-white py-16 sm:py-24">
+      <section className="w-full bg-white py-10 sm:py-14">
         <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left Column: Heading & Key Differentiators (7 Cols) */}
             <div className="lg:col-span-7 space-y-10">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-black font-['Agrandir',sans-serif] tracking-tight leading-[1.08]">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-black font-['Questrial',sans-serif] tracking-tight leading-[1.12] break-words">
                 {/* Baris 1: What Makes Us */}
-                <span className="block overflow-hidden pb-1">
+                <span className="block pb-1">
                   {["What", "Makes", "Us"].map((word, index) => (
                     <motion.span
                       key={`diff-1-${index}`}
@@ -501,7 +480,7 @@ export default function AboutPage() {
                         delay: 0.1 + index * 0.08,
                         ease: [0.16, 1, 0.3, 1],
                       }}
-                      className="inline-block mr-3 sm:mr-4 text-black"
+                      className="inline-block mr-2.5 sm:mr-4 text-black"
                     >
                       {word}
                     </motion.span>
@@ -509,7 +488,7 @@ export default function AboutPage() {
                 </span>
 
                 {/* Baris 2: Different From */}
-                <span className="block overflow-hidden pb-1 pt-0.5">
+                <span className="block pb-1 pt-0.5">
                   {["Different", "From"].map((word, index) => (
                     <motion.span
                       key={`diff-2-${index}`}
@@ -521,7 +500,7 @@ export default function AboutPage() {
                         delay: 0.35 + index * 0.09,
                         ease: [0.16, 1, 0.3, 1],
                       }}
-                      className="inline-block mr-3 sm:mr-4 text-black"
+                      className="inline-block mr-2.5 sm:mr-4 text-black"
                     >
                       {word}
                     </motion.span>
@@ -529,7 +508,7 @@ export default function AboutPage() {
                 </span>
 
                 {/* Baris 3: Others */}
-                <span className="block overflow-hidden pt-0.5">
+                <span className="block pt-0.5">
                   {["Others"].map((word, index) => (
                     <motion.span
                       key={`diff-3-${index}`}
@@ -552,48 +531,48 @@ export default function AboutPage() {
               <div className="space-y-8 pt-4">
                 {/* Differentiator 1 */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
+                  initial={{ opacity: 0, y: 20, filter: "blur(14px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                   className="space-y-3 pb-8 border-b border-neutral-200"
                 >
-                  <h3 className="text-xl sm:text-2xl font-bold text-black font-['Agrandir',sans-serif]">
+                  <h3 className="text-xl sm:text-2xl font-bold text-black font-['Questrial',sans-serif]">
                     Design Plus Development
                   </h3>
-                  <p className="text-sm sm:text-base text-neutral-600 font-['Questrial',sans-serif] leading-relaxed">
+                  <p className="text-sm sm:text-base text-neutral-600 font-['Agrandir',sans-serif] leading-relaxed">
                     Most agencies do one or the other. We handle design and development under one roof, so nothing gets lost between the mockup and the live, working site.
                   </p>
                 </motion.div>
 
                 {/* Differentiator 2 */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
+                  initial={{ opacity: 0, y: 20, filter: "blur(14px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                   className="space-y-3 pb-8 border-b border-neutral-200"
                 >
-                  <h3 className="text-xl sm:text-2xl font-bold text-black font-['Agrandir',sans-serif]">
+                  <h3 className="text-xl sm:text-2xl font-bold text-black font-['Questrial',sans-serif]">
                     Founder-Led Expertise
                   </h3>
-                  <p className="text-sm sm:text-base text-neutral-600 font-['Questrial',sans-serif] leading-relaxed">
+                  <p className="text-sm sm:text-base text-neutral-600 font-['Agrandir',sans-serif] leading-relaxed">
                     Every project is guided by 25+ years of hands-on UI/UX and web development experience, never handed off to juniors learning on your budget.
                   </p>
                 </motion.div>
 
                 {/* Differentiator 3 */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
+                  initial={{ opacity: 0, y: 20, filter: "blur(14px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
                   className="space-y-3"
                 >
-                  <h3 className="text-xl sm:text-2xl font-bold text-black font-['Agrandir',sans-serif]">
+                  <h3 className="text-xl sm:text-2xl font-bold text-black font-['Questrial',sans-serif]">
                     Speed Without Shortcuts
                   </h3>
-                  <p className="text-sm sm:text-base text-neutral-600 font-['Questrial',sans-serif] leading-relaxed">
+                  <p className="text-sm sm:text-base text-neutral-600 font-['Agrandir',sans-serif] leading-relaxed">
                     We move at venture velocity with rigorous code standards, ensuring your product launches fast while remaining scalable for enterprise growth.
                   </p>
                 </motion.div>
@@ -603,9 +582,9 @@ export default function AboutPage() {
             {/* Right Column: Dedicated 3D Liquid Glass Centerpiece (5 Cols - Sejajar Sempurna ke Bawah) */}
             <div className="lg:col-span-5 h-full flex flex-col">
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                initial={{ opacity: 0, scale: 0.95, filter: "blur(14px)" }}
+                whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className="relative w-full h-full min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] rounded-3xl bg-gradient-to-b from-[#0e1017] via-[#08090c] to-black p-6 border border-neutral-800 shadow-2xl overflow-hidden flex flex-col items-center justify-center"
               >
@@ -630,10 +609,10 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 pt-6 sm:pt-8 mt-6 sm:mt-8">
             {/* Mission Card (Frosted Light Glassmorphic Card) */}
             <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              initial={{ opacity: 0, y: 25, filter: "blur(14px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="relative overflow-hidden rounded-[32px] bg-white/70 backdrop-blur-xl backdrop-saturate-150 border border-white/80 ring-1 ring-black/[0.06] shadow-[0_20px_45px_-12px_rgba(0,0,0,0.08),0_2px_6px_rgba(0,0,0,0.03),inset_0_1.5px_1.5px_rgba(255,255,255,0.9),inset_0_-1px_1.5px_rgba(0,0,0,0.04)] p-8 sm:p-10 space-y-4 flex flex-col justify-between"
             >
               {/* Specular Ambient Light Flare */}
@@ -650,7 +629,7 @@ export default function AboutPage() {
                   <span className="w-1.5 h-1.5 rounded-full bg-black" />
                   <span>MISSION</span>
                 </div>
-                <p className="text-base sm:text-lg text-neutral-900 font-medium font-['Questrial',sans-serif] leading-relaxed">
+                <p className="text-base sm:text-lg text-neutral-900 font-medium font-['Agrandir',sans-serif] leading-relaxed">
                   To help growing brands turn great ideas into digital products that are genuinely easy to use and built to scale. We design and build websites, SaaS platforms, and mobile apps that drive real growth and revenue for businesses worldwide.
                 </p>
               </div>
@@ -658,10 +637,10 @@ export default function AboutPage() {
 
             {/* Vision Card (Frosted Dark Glassmorphic Card dengan Glowing Accent) */}
             <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.35 }}
+              initial={{ opacity: 0, y: 25, filter: "blur(14px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
               className="relative overflow-hidden rounded-[32px] bg-[#0c0d12]/90 backdrop-blur-xl backdrop-saturate-150 border border-white/15 ring-1 ring-white/[0.1] shadow-[0_20px_45px_-12px_rgba(0,0,0,0.4),inset_0_1.5px_1.5px_rgba(255,255,255,0.2),inset_0_-1px_1.5px_rgba(0,0,0,0.2)] p-8 sm:p-10 space-y-4 flex flex-col justify-between text-white"
             >
               {/* Specular Ambient Radial Light Flare */}
@@ -679,20 +658,21 @@ export default function AboutPage() {
                   <span className="w-1.5 h-1.5 rounded-full bg-[#d4f938]" />
                   <span>VISION</span>
                 </div>
-                <p className="text-base sm:text-lg text-neutral-200 font-normal font-['Questrial',sans-serif] leading-relaxed">
+                <p className="text-base sm:text-lg text-neutral-200 font-normal font-['Agrandir',sans-serif] leading-relaxed">
                   To be the global benchmark for venture-grade digital experiences, proving that extraordinary aesthetics and high-performance engineering can live together effortlessly.
                 </p>
               </div>
             </motion.div>
           </div>
+
         </div>
       </section>
 
       {/* Why Brands Choose Us Section (Clean White Background, Studio Fonts, Blur-to-Clear Animation) */}
-      <section className="w-full bg-white py-24 sm:py-32">
+      <section className="w-full bg-white py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 space-y-16">
           <div className="max-w-4xl mx-auto text-center space-y-4">
-            <h2 className="text-3xl sm:text-5xl lg:text-[54px] font-black text-black font-['Agrandir',sans-serif] tracking-tight leading-[1.15]">
+            <h2 className="text-3xl sm:text-5xl lg:text-[54px] font-black text-black font-['Questrial',sans-serif] tracking-tight leading-[1.15]">
               {/* Baris 1: Why brands choose Labs Stdio for */}
               <span className="block overflow-hidden pb-1">
                 {["Why", "brands", "choose", "Labs", "Stdio", "for"].map((word, index) => (
@@ -743,45 +723,60 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              whileHover={{ y: -6 }}
+              whileHover={{ y: -8 }}
               className="rounded-3xl bg-white text-black p-7 sm:p-8 border border-neutral-200/90 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] flex flex-col justify-between space-y-6 group hover:border-neutral-300 hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.1)] transition-all duration-300 relative overflow-hidden"
             >
               <div className="space-y-1">
-                <div className="text-3xl sm:text-4xl font-black text-black font-['Agrandir',sans-serif] tracking-tight">
+                <div className="text-3xl sm:text-4xl font-black text-black font-['Questrial',sans-serif] tracking-tight">
                   200+
                 </div>
-                <div className="text-xs sm:text-sm font-medium text-neutral-500 font-['Questrial',sans-serif]">
+                <div className="text-xs sm:text-sm font-medium text-neutral-500 font-['Agrandir',sans-serif]">
                   Projects delivered
                 </div>
               </div>
 
-              {/* Interactive Graphic 1: Clean Project Box & Rocket */}
+              {/* Interactive Graphic 1: Animated Project Box & Rocket Motion */}
               <div className="h-36 sm:h-40 flex items-center justify-center relative my-2">
-                <div className="relative w-32 h-24 rounded-2xl bg-neutral-50 border border-neutral-200 p-2.5 flex flex-col justify-between shadow-inner group-hover:border-[#16a34a]/50 transition-colors">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="relative w-36 h-26 rounded-2xl bg-neutral-50 border border-neutral-200 p-3 flex flex-col justify-between shadow-inner group-hover:border-[#16a34a]/50 transition-colors"
+                >
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#16a34a]/10 text-[#16a34a] font-mono font-bold">
+                    <motion.span
+                      animate={{ opacity: [0.85, 1, 0.85] }}
+                      transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                      className="text-[10px] px-2 py-0.5 rounded-md bg-[#16a34a]/10 text-[#16a34a] font-mono font-bold"
+                    >
                       Projects
-                    </span>
-                    <span className="text-xs text-neutral-400">+</span>
+                    </motion.span>
+                    <span className="text-xs text-neutral-400 font-bold">+</span>
                   </div>
-                  {/* Cursor Arrow */}
+                  {/* Animated Cursor Arrow with Click Motion */}
                   <motion.div
-                    animate={{ x: [0, 4, 0], y: [0, -3, 0] }}
-                    transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-                    className="w-3.5 h-3.5 border-t-2 border-l-2 border-[#16a34a] rotate-45 self-center"
+                    animate={{
+                      x: [0, 8, 4, 0],
+                      y: [0, -6, -3, 0],
+                      scale: [1, 1.1, 0.85, 1],
+                    }}
+                    transition={{ repeat: Infinity, duration: 2.4, ease: "easeInOut" }}
+                    className="w-4 h-4 border-t-2 border-l-2 border-[#16a34a] rotate-45 self-center shadow-sm"
                   />
-                  {/* Floating Rocket Badge */}
+                  {/* Floating Rocket Badge with Angular Wobble & Bounce */}
                   <motion.div
-                    animate={{ y: [-2, 2, -2] }}
-                    transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                    className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-sm shadow-md"
+                    animate={{
+                      y: [-5, 5, -5],
+                      rotate: [-8, 8, -8],
+                      scale: [1, 1.08, 1],
+                    }}
+                    transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
+                    className="absolute -top-3.5 -right-3.5 w-9 h-9 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-base shadow-md"
                   >
                     🚀
                   </motion.div>
-                </div>
+                </motion.div>
               </div>
 
-              <p className="text-xs sm:text-sm text-neutral-600 font-['Questrial',sans-serif] leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-600 font-['Agrandir',sans-serif] leading-relaxed">
                 From landing pages to full SaaS platforms, we ship work that looks sharp and performs.
               </p>
             </motion.div>
@@ -792,58 +787,74 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              whileHover={{ y: -6 }}
+              whileHover={{ y: -8 }}
               className="rounded-3xl bg-white text-black p-7 sm:p-8 border border-neutral-200/90 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] flex flex-col justify-between space-y-6 group hover:border-neutral-300 hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.1)] transition-all duration-300 relative overflow-hidden"
             >
               <div className="space-y-1">
-                <div className="text-3xl sm:text-4xl font-black text-black font-['Agrandir',sans-serif] tracking-tight">
+                <div className="text-3xl sm:text-4xl font-black text-black font-['Questrial',sans-serif] tracking-tight">
                   50+
                 </div>
-                <div className="text-xs sm:text-sm font-medium text-neutral-500 font-['Questrial',sans-serif]">
+                <div className="text-xs sm:text-sm font-medium text-neutral-500 font-['Agrandir',sans-serif]">
                   Team members worldwide
                 </div>
               </div>
 
-              {/* Interactive Graphic 2: Orbiting Global Crew */}
+              {/* Interactive Graphic 2: Multi-Layer Orbiting Global Crew */}
               <div className="h-36 sm:h-40 flex items-center justify-center relative my-2">
-                <div className="relative w-28 h-28 flex items-center justify-center">
-                  {/* Orbit Ring */}
-                  <div className="absolute inset-0 rounded-full border border-neutral-200 group-hover:border-[#16a34a]/40 transition-colors" />
-                  
-                  {/* Glowing Center Globe */}
+                <div className="relative w-32 h-32 flex items-center justify-center">
+                  {/* Outer Orbit Ring with Pulse */}
                   <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-                    className="w-12 h-12 rounded-full bg-[#16a34a]/15 border border-[#16a34a]/30 flex items-center justify-center shadow-sm"
+                    animate={{ scale: [0.98, 1.02, 0.98] }}
+                    transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                    className="absolute inset-0 rounded-full border border-neutral-200 group-hover:border-[#16a34a]/40 transition-colors"
+                  />
+                  
+                  {/* Glowing Center Globe Floating */}
+                  <motion.div
+                    animate={{
+                      y: [-3, 3, -3],
+                      scale: [0.95, 1.05, 0.95],
+                    }}
+                    transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                    className="w-13 h-13 rounded-full bg-[#16a34a]/15 border border-[#16a34a]/30 flex items-center justify-center shadow-sm"
                   >
-                    <span className="text-lg">🌍</span>
+                    <span className="text-xl">🌍</span>
                   </motion.div>
 
-                  {/* Orbiting Avatar 1 */}
+                  {/* Orbiting Avatar 1 (Clockwise) */}
                   <motion.div
                     animate={{ rotate: 360 }}
-                    transition={{ repeat: Infinity, duration: 12, ease: "linear" }}
-                    className="absolute inset-0 flex items-start justify-center"
+                    transition={{ repeat: Infinity, duration: 9, ease: "linear" }}
+                    className="absolute inset-0 flex items-start justify-center pointer-events-none"
                   >
-                    <span className="w-6 h-6 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-[10px] -translate-y-3 shadow-sm">
+                    <span className="w-7 h-7 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-xs -translate-y-3.5 shadow-md">
                       👩‍💻
                     </span>
                   </motion.div>
 
-                  {/* Orbiting Avatar 2 */}
+                  {/* Orbiting Avatar 2 (Counter-Clockwise) */}
                   <motion.div
                     animate={{ rotate: -360 }}
-                    transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
-                    className="absolute inset-0 flex items-end justify-center"
+                    transition={{ repeat: Infinity, duration: 12, ease: "linear" }}
+                    className="absolute inset-0 flex items-end justify-center pointer-events-none"
                   >
-                    <span className="w-6 h-6 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-[10px] translate-y-3 shadow-sm">
+                    <span className="w-7 h-7 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-xs translate-y-3.5 shadow-md">
                       👨‍🎨
                     </span>
+                  </motion.div>
+
+                  {/* Orbiting Satellite Node 3 */}
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ repeat: Infinity, duration: 6, ease: "linear" }}
+                    className="absolute inset-0 flex items-center justify-start pointer-events-none"
+                  >
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#16a34a] shadow-[0_0_8px_#16a34a] -translate-x-1" />
                   </motion.div>
                 </div>
               </div>
 
-              <p className="text-xs sm:text-sm text-neutral-600 font-['Questrial',sans-serif] leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-600 font-['Agrandir',sans-serif] leading-relaxed">
                 We started as a small team and grew into a global crew working across time zones.
               </p>
             </motion.div>
@@ -854,36 +865,64 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              whileHover={{ y: -6 }}
+              whileHover={{ y: -8 }}
               className="rounded-3xl bg-white text-black p-7 sm:p-8 border border-neutral-200/90 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] flex flex-col justify-between space-y-6 group hover:border-neutral-300 hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.1)] transition-all duration-300 relative overflow-hidden"
             >
               <div className="space-y-1">
-                <div className="text-3xl sm:text-4xl font-black text-black font-['Agrandir',sans-serif] tracking-tight">
+                <div className="text-3xl sm:text-4xl font-black text-black font-['Questrial',sans-serif] tracking-tight">
                   5.0
                 </div>
-                <div className="text-xs sm:text-sm font-medium text-neutral-500 font-['Questrial',sans-serif]">
+                <div className="text-xs sm:text-sm font-medium text-neutral-500 font-['Agrandir',sans-serif]">
                   Clutch rating
                 </div>
               </div>
 
-              {/* Interactive Graphic 3: Laptop with A+ Grade */}
+              {/* Interactive Graphic 3: Floating Card with Briefcase & Pulsing A+ Badge */}
               <div className="h-36 sm:h-40 flex items-center justify-center relative my-2">
-                <div className="relative w-36 h-24 rounded-xl bg-neutral-50 border border-neutral-200 p-3 flex items-center justify-between shadow-inner group-hover:border-[#16a34a]/40 transition-colors">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="relative w-40 h-26 rounded-xl bg-neutral-50 border border-neutral-200 p-3.5 flex items-center justify-between shadow-inner group-hover:border-[#16a34a]/40 transition-colors"
+                >
                   {/* Floating Orb with Briefcase */}
-                  <div className="w-8 h-8 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-xs shadow-sm">
+                  <motion.div
+                    animate={{
+                      y: [-4, 4, -4],
+                      rotate: [-6, 6, -6],
+                    }}
+                    transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+                    className="w-9 h-9 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-sm shadow-md"
+                  >
                     💼
+                  </motion.div>
+
+                  {/* A+ Rating Stamp with Glowing Motion */}
+                  <div className="text-right space-y-1">
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.1, 1],
+                      }}
+                      transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                      className="text-xl font-black text-[#16a34a] font-['Questrial',sans-serif] drop-shadow-sm flex items-center gap-1 justify-end"
+                    >
+                      <span>A+</span>
+                      <motion.span
+                        animate={{ opacity: [0.5, 1, 0.5], scale: [0.8, 1.2, 0.8] }}
+                        transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+                        className="text-xs"
+                      >
+                        ✨
+                      </motion.span>
+                    </motion.div>
+                    <motion.div
+                      animate={{ scaleX: [0.75, 1, 0.75] }}
+                      transition={{ repeat: Infinity, duration: 2.4, ease: "easeInOut" }}
+                      className="w-10 h-1.5 bg-[#16a34a]/30 rounded-full origin-right"
+                    />
                   </div>
-                  {/* A+ Rating Stamp */}
-                  <div className="text-right space-y-0.5">
-                    <span className="text-lg font-black text-[#16a34a] font-['Agrandir',sans-serif]">
-                      A+
-                    </span>
-                    <div className="w-8 h-1 bg-neutral-200 rounded-full" />
-                  </div>
-                </div>
+                </motion.div>
               </div>
 
-              <p className="text-xs sm:text-sm text-neutral-600 font-['Questrial',sans-serif] leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-600 font-['Agrandir',sans-serif] leading-relaxed">
                 Most clients do not leave, and the ones who review us on Clutch tell you exactly why.
               </p>
             </motion.div>
@@ -894,51 +933,61 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              whileHover={{ y: -6 }}
+              whileHover={{ y: -8 }}
               className="rounded-3xl bg-white text-black p-7 sm:p-8 border border-neutral-200/90 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] flex flex-col justify-between space-y-6 group hover:border-neutral-300 hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.1)] transition-all duration-300 relative overflow-hidden"
             >
               <div className="space-y-1">
-                <div className="text-3xl sm:text-4xl font-black text-black font-['Agrandir',sans-serif] tracking-tight">
+                <div className="text-3xl sm:text-4xl font-black text-black font-['Questrial',sans-serif] tracking-tight">
                   15+
                 </div>
-                <div className="text-xs sm:text-sm font-medium text-neutral-500 font-['Questrial',sans-serif]">
+                <div className="text-xs sm:text-sm font-medium text-neutral-500 font-['Agrandir',sans-serif]">
                   Industries served
                 </div>
               </div>
 
-              {/* Interactive Graphic 4: Funnel with Floating Spheres */}
+              {/* Interactive Graphic 4: Funnel with Floating Spheres Motion */}
               <div className="h-36 sm:h-40 flex items-center justify-center relative my-2">
-                <div className="relative w-36 h-28 flex flex-col items-center justify-center">
-                  {/* Floating Icons */}
-                  <div className="flex gap-2 mb-2">
+                <div className="relative w-40 h-28 flex flex-col items-center justify-center">
+                  {/* Floating Multi-Industry Icons */}
+                  <div className="flex gap-2.5 mb-2">
                     <motion.span
-                      animate={{ y: [-3, 3, -3] }}
-                      transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                      className="w-6 h-6 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-[10px] shadow-sm"
+                      animate={{ y: [-6, 6, -6], rotate: [-4, 4, -4] }}
+                      transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
+                      className="w-7 h-7 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-xs shadow-md"
                     >
                       ☁️
                     </motion.span>
                     <motion.span
-                      animate={{ y: [3, -3, 3] }}
-                      transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
-                      className="w-6 h-6 rounded-full bg-white border border-[#16a34a]/40 flex items-center justify-center text-[10px] shadow-sm"
+                      animate={{ y: [6, -6, 6], scale: [0.95, 1.08, 0.95] }}
+                      transition={{ repeat: Infinity, duration: 2.6, ease: "easeInOut" }}
+                      className="w-7 h-7 rounded-full bg-white border border-[#16a34a]/40 flex items-center justify-center text-xs shadow-md"
                     >
                       💳
                     </motion.span>
                     <motion.span
-                      animate={{ y: [-2, 2, -2] }}
-                      transition={{ repeat: Infinity, duration: 2.4, ease: "easeInOut" }}
-                      className="w-6 h-6 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-[10px] shadow-sm"
+                      animate={{ y: [-5, 5, -5], rotate: [4, -4, 4] }}
+                      transition={{ repeat: Infinity, duration: 2.8, ease: "easeInOut" }}
+                      className="w-7 h-7 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-xs shadow-md"
                     >
                       🏥
                     </motion.span>
                   </div>
-                  {/* Funnel Outline */}
-                  <div className="w-24 h-10 border-b-2 border-l-2 border-r-2 border-neutral-300 rounded-b-full opacity-70" />
+                  {/* Funnel Outline with Cascading Particle Beam */}
+                  <div className="relative w-28 h-10 border-b-2 border-l-2 border-r-2 border-neutral-300 rounded-b-full flex items-center justify-center">
+                    <motion.div
+                      animate={{
+                        y: [-8, 8, -8],
+                        opacity: [0.3, 1, 0.3],
+                        scale: [0.7, 1.2, 0.7],
+                      }}
+                      transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+                      className="w-2 h-2 rounded-full bg-[#16a34a] shadow-[0_0_8px_#16a34a]"
+                    />
+                  </div>
                 </div>
               </div>
 
-              <p className="text-xs sm:text-sm text-neutral-600 font-['Questrial',sans-serif] leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-600 font-['Agrandir',sans-serif] leading-relaxed">
                 Fintech, SaaS, healthcare, e-commerce, and more. We adapt to your domain, not the other way around.
               </p>
             </motion.div>
@@ -949,34 +998,70 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              whileHover={{ y: -6 }}
+              whileHover={{ y: -8 }}
               className="rounded-3xl bg-white text-black p-7 sm:p-8 border border-neutral-200/90 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] flex flex-col justify-between space-y-6 group hover:border-neutral-300 hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.1)] transition-all duration-300 relative overflow-hidden"
             >
               <div className="space-y-1">
-                <div className="text-3xl sm:text-4xl font-black text-black font-['Agrandir',sans-serif] tracking-tight">
+                <div className="text-3xl sm:text-4xl font-black text-black font-['Questrial',sans-serif] tracking-tight">
                   25+
                 </div>
-                <div className="text-xs sm:text-sm font-medium text-neutral-500 font-['Questrial',sans-serif]">
+                <div className="text-xs sm:text-sm font-medium text-neutral-500 font-['Agrandir',sans-serif]">
                   Years of expertise
                 </div>
               </div>
 
-              {/* Interactive Graphic 5: Laptop with 5 Golden Stars */}
+              {/* Interactive Graphic 5: Inspecting Lens with Staggered Twinkling Stars */}
               <div className="h-36 sm:h-40 flex items-center justify-center relative my-2">
-                <div className="relative w-36 h-24 rounded-xl bg-neutral-50 border border-neutral-200 p-3 flex flex-col justify-between shadow-inner group-hover:border-neutral-400 transition-colors">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="relative w-40 h-26 rounded-xl bg-neutral-50 border border-neutral-200 p-3 flex flex-col justify-between shadow-inner group-hover:border-neutral-400 transition-colors"
+                >
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold text-neutral-500">🔍</span>
+                    {/* Animated Search Lens moving across */}
+                    <motion.span
+                      animate={{
+                        x: [-6, 16, -6],
+                        y: [-2, 2, -2],
+                        rotate: [-10, 10, -10],
+                      }}
+                      transition={{ repeat: Infinity, duration: 3.2, ease: "easeInOut" }}
+                      className="text-sm font-bold drop-shadow-sm"
+                    >
+                      🔍
+                    </motion.span>
+                    {/* Glowing Accent Orb */}
+                    <motion.span
+                      animate={{ scale: [0.85, 1.2, 0.85], opacity: [0.6, 1, 0.6] }}
+                      transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                      className="w-3 h-3 rounded-full bg-[#16a34a]/30 border border-[#16a34a] shadow-[0_0_8px_#16a34a]"
+                    />
                   </div>
-                  {/* 5 Stars */}
-                  <div className="flex items-center gap-1 text-amber-500 text-xs">
+
+                  {/* 5 Golden Twinkling Wave Stars */}
+                  <div className="flex items-center gap-1.5 text-amber-500 text-xs">
                     {"★★★★★".split("").map((star, i) => (
-                      <span key={i}>{star}</span>
+                      <motion.span
+                        key={i}
+                        animate={{
+                          scale: [1, 1.35, 1],
+                          y: [0, -2.5, 0],
+                        }}
+                        transition={{
+                          repeat: Infinity,
+                          duration: 2,
+                          delay: i * 0.2,
+                          ease: "easeInOut",
+                        }}
+                        className="inline-block drop-shadow-[0_0_4px_rgba(245,158,11,0.5)]"
+                      >
+                        {star}
+                      </motion.span>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               </div>
 
-              <p className="text-xs sm:text-sm text-neutral-600 font-['Questrial',sans-serif] leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-600 font-['Agrandir',sans-serif] leading-relaxed">
                 Our founder brings more than 25 years in UI/UX and web development to every build.
               </p>
             </motion.div>
@@ -987,31 +1072,52 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              whileHover={{ y: -6 }}
+              whileHover={{ y: -8 }}
               className="rounded-3xl bg-white text-black p-7 sm:p-8 border border-neutral-200/90 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] flex flex-col justify-between space-y-6 group hover:border-neutral-300 hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.1)] transition-all duration-300 relative overflow-hidden"
             >
               <div className="space-y-1">
-                <div className="text-3xl sm:text-4xl font-black text-black font-['Agrandir',sans-serif] tracking-tight">
+                <div className="text-3xl sm:text-4xl font-black text-black font-['Questrial',sans-serif] tracking-tight">
                   100+
                 </div>
-                <div className="text-xs sm:text-sm font-medium text-neutral-500 font-['Questrial',sans-serif]">
+                <div className="text-xs sm:text-sm font-medium text-neutral-500 font-['Agrandir',sans-serif]">
                   Brands served
                 </div>
               </div>
 
-              {/* Interactive Graphic 6: Stacked UI Cards with Checkmarks */}
+              {/* Interactive Graphic 6: Animated Floating Stacked UI Cards with Bouncing Checkmark */}
               <div className="h-36 sm:h-40 flex items-center justify-center relative my-2">
-                <div className="space-y-1.5 w-32">
-                  <div className="h-4 rounded-md bg-neutral-100 border border-neutral-200 w-3/4 mx-auto" />
-                  <div className="h-6 rounded-lg bg-neutral-50 border border-[#16a34a]/40 flex items-center justify-between px-2.5 shadow-sm">
-                    <span className="w-2 h-2 rounded-full bg-neutral-400" />
-                    <span className="text-[#16a34a] text-xs font-bold">✓</span>
-                  </div>
-                  <div className="h-4 rounded-md bg-neutral-100 border border-neutral-200 w-full" />
+                <div className="space-y-1.5 w-36">
+                  {/* Top Layer Card Floating */}
+                  <motion.div
+                    animate={{ y: [-3, 3, -3], x: [-1, 1, -1] }}
+                    transition={{ repeat: Infinity, duration: 2.8, ease: "easeInOut" }}
+                    className="h-4 rounded-md bg-neutral-100 border border-neutral-200 w-3/4 mx-auto"
+                  />
+                  {/* Middle Layer Card with Pulsing Checkmark */}
+                  <motion.div
+                    animate={{ scale: [0.98, 1.03, 0.98] }}
+                    transition={{ repeat: Infinity, duration: 2.4, ease: "easeInOut" }}
+                    className="h-7 rounded-lg bg-neutral-50 border border-[#16a34a]/40 flex items-center justify-between px-3 shadow-sm group-hover:border-[#16a34a] transition-colors"
+                  >
+                    <span className="w-2.5 h-2.5 rounded-full bg-neutral-400" />
+                    <motion.span
+                      animate={{ scale: [1, 1.3, 1] }}
+                      transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+                      className="text-[#16a34a] text-sm font-black drop-shadow-sm"
+                    >
+                      ✓
+                    </motion.span>
+                  </motion.div>
+                  {/* Bottom Layer Card Floating */}
+                  <motion.div
+                    animate={{ y: [3, -3, 3], x: [1, -1, 1] }}
+                    transition={{ repeat: Infinity, duration: 3.2, ease: "easeInOut" }}
+                    className="h-4 rounded-md bg-neutral-100 border border-neutral-200 w-full"
+                  />
                 </div>
               </div>
 
-              <p className="text-xs sm:text-sm text-neutral-600 font-['Questrial',sans-serif] leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-600 font-['Agrandir',sans-serif] leading-relaxed">
                 Behind every product we build is a real person using it. That is what good design is for.
               </p>
             </motion.div>
@@ -1020,16 +1126,16 @@ export default function AboutPage() {
       </section>
 
       {/* Meet the Minds Behind the MAGIC from Around the World Section (Dark Black Background) */}
-      <section className="w-full bg-[#050507] text-white py-28 sm:py-36 relative overflow-hidden border-t border-neutral-900">
+      <section className="w-full bg-[#050507] text-white py-14 sm:py-18 relative overflow-hidden border-t border-neutral-900">
         {/* Ambient Subtle Radial Glow */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(212,249,56,0.06)_0%,transparent_70%)] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 space-y-14 relative z-10">
           {/* Centered Heading with Blur-to-Clear Word Animation */}
           <div className="max-w-4xl mx-auto text-center space-y-5">
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white font-['Agrandir',sans-serif] tracking-tight leading-[1.12]">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white font-['Questrial',sans-serif] tracking-tight leading-[1.15] break-words">
               {/* Baris 1: Meet the minds behind */}
-              <span className="block overflow-hidden pb-1">
+              <span className="block pb-1">
                 {["Meet", "the", "minds", "behind"].map((word, index) => (
                   <motion.span
                     key={`minds-1-${index}`}
@@ -1041,7 +1147,7 @@ export default function AboutPage() {
                       delay: 0.1 + index * 0.08,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="inline-block mr-2.5 sm:mr-3.5 text-white"
+                    className="inline-block mr-2 sm:mr-3.5 text-white"
                   >
                     {word}
                   </motion.span>
@@ -1049,7 +1155,7 @@ export default function AboutPage() {
               </span>
 
               {/* Baris 2: the MAGIC from around the world! */}
-              <span className="block overflow-hidden pt-0.5">
+              <span className="block pt-0.5">
                 {["the", "MAGIC", "from", "around", "the", "world!"].map((word, index) => (
                   <motion.span
                     key={`minds-2-${index}`}
@@ -1061,7 +1167,7 @@ export default function AboutPage() {
                       delay: 0.45 + index * 0.08,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className={`inline-block mr-2.5 sm:mr-3.5 ${
+                    className={`inline-block mr-2 sm:mr-3.5 ${
                       word === "MAGIC"
                         ? "text-[#d4f938] font-black tracking-wider drop-shadow-[0_0_25px_rgba(212,249,56,0.4)]"
                         : "text-white"
@@ -1079,7 +1185,7 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.65 }}
-              className="text-neutral-400 text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed font-['Questrial',sans-serif]"
+              className="text-neutral-400 text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed font-['Agrandir',sans-serif]"
             >
               A powerhouse team of UI UX & brand identity designers, strategists, and web developers working remotely to create digital experiences that make an impact.
             </motion.p>
@@ -1099,7 +1205,7 @@ export default function AboutPage() {
                     key={category}
                     type="button"
                     onClick={() => setActiveFilter(category)}
-                    className={`group/btn relative inline-flex items-center justify-center overflow-hidden rounded-full px-5 py-2 text-xs sm:text-sm font-semibold font-['Questrial',sans-serif] transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] cursor-pointer active:scale-95 ${
+                    className={`group/btn relative inline-flex items-center justify-center overflow-hidden rounded-full px-5 py-2 text-xs sm:text-sm font-semibold font-['Agrandir',sans-serif] transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] cursor-pointer active:scale-95 ${
                       isActive
                         ? "bg-[#d4f938] text-black border border-[#c4eb28] shadow-[0_0_20px_rgba(212,249,56,0.4)] scale-105 hover:bg-[#111111] hover:border-black"
                         : "bg-neutral-900/90 text-neutral-400 border border-neutral-800 hover:border-[#c4eb28] hover:bg-[#d4f938]"
@@ -1318,19 +1424,19 @@ export default function AboutPage() {
                 </div>
                 <div className="p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-neutral-950">
                   <div>
-                    <span className="text-xs font-bold text-[#d4f938] uppercase tracking-widest">
+                    <span className="text-xs font-bold text-[#d4f938] uppercase tracking-widest font-['Agrandir',sans-serif]">
                       {selectedCultureImage.category} • {selectedCultureImage.location}
                     </span>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white font-['Agrandir',sans-serif]">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white font-['Questrial',sans-serif]">
                       {selectedCultureImage.title}
                     </h3>
-                    <p className="text-sm text-neutral-400 font-['Questrial',sans-serif]">
+                    <p className="text-sm text-neutral-400 font-['Agrandir',sans-serif]">
                       {selectedCultureImage.role}
                     </p>
                   </div>
                   <button
                     onClick={() => setSelectedCultureImage(null)}
-                    className="px-6 py-2.5 rounded-full bg-white text-black font-bold text-sm hover:bg-[#d4f938] transition-colors"
+                    className="px-6 py-2.5 rounded-full bg-white text-black font-bold text-sm hover:bg-[#d4f938] transition-colors font-['Agrandir',sans-serif]"
                   >
                     Close Preview
                   </button>

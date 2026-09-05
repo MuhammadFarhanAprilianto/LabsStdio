@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "@/components/Footer";
+import { Search01Icon, Cancel01Icon } from "hugeicons-react";
 
 interface BlogPost {
   id: string;
@@ -188,17 +189,17 @@ export default function BlogPage() {
   const headlineLine2 = ["thinking."];
 
   return (
-    <main className="min-h-screen bg-white text-gray-900 font-['Questrial',sans-serif] pt-28 sm:pt-36 overflow-hidden">
+    <main className="min-h-screen bg-white text-gray-900 font-['Agrandir',sans-serif] pt-28 sm:pt-36 overflow-hidden">
       {/* Hero Section: Centered Clean White Layout */}
-      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pb-12 sm:pb-16">
+      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pb-6 sm:pb-8">
         {/* Subtle Ambient Radial Glow */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(212,249,56,0.18)_0%,transparent_70%)] pointer-events-none" />
 
-        <div className="space-y-6 flex flex-col items-center relative z-10 max-w-5xl mx-auto w-full">
-          {/* Main Headline: Tepat 2 Baris Saja dengan Blur-to-Clear Upward Animation */}
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[72px] font-bold tracking-tight text-black leading-[1.12] text-center w-full">
+        <div className="space-y-4 flex flex-col items-center relative z-10 max-w-5xl mx-auto w-full">
+          {/* Main Headline: Blur-to-Clear Upward Animation with Responsive Wrapping */}
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-[72px] font-bold tracking-tight text-black leading-[1.15] text-center w-full break-words">
             {/* Baris 1: Insights & creative (Tebal) */}
-            <span className="block overflow-hidden pb-1 font-bold text-black font-['Agrandir',sans-serif] whitespace-nowrap">
+            <span className="block pb-1 font-bold text-black font-['Questrial',sans-serif]">
               {headlineLine1.map((word, index) => (
                 <motion.span
                   key={`blog-1-${index}`}
@@ -216,8 +217,8 @@ export default function BlogPage() {
               ))}
             </span>
 
-            {/* Baris 2: thinking. (Normal Weight, Abu-abu Elegan) */}
-            <span className="block overflow-hidden pt-1 font-normal text-neutral-400 font-['Questrial',sans-serif] whitespace-nowrap">
+            {/* Baris 2: thinking. (Normal Weight) */}
+            <span className="block pt-1 font-normal text-neutral-400 font-['Questrial',sans-serif]">
               {headlineLine2.map((word, index) => (
                 <motion.span
                   key={`blog-2-${index}`}
@@ -241,7 +242,7 @@ export default function BlogPage() {
             initial={{ opacity: 0, y: 25, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            className="text-neutral-600 text-sm sm:text-base md:text-lg max-w-[920px] mx-auto leading-relaxed font-['Questrial',sans-serif] px-2 text-center"
+            className="text-neutral-600 text-sm sm:text-base md:text-lg max-w-[920px] mx-auto leading-relaxed font-['Agrandir',sans-serif] px-2 text-center"
           >
             Deep-dives into digital product design, web engineering, AI interfaces, and proven growth strategies from our studio craft.
           </motion.p>
@@ -249,7 +250,7 @@ export default function BlogPage() {
       </section>
 
       {/* Filter Tabs & Search Bar */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-12">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-6 sm:pb-8">
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 pb-6 border-b border-neutral-200">
           {/* Category Filter Pills: 4 on Row 1, 3 on Row 2 */}
           <div className="flex flex-col gap-2.5">
@@ -282,7 +283,7 @@ export default function BlogPage() {
                         </span>
                       ) : (
                         /* Inactive State: Rolling Text Flip on Hover */
-                        <div className="relative overflow-hidden h-4 sm:h-5 flex flex-col justify-center font-['Questrial',sans-serif]">
+                        <div className="relative overflow-hidden h-4 sm:h-5 flex flex-col justify-center font-['Agrandir',sans-serif]">
                           <span className="block transform transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full text-neutral-700">
                             {tab}
                           </span>
@@ -305,32 +306,23 @@ export default function BlogPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search articles..."
-              className="w-full px-4 py-2.5 pl-10 rounded-full bg-neutral-100/90 border border-neutral-200 text-xs sm:text-sm text-black placeholder:text-neutral-400 focus:outline-none focus:border-black focus:bg-white transition-colors font-['Questrial',sans-serif]"
+              className="w-full px-4 py-2.5 pl-10 rounded-full bg-neutral-100/90 border border-neutral-200 text-xs sm:text-sm text-black placeholder:text-neutral-400 focus:outline-none focus:border-black focus:bg-white transition-colors font-['Agrandir',sans-serif]"
             />
-            <svg
-              className="w-4 h-4 text-neutral-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
+            <Search01Icon className="w-4 h-4 text-neutral-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none stroke-[2]" />
           </div>
         </div>
       </section>
 
       {/* Main Bento Layout (Persis Sesuai Gambar User) */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-20">
+      <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-12 sm:pb-14">
         {/* Bento Grid 2 Kolom: Kiri (1 Besar) & Kanan (2 Baris) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           {/* Kolom Kiri: Featured Big Article Card (7 Cols) */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             data-cursor="read"
             onClick={() => setSelectedArticle(featuredPost)}
             className="lg:col-span-6 xl:col-span-6 flex flex-col space-y-5 group cursor-pointer"
@@ -353,7 +345,7 @@ export default function BlogPage() {
                 {featuredPost.categories.map((cat, idx) => (
                   <span
                     key={idx}
-                    className="px-3 py-1 rounded-full border border-neutral-300 text-[11px] font-medium text-neutral-600 bg-white font-['Questrial',sans-serif]"
+                    className="px-3 py-1 rounded-full border border-neutral-300 text-[11px] font-medium text-neutral-600 bg-white font-['Agrandir',sans-serif]"
                   >
                     {cat}
                   </span>
@@ -361,12 +353,12 @@ export default function BlogPage() {
               </div>
 
               {/* Title */}
-              <h2 className="text-2xl sm:text-3xl lg:text-[32px] font-bold text-black font-['Agrandir',sans-serif] tracking-tight leading-snug group-hover:text-[#84c405] transition-colors">
+              <h2 className="text-2xl sm:text-3xl lg:text-[32px] font-bold text-black font-['Questrial',sans-serif] tracking-tight leading-snug group-hover:text-[#84c405] transition-colors">
                 {featuredPost.title}
               </h2>
 
               {/* Excerpt */}
-              <p className="text-xs sm:text-sm text-neutral-600 font-['Questrial',sans-serif] leading-relaxed line-clamp-3">
+              <p className="text-xs sm:text-sm text-neutral-600 font-['Agrandir',sans-serif] leading-relaxed line-clamp-3">
                 {featuredPost.excerpt}
               </p>
             </div>
@@ -377,10 +369,10 @@ export default function BlogPage() {
             {secondaryPosts.map((post, idx) => (
               <motion.div
                 key={post.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.15 * (idx + 1) }}
+                initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.7, delay: 0.12 * (idx + 1), ease: [0.16, 1, 0.3, 1] }}
                 data-cursor="read"
                 onClick={() => setSelectedArticle(post)}
                 className="flex flex-col sm:flex-row items-start gap-5 sm:gap-6 group cursor-pointer"
@@ -403,7 +395,7 @@ export default function BlogPage() {
                     {post.categories.map((cat, catIdx) => (
                       <span
                         key={catIdx}
-                        className="px-2.5 py-0.5 rounded-full border border-neutral-300 text-[11px] font-medium text-neutral-600 bg-white font-['Questrial',sans-serif]"
+                        className="px-2.5 py-0.5 rounded-full border border-neutral-300 text-[11px] font-medium text-neutral-600 bg-white font-['Agrandir',sans-serif]"
                       >
                         {cat}
                       </span>
@@ -411,12 +403,12 @@ export default function BlogPage() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg sm:text-xl font-bold text-black font-['Agrandir',sans-serif] tracking-tight leading-snug group-hover:text-[#84c405] transition-colors">
+                  <h3 className="text-lg sm:text-xl font-bold text-black font-['Questrial',sans-serif] tracking-tight leading-snug group-hover:text-[#84c405] transition-colors">
                     {post.title}
                   </h3>
 
                   {/* Excerpt */}
-                  <p className="text-xs sm:text-sm text-neutral-600 font-['Questrial',sans-serif] leading-relaxed line-clamp-3">
+                  <p className="text-xs sm:text-sm text-neutral-600 font-['Agrandir',sans-serif] leading-relaxed line-clamp-3">
                     {post.excerpt}
                   </p>
                 </div>
@@ -428,12 +420,12 @@ export default function BlogPage() {
 
       {/* Additional Articles Grid (Jika ada lebih banyak artikel atau hasil filter) */}
       {additionalPosts.length > 0 && (
-        <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-24 border-t border-neutral-200 pt-16">
+        <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 pb-14 sm:pb-18 border-t border-neutral-200 pt-10 sm:pt-12">
           <div className="space-y-2 pb-8">
             <div className="text-xs font-bold text-neutral-400 uppercase tracking-widest font-['Agrandir',sans-serif]">
               More Publications
             </div>
-            <h3 className="text-2xl sm:text-3xl font-bold text-black font-['Agrandir',sans-serif]">
+            <h3 className="text-2xl sm:text-3xl font-bold text-black font-['Questrial',sans-serif]">
               Latest Architecture & Engineering Reads
             </h3>
           </div>
@@ -442,13 +434,14 @@ export default function BlogPage() {
             {additionalPosts.map((post, idx) => (
               <motion.div
                 key={post.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.7, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 onClick={() => setSelectedArticle(post)}
                 className="group flex flex-col space-y-4 cursor-pointer"
               >
+
                 <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-200 shadow-sm">
                   <Image
                     src={post.image}
@@ -463,12 +456,12 @@ export default function BlogPage() {
                       {post.categories.join(" • ")}
                     </span>
                     <span className="text-neutral-300 text-xs">•</span>
-                    <span className="text-xs text-neutral-400 font-['Questrial',sans-serif]">{post.readTime}</span>
+                    <span className="text-xs text-neutral-400 font-['Agrandir',sans-serif]">{post.readTime}</span>
                   </div>
-                  <h4 className="text-lg font-bold text-black font-['Agrandir',sans-serif] group-hover:text-[#84c405] transition-colors leading-snug">
+                  <h4 className="text-lg font-bold text-black font-['Questrial',sans-serif] group-hover:text-[#84c405] transition-colors leading-snug">
                     {post.title}
                   </h4>
-                  <p className="text-xs text-neutral-600 font-['Questrial',sans-serif] leading-relaxed line-clamp-2">
+                  <p className="text-xs text-neutral-600 font-['Agrandir',sans-serif] leading-relaxed line-clamp-2">
                     {post.excerpt}
                   </p>
                 </div>
@@ -507,7 +500,7 @@ export default function BlogPage() {
                   onClick={() => setSelectedArticle(null)}
                   className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center transition-colors cursor-pointer"
                 >
-                  ✕
+                  <Cancel01Icon className="w-4 h-4 stroke-[2.4]" />
                 </button>
               </div>
 
@@ -518,26 +511,26 @@ export default function BlogPage() {
                     {selectedArticle.categories.map((c, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 rounded-full bg-neutral-100 text-xs font-semibold text-neutral-700"
+                        className="px-3 py-1 rounded-full bg-neutral-100 text-xs font-semibold text-neutral-700 font-['Agrandir',sans-serif]"
                       >
                         {c}
                       </span>
                     ))}
-                    <span className="text-xs text-neutral-400">
+                    <span className="text-xs text-neutral-400 font-['Agrandir',sans-serif]">
                       {selectedArticle.readTime} • {selectedArticle.date}
                     </span>
                   </div>
 
-                  <h2 className="text-2xl sm:text-3xl font-black text-black font-['Agrandir',sans-serif] leading-snug">
+                  <h2 className="text-2xl sm:text-3xl font-black text-black font-['Questrial',sans-serif] leading-snug">
                     {selectedArticle.title}
                   </h2>
 
-                  <div className="text-xs text-neutral-500 font-['Questrial',sans-serif] flex items-center gap-2 pt-1 border-b border-neutral-100 pb-4">
+                  <div className="text-xs text-neutral-500 font-['Agrandir',sans-serif] flex items-center gap-2 pt-1 border-b border-neutral-100 pb-4">
                     <span>Written by <strong>{selectedArticle.author.name}</strong> ({selectedArticle.author.role})</span>
                   </div>
                 </div>
 
-                <div className="space-y-4 text-sm sm:text-base text-neutral-700 font-['Questrial',sans-serif] leading-relaxed">
+                <div className="space-y-4 text-sm sm:text-base text-neutral-700 font-['Agrandir',sans-serif] leading-relaxed">
                   <p>{selectedArticle.excerpt}</p>
                   <p>
                     In the fast-moving landscape of 2026 digital product development, precision in UX craft and software architecture separates market leaders from also-rans. By structuring robust design tokens, automated CI/CD design pipelines, and zero-runtime CSS layouts, creative agencies and product studios are able to ship venture-grade platforms in days rather than months.
@@ -550,13 +543,13 @@ export default function BlogPage() {
                 <div className="pt-6 border-t border-neutral-100 flex items-center justify-between">
                   <Link
                     href="/contact"
-                    className="px-6 py-3 rounded-full bg-[#d4f938] hover:bg-[#c8f219] text-black font-bold text-xs sm:text-sm font-['Questrial',sans-serif] transition-all shadow-md"
+                    className="px-6 py-3 rounded-full bg-[#d4f938] hover:bg-[#c8f219] text-black font-bold text-xs sm:text-sm font-['Agrandir',sans-serif] transition-all shadow-md"
                   >
                     Discuss Your Project With Us
                   </Link>
                   <button
                     onClick={() => setSelectedArticle(null)}
-                    className="text-xs font-semibold text-neutral-500 hover:text-black transition-colors"
+                    className="text-xs font-semibold text-neutral-500 hover:text-black transition-colors font-['Agrandir',sans-serif]"
                   >
                     Close Article
                   </button>

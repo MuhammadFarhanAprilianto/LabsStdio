@@ -778,64 +778,77 @@ export default function ThreeInteractiveGlobe({
             </div>
 
             {/* Tracking Rating Testimonial Card (Desain Kompak & Elegan) */}
-            <div
-              className={`absolute left-1/2 -translate-x-1/2 bottom-full mb-2.5 w-[225px] sm:w-[255px] rounded-[18px] bg-[#0c0d12]/96 backdrop-blur-2xl border border-white/20 p-3.5 sm:p-4 text-white shadow-[0_20px_50px_-10px_rgba(0,0,0,0.95)] transition-all duration-300 ease-out pointer-events-auto ${
-                isCardActive
-                  ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
-                  : "opacity-0 scale-90 translate-y-2 pointer-events-none"
-              }`}
-            >
-              {/* Header: Country Badge & Stars Rating */}
-              <div className="flex items-center justify-between gap-1.5 mb-2">
-                {/* Country Pill Badge: [JP] Tokyo • Japan */}
-                <div className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 text-[10px] text-white font-['Questrial',sans-serif]">
-                  <span className="font-bold text-[9px] uppercase px-1 py-0.2 rounded bg-white/20 text-white">
-                    {pin.countryCode}
-                  </span>
-                  <span className="font-semibold text-white">{pin.city}</span>
-                  <span className="text-neutral-400">• {pin.country}</span>
-                </div>
+            {(() => {
+              const isTopPin = pin.lat >= 15;
+              return (
+                <div
+                  className={`absolute left-1/2 -translate-x-1/2 ${
+                    isTopPin ? "top-full mt-2.5" : "bottom-full mb-2.5"
+                  } w-[245px] sm:w-[275px] rounded-[18px] bg-[#0c0d12]/96 backdrop-blur-2xl border border-white/20 p-3.5 sm:p-4 text-white shadow-[0_20px_50px_-10px_rgba(0,0,0,0.95)] transition-all duration-300 ease-out pointer-events-auto ${
+                    isCardActive
+                      ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+                      : isTopPin
+                      ? "opacity-0 scale-90 -translate-y-2 pointer-events-none"
+                      : "opacity-0 scale-90 translate-y-2 pointer-events-none"
+                  }`}
+                >
+                  {/* Header: Country Badge & Stars Rating */}
+                  <div className="flex items-center justify-between gap-1.5 mb-2.5">
+                    {/* Country Pill Badge: [JP] Tokyo • Japan */}
+                    <div className="inline-flex items-center justify-center gap-1.5 rounded-full bg-white/10 px-2.5 py-1 text-[10px] text-white font-['Agrandir',sans-serif] leading-none whitespace-nowrap shrink-0">
+                      <span className="inline-flex items-center justify-center font-bold text-[9px] uppercase px-1.5 py-0.5 rounded-md bg-white/20 text-white leading-none shrink-0">
+                        {pin.countryCode}
+                      </span>
+                      <span className="font-semibold text-white leading-none">{pin.city}</span>
+                      <span className="text-neutral-400 leading-none">• {pin.country}</span>
+                    </div>
 
-                {/* 5 Stars Rating */}
-                <div className="flex items-center gap-0.5 text-[#d4f938]">
-                  {[...Array(pin.rating)].map((_, i) => (
-                    <svg
-                      key={i}
-                      className="w-3 h-3 fill-current drop-shadow-[0_0_4px_rgba(212,249,56,0.6)]"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
+                    {/* 5 Stars Rating */}
+                    <div className="flex items-center gap-0.5 text-[#d4f938] shrink-0">
+                      {[...Array(pin.rating)].map((_, i) => (
+                        <svg
+                          key={i}
+                          className="w-3 h-3 fill-current drop-shadow-[0_0_4px_rgba(212,249,56,0.6)]"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                  </div>
 
-              {/* Testimonial Quote */}
-              <p className="text-[11px] sm:text-xs text-neutral-200 font-['Questrial',sans-serif] leading-snug mb-2.5 line-clamp-3">
-                &ldquo;{pin.content}&rdquo;
-              </p>
-
-              {/* Author Footer */}
-              <div className="flex items-center gap-2 pt-2 border-t border-white/10">
-                <div className="w-6 h-6 rounded-full bg-[#d4f938] text-black font-black text-[9px] flex items-center justify-center shadow-md shadow-black/40 shrink-0 font-['Agrandir',sans-serif]">
-                  {pin.avatar}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <h4 className="text-[11px] font-bold text-white font-['Agrandir',sans-serif] truncate leading-tight">
-                    {pin.name}
-                  </h4>
-                  <p className="text-[9px] text-neutral-400 font-['Questrial',sans-serif] truncate leading-tight">
-                    {pin.role},{" "}
-                    <span className="text-neutral-300 font-medium">
-                      {pin.company}
-                    </span>
+                  {/* Testimonial Quote */}
+                  <p className="text-[11px] sm:text-xs text-neutral-200 font-['Agrandir',sans-serif] leading-snug mb-2.5 line-clamp-3">
+                    &ldquo;{pin.content}&rdquo;
                   </p>
-                </div>
-              </div>
 
-              {/* Chat Bubble Arrow Tip */}
-              <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-0.5 border-solid border-t-[#0c0d12]/96 border-t-6 border-x-transparent border-x-6 border-b-0" />
-            </div>
+                  {/* Author Footer */}
+                  <div className="flex items-center gap-2 pt-2 border-t border-white/10">
+                    <div className="w-6 h-6 rounded-full bg-[#d4f938] text-black font-black text-[9px] flex items-center justify-center text-center shadow-md shadow-black/40 shrink-0 font-['Agrandir',sans-serif] leading-none">
+                      {pin.avatar}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h4 className="text-[11px] font-bold text-white font-['Questrial',sans-serif] truncate leading-tight">
+                        {pin.name}
+                      </h4>
+                      <p className="text-[9px] text-neutral-400 font-['Agrandir',sans-serif] truncate leading-tight">
+                        {pin.role},{" "}
+                        <span className="text-neutral-300 font-medium">
+                          {pin.company}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Chat Bubble Arrow Tip */}
+                  {isTopPin ? (
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 -mb-0.5 border-solid border-b-[#0c0d12]/96 border-b-[6px] border-x-transparent border-x-[6px] border-t-0" />
+                  ) : (
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-0.5 border-solid border-t-[#0c0d12]/96 border-t-[6px] border-x-transparent border-x-[6px] border-b-0" />
+                  )}
+                </div>
+              );
+            })()}
           </div>
         );
       })}
