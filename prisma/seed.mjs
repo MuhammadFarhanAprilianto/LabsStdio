@@ -1,7 +1,17 @@
+import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
-const prisma = new PrismaClient();
+const rawUrl = process.env.DATABASE_URL || "";
+const dbUrl = rawUrl.replace("pg-3f9d1016-farhankey666-6949.j.aivencloud.com", "168.144.84.187");
+
+const prisma = new PrismaClient(dbUrl ? {
+  datasources: {
+    db: {
+      url: dbUrl,
+    },
+  },
+} : undefined);
 
 async function main() {
   console.log("🚀 Starting database seeding for Labs Stdio Enterprise...");
@@ -273,7 +283,32 @@ async function main() {
     },
   });
 
-  console.log("✅ Seeded Users:", [adminUser.email, clientUser.email]);
+  const budiPasswordHash = await bcrypt.hash("budi123", 12);
+
+  const budiUser = await prisma.user.upsert({
+    where: { email: "budi@admin.com" },
+    update: {},
+    create: {
+      name: "Budi Santoso",
+      email: "budi@admin.com",
+      passwordHash: budiPasswordHash,
+      role: "ADMIN",
+    },
+  });
+
+  const fauziUser = await prisma.user.upsert({
+    where: { email: "fauzi@enterprise.co" },
+    update: {},
+    create: {
+      name: "Ahmad Fauzi",
+      email: "fauzi@enterprise.co",
+      passwordHash: clientPasswordHash,
+      role: "CLIENT",
+      clientOrganizationId: hyroOrg.id,
+    },
+  });
+
+  console.log("✅ Seeded Users:", [adminUser.email, clientUser.email, budiUser.email, fauziUser.email]);
 
   console.log("🌟 Seeding completed successfully!");
 }
