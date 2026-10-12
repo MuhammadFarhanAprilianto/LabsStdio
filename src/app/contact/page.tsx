@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import StudioAvailabilityBadge from "@/components/ui/StudioAvailabilityBadge";
 import { Tick01Icon, FlashIcon, ArrowRight01Icon, LockKeyIcon } from "hugeicons-react";
@@ -76,6 +76,7 @@ export default function ContactPage() {
   const [projectDetails, setProjectDetails] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Toggle Feature
   const toggleFeature = (featureId: string) => {
@@ -111,15 +112,47 @@ export default function ContactPage() {
     };
   }, [selectedProduct, selectedFeatures, velocity]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName || !email) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName,
+          email,
+          company,
+          projectDetails,
+          productType: selectedProduct,
+          productName: calculation.productName,
+          selectedFeatures,
+          velocity,
+          estimatedPriceMin: calculation.estimatedPriceMin,
+          estimatedPriceMax: calculation.estimatedPriceMax,
+          estimatedWeeks: calculation.estimatedWeeks,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to record inquiry.");
+      }
+
       setIsSubmitted(true);
-    }, 1200);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "An unexpected error occurred. Please try again.";
+      setErrorMessage(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const headlineLine1 = ["Estimate", "Your", "Scope."];
@@ -452,6 +485,12 @@ export default function ContactPage() {
                       className="w-full bg-white border border-neutral-300 rounded-2xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-black transition-all resize-none font-['Agrandir',sans-serif]"
                     />
                   </div>
+
+                  {errorMessage && (
+                    <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 text-xs font-semibold">
+                      {errorMessage}
+                    </div>
+                  )}
 
                   <button
                     type="submit"

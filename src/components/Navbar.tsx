@@ -147,6 +147,18 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Hide Navbar completely on Auth screens, Admin, and Client Portal (after all hooks)
+  if (
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/forgot-password" ||
+    pathname === "/reset-password" ||
+    pathname?.startsWith("/admin") ||
+    pathname?.startsWith("/portal")
+  ) {
+    return null;
+  }
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 flex flex-col items-center pointer-events-none px-4 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] font-['Agrandir',sans-serif] ${

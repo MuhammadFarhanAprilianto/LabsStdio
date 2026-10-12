@@ -30,8 +30,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files (allow .env.example template)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -39,3 +40,33 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/generated/prisma
+*.db
+*.db-journal
+
+# Internal notes & roadmaps (Keep on local machine only)
+ROADMAP_MIDDLE_TO_EXPERT.md
+SESSION_SUMMARY_PILAR_1_2_3.md
+CLAUDE.md
+
+# Scratch verification scripts (Keep on local machine only)
+scripts/cleanup-test-invoices.mjs
+scripts/create-pending-invoice.mjs
+scripts/execute-production-cleanup.mjs
+scripts/inspect-database-state.mjs
+scripts/inspect-invoices.mjs
+scripts/master-pilar4-verification.mjs
+scripts/master-pilar6-verification.mjs
+scripts/master-pilar7-verification.mjs
+scripts/pre-cleanup-inspect.mjs
+scripts/stress-test-load.mjs
+scripts/test-api.mjs
+scripts/test-international-checkout.mjs
+scripts/test-pilar6-improvements.mjs
+scripts/test-pilar6.mjs
+scripts/test-security-shield.mjs
+scripts/test-observability.mjs
+scripts/test-distributed-cache.mjs
+scripts/test-realtime-sse.mjs
+

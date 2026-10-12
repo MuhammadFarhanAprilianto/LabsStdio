@@ -1,0 +1,48 @@
+name: Labs Stdio CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality-gate:
+    name: 🛡️ Enterprise Quality Gate (Tests, Types & Build)
+    runs-on: ubuntu-latest
+
+    env:
+      DATABASE_URL: "file:./dev.db"
+      JWT_SECRET: "ci-testing-jwt-secret-key-32-chars-minimum"
+      NODE_ENV: "test"
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🗄️ Generate Prisma Client
+        run: npx prisma generate
+
+      - name: 🔍 TypeScript Strict Typecheck
+        run: npx tsc --noEmit
+
+      - name: 🧪 Execute Automated Enterprise Test Suite (25+ Tests)
+        run: npm test
+
+      - name: 🏗️ Production Next.js Build
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"

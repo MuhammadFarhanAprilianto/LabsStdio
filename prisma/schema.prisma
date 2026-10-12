@@ -1,0 +1,223 @@
+// Prisma Schema File for Labs Stdio Enterprise Full Stack Platform
+// Architecture: Next.js + TypeScript + Prisma ORM + Relational Storage
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// 1. SMART INQUIRIES & LEAD INTELLIGENCE (CRM)
+model Inquiry {
+  id                   String              @id @default(cuid())
+  fullName             String
+  email                String
+  company              String?
+  projectDetails       String?
+  productType          String              // "web-app" | "saas-platform" | "headless-ecommerce" | "brand-system"
+  productName          String              // "Web Application"
+  selectedFeatures     String              // JSON array string e.g. '["3d-webgl","micro-anim"]'
+  velocity             String              @default("standard") // "standard" | "express"
+  estimatedPriceMin    Int
+  estimatedPriceMax    Int
+  estimatedWeeks       Int
+  
+  // Enterprise & Tech 5.0 Intelligence Fields
+  leadScore            String              @default("STANDARD") // "STANDARD" | "HIGH_PRIORITY" | "ENTERPRISE_WHALE"
+  status               String              @default("NEW") // "NEW" | "CONTACTED" | "DISCOVERY_CALL" | "PROPOSAL_SENT" | "WON" | "LOST"
+  aiSummary            String?             // AI-generated scope synthesis
+  techStackRecommended String?             // e.g. "Next.js 16 + Turbopack + Three.js"
+  notes                String?             // Internal agency notes
+  
+  // Relasi jika inquiry berhasil di-convert menjadi klien resmi
+  clientOrganizationId String?
+  clientOrganization   ClientOrganization? @relation(fields: [clientOrganizationId], references: [id], onDelete: SetNull)
+
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+}
+
+// 2. CLIENT ORGANIZATION & ENTERPRISE PORTAL
+model ClientOrganization {
+  id          String       @id @default(cuid())
+  name        String       // Company or Brand Name e.g. "Blanqs AI Platform"
+  slug        String       @unique
+  website     String?
+  industry    String?
+  contactName String?
+  contactEmail String      @unique
+  avatarUrl   String?
+  status      String       @default("ACTIVE") // "ACTIVE" | "ONBOARDING" | "PAUSED" | "COMPLETED"
+  
+  // Relasi
+  inquiries   Inquiry[]
+  projects    Project[]
+  users       User[]
+  activityLogs ActivityLog[]
+  assets      ClientAsset[]
+  invoices    Invoice[]
+  
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+// 3. CASE STUDIES & PORTFOLIO PROJECTS (METRIC-DRIVEN SHOWCASE)
+model Project {
+  id             String              @id @default(cuid())
+  slug           String              @unique
+  title          String              // e.g. "Reimagining Venture-Grade Analytics for 100K+ Users"
+  clientName     String              // Display client name
+  year           String              @default("2026")
+  category       String              // "SaaS & AI Infrastructure", "Web Architecture"
+  overview       String
+  challenge      String
+  solution       String
+  
+  // Media Assets
+  heroImage      String              // Main cover photo
+  beforeImg      String?             // Before redesign UI
+  afterImg       String?             // After redesign UI
+  galleryImages  String?             // JSON array string of extra media
+  
+  // Tech 5.0 Deliverables & Impact Metrics
+  deliverables   String              // JSON array string e.g. '["UI/UX Architecture","Next.js WebGL"]'
+  metrics        String              // JSON array string of ROI e.g. '[{"label":"User Retention","value":"+240%","desc":"Surge"}]'
+  techStack      String?             // JSON array string e.g. '["Next.js","Three.js","Tailwind"]'
+  liveDemoUrl    String?
+  figmaUrl       String?
+  
+  // Relasi ke Organisasi Klien & Sprint Milestones
+  organizationId String?
+  organization   ClientOrganization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  milestones     Milestone[]
+
+  featured       Boolean             @default(false)
+  sortOrder      Int                 @default(0)
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+}
+
+// 4. SPRINT MILESTONES & CLIENT COLLABORATION
+model Milestone {
+  id             String       @id @default(cuid())
+  projectId      String
+  project        Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  title          String       // e.g. "Sprint 01: Product Discovery & Token Architecture"
+  order          Int          @default(1)
+  description    String?
+  deliverables   String?      // JSON array string of sprint deliverables
+  targetDate     DateTime?
+  status         String       @default("PLANNED") // "PLANNED" | "IN_PROGRESS" | "UNDER_REVIEW" | "APPROVED"
+  
+  // Client Sign-off Transparency
+  approvedBy     String?      // Client contact name who approved
+  approvedAt     DateTime?
+  approvalNotes  String?
+
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+// 5. THOUGHT LEADERSHIP & RESEARCH ARTICLES (BLOG CMS)
+model Post {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  excerpt     String
+  content     String?  // Full Markdown / HTML content
+  image       String   // Thumbnail cover
+  categories  String   // JSON array string e.g. '["UI/UX Design","SaaS"]'
+  readTime    String   @default("5 min read")
+  authorName  String   @default("Labs Stdio")
+  authorRole  String   @default("Product Studio Team")
+  featured    Boolean  @default(false)
+  status      String   @default("PUBLISHED") // "DRAFT" | "PUBLISHED" | "ARCHIVED"
+  viewCount   Int      @default(0)
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 6. NEWSLETTER SUBSCRIBERS
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  source    String?  @default("footer")
+  createdAt DateTime @default(now())
+}
+
+// 7. AUDIT TRAIL & ACTIVITY LOGS (ENTERPRISE GOVERNANCE)
+model ActivityLog {
+  id             String              @id @default(cuid())
+  action         String              // e.g. "INQUIRY_CREATED", "MILESTONE_APPROVED", "STATUS_UPDATED"
+  entityType     String              // "Inquiry", "Project", "Milestone"
+  entityId       String
+  actorName      String              // Name of user or system
+  details        String?             // Extra context JSON
+  organizationId String?
+  organization   ClientOrganization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  createdAt      DateTime            @default(now())
+}
+
+// 8. ENTERPRISE USERS & MULTI-ROLE RBAC AUTH
+model User {
+  id                   String              @id @default(cuid())
+  name                 String
+  email                String              @unique
+  passwordHash         String
+  role                 String              @default("CLIENT") // "SUPER_ADMIN" | "PROJECT_MANAGER" | "CLIENT"
+  
+  // Security & Anti Brute-Force
+  failedAttempts       Int                 @default(0)
+  lockedUntil          DateTime?
+  lastLoginAt          DateTime?
+  lastLoginIp          String?
+  resetToken           String?
+  resetTokenExpiry     DateTime?
+
+  // Relasi khusus perwakilan organisasi klien
+  clientOrganizationId String?
+  clientOrganization   ClientOrganization? @relation(fields: [clientOrganizationId], references: [id], onDelete: SetNull)
+
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+}
+
+// 9. CLIENT ASSET VAULT (CLIENT CMS)
+model ClientAsset {
+  id             String              @id @default(cuid())
+  organizationId String
+  organization   ClientOrganization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  projectId      String?
+  name           String              // e.g. "Brand Guidelines 2026.pdf", "Logo Vector Pack"
+  category       String              @default("BRAND_LOGO") // "BRAND_LOGO" | "GUIDELINES" | "COPYWRITING" | "MEDIA" | "OTHER"
+  fileUrl        String              // /uploads/...
+  fileSize       String?             // e.g. "2.4 MB"
+  fileType       String?             // e.g. "image/png", "application/pdf"
+  uploadedBy     String              // Contact name
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+}
+
+// 10. BILLING & INVOICES (CLIENT CRM)
+model Invoice {
+  id             String              @id @default(cuid())
+  invoiceNumber  String              @unique // e.g. "INV-2026-001"
+  organizationId String
+  organization   ClientOrganization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  projectId      String?
+  title          String              // e.g. "Kickoff Down Payment (50%)", "Sprint 02 Milestone Release"
+  amount         Int                 // Amount e.g. 14000
+  currency       String              @default("USD") // "USD" | "IDR"
+  status         String              @default("PAID") // "PAID" | "PENDING" | "OVERDUE"
+  dueDate        DateTime?
+  paidAt         DateTime?
+  invoiceUrl     String?             // Optional receipt / PDF link
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+}
+
